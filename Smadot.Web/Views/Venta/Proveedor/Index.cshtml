@@ -1,0 +1,76 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    ViewBag.Title = "Proveedores";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    @*<link rel="stylesheet" href="~/lib/dropzone/dist/dropzone.css" type="text/css" />*@
+    @*<link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />*@
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            cursor: default;
+            z-index: 99999 !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 43px !important;
+        }
+    </style>
+}
+
+    @section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Seguimiento a CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Mantenimiento</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active" aria-current="page"><a href="#">@ViewBag.Title</a></li>
+}
+
+@section toolbar{
+    @if (UserResolver.HasPermission(MenuProveedores.Registrar))
+    {
+        <a class="btn  btn-sm fw-bold btn-primary" id="btnRegistrarProveedor">Registrar</a>
+    }
+    }
+
+    <section>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-flush h-lg-100 shadow-sm">
+                    <!--begin::Body-->
+                    <div class="card-body pt-5">
+                        <div class="bottom-buffer">
+                            <div class="datatable datatable-bordered datatable-head-custom">
+                                <table class="table table-striped gx-7" id="proveedorGrid"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+
+    @section scripts{
+    
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    
+    <script asp-append-version="true" src="~/js/Venta/Proveedor/smadot.venta.proveedor.index.js"></script>
+}

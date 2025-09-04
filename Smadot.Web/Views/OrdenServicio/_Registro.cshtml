@@ -1,0 +1,76 @@
+﻿<div class='py-2 px-0 col-md-12'>
+    <form role='form' class='clearfix' id="form_registro">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" id="_idEquipo" value ="" name="_idEquipo" class="form-control" style="display:none">
+                <label class="control-label" for="autocomplete">Equipo</label>
+                <select class="form-control form-control-solid form-select" id="autocomplete"></select>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="TipoOrden">Tipo Orden de Servicio</label>
+                <select class="form-control form-control-solid form-select" id="TipoOrdenServicio" style="height: 43px !important; color : #a1a5b7">
+                    <option value="">Seleccione uno...</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                <label for="name">Nuevo Número de Serie: &nbsp;</label>
+                <input type="text" class="form-control" placeholder="Número de Serie" id="NoSerieActual">
+                </div>
+            </div>
+            @*<div class="col-md-6">
+                <div class="form-group">
+                <label for="name">Número de Serie Anterior: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" class="form-control" placeholder="Número de Serie Anterior" id="NoSerieAnterior">
+                </div>
+            </div>*@
+        </div>
+        <div class="row mt-3 divMessageInfo" style="display:none">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="text-warning"><strong class="obligatorio" style="color: var(--bs-warning);">*</strong> Si el número de serie no coincide con el número de serie del equipo actual del verificentro, puede causar un error en la comunicación con el sistema</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                <label for="name">Motivo: &nbsp;<strong class="obligatorio">*</strong></label>
+                <textarea id="Motivo" class="form-control" rows="2" placeholder="Motivo"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                <label for="name">Solución: &nbsp;<strong class="obligatorio">*</strong></label>
+                <textarea id="Solucion" class="form-control" rows="2" placeholder="Solución"></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                <label for="name">Folio: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" class="form-control" placeholder="Folio" id="FolioOS">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Cargar Documento</label><br />
+                <div class="fv-row">
+                    <div class="dropzone" id="dropzonejs">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

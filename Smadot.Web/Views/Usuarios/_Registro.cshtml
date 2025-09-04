@@ -1,0 +1,94 @@
+﻿@model List<Smadot.Models.Entities.Usuarios.Response.UsuariosResponse>
+
+
+@if(Model[0].NombreUsuario != null)
+{
+    <form role="form" id="form_Usuarios" class="clearfix">
+        <div class="row mb-5" hidden>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Nombre">Id: </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="text" readonly value="@Model[0].IdUsuario" id="IdUsuario" name="IdUsuario" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Nombre">Nombre: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="text" value="@Model[0].NombreUsuario" placeholder="Ingresa el Nombre" id="Nombre" name="Nombre" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Email">Correo electrónico: </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="email" readonly value="@Model[0].CorreoElectronico" placeholder="Ingresa el correo electrónico" id="Email" name="Email" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="form-label" for="autocomplete">Rol: &nbsp;<strong class="obligatorio">*</strong></label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <select class="form-control form-control-solid form-select" data-val="3" data-trigger="change" data-control="select2" name="rolGrid" id="rolGrid">
+                            <option value="@Model[0].IdRol" selected disabled>@Model[0].NombreRol</option>
+                            @foreach (var obj in Model)
+                            {
+                                <option value="@obj.IdRolSelect">@obj.NombreRolSelect</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+}
+else
+{
+    <form role="form" id="form_Usuarios" class="clearfix">
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Nombre">Nombre: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="text" placeholder="Ingresa el Nombre" id="Nombre" name="Nombre" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Email">Correo electrónico: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="email" placeholder="Ingresa el correo electrónico" id="Email" name="Email" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="form-label" for="autocomplete">Rol: &nbsp;<strong class="obligatorio">*</strong></label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <select class="form-control form-control-solid form-select" data-control="select2" name="rolGrid" id="rolGrid">
+                            @foreach (var obj in Model)
+                            {
+                                <option value="@obj.IdRolSelect">@obj.NombreRolSelect</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        var idrol = @Model[0].IdRol;
+    </script>
+
+}

@@ -1,0 +1,73 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    ViewData["Title"] = "Personal";
+}
+
+@section styles{
+    @*<link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />*@
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-hover-primary">@ViewData["Title"]</a>
+    </li>
+    }
+
+@section toolbar{
+    @if (UserResolver.HasPermission(MenuPersonal.Registrar))
+    {
+        <div class="btn-group dropup drop-up dropdown">
+            <a class="btn btn-sm fw-bold btn-primary save" asp-controller="Personal" asp-action="Registro">Registrar Personal</a>
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-flush h-lg-100">
+            <div class="card-body pt-5">
+                <div class="bottom-buffer">
+                    <div class="datatable datatable-bordered datatable-head-custom">
+                        <div class="card card-p-0 card-flush">
+                            <div class="card-body">
+                                @*<div class="d-flex align-items-center position-relative my-1 justify-content-end">
+                                    <input type="text" data-kt-filter="search" class="form-control form-control-sm w-250px mb-6" placeholder="Buscar" />
+                                </div>*@
+                                <input type="hidden" id="IdVerificentro" />
+                                <table class="table align-middle border rounded table-row-dashed fs-6 g-5" id="kt_datatablePersonal">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+
+@section Scripts{
+    @*<script src="~/lib/datatables/dist/js/dataTables.material.min.js"></script>*@
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+
+    @*<script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>*@
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/js/Personal/smadot.personal.index.js" asp-append-version="true"></script>
+    }

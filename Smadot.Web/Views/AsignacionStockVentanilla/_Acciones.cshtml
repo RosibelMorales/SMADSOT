@@ -1,0 +1,11 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.AsignacionStock.Response.ListAsignacionStockResponse
+<div class="btn-group dropup drop-up dropdown">
+    @if (UserResolver.HasPermission(MenuAsignacionStockdeVentanilla.Detalle))
+    {
+        <a data-id="@Model.Id" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnEditar" title="Detalle">
+            <i class="bi bi-search"></i>
+        </a>
+    }
+</div>

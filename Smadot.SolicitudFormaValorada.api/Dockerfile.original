@@ -1,0 +1,25 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["Smadot.SolicitudFormaValorada.api/Smadot.SolicitudFormaValorada.Api.csproj", "Smadot.SolicitudFormaValorada.api/"]
+COPY ["Smadot.Models/Smadot.Models.csproj", "Smadot.Models/"]
+COPY ["Utilities/Smadot.Utilities.csproj", "Utilities/"]
+COPY ["Smadot.SolicitudFormaValorada.model/Smadot.SolicitudFormaValorada.Model.csproj", "Smadot.SolicitudFormaValorada.model/"]
+RUN dotnet restore "Smadot.SolicitudFormaValorada.api/Smadot.SolicitudFormaValorada.Api.csproj"
+COPY . .
+WORKDIR "/src/Smadot.SolicitudFormaValorada.api"
+RUN dotnet build "Smadot.SolicitudFormaValorada.Api.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Smadot.SolicitudFormaValorada.Api.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Smadot.SolicitudFormaValorada.Api.dll"]

@@ -1,0 +1,220 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    ViewData["Title"] = "Folios Pendientes de Impresión";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    var user = UserResolver.GetUser();
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" />
+    <link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+
+@section breadcrumb {
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Configuración</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            <div class="card-header pt-1">
+                <div class="card-title">
+                    <h3 class="card-label">Folios Pendientes de Impresión</h3>
+                </div>
+
+            </div>
+            <!--begin::Body-->
+            <div class="card-body pt-5">
+                <div class="row">
+                    @if (!user.NombreVerificentro.Contains("SMADSOT"))
+                    {
+                        <div class="col-lg-3 col-4">
+                            <label
+                                class="btn btn-outline btn-outline-dashed btn-active-light-primary  d-flex align-items-center mb-5"
+                                for="kt_create_account_form_account_type_personal">
+                                <div class="symbol symbol-65px symbol-circle mb-3 me-4">
+                                    <span class="symbol-label fs-2x fw-semibold text-secondary bg-light-secondary">00</span>
+                                </div>
+                                <!--begin::Info-->
+                                <span class="d-block fw-semibold text-start">
+                                    <span class="text-dark fw-bold d-block fs-4 mb-2">DOBLE CERO</span>
+
+                                    <span class="text-dark d-block fs-8">Próximo Folio: <span class="text-dark d-block fs-4"
+                                            id="FolioDobleCero">0</span></span>
+                                </span>
+                                <!--end::Info-->
+                            </label>
+                            <!--end::Option-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <div class="col-lg-3 col-4">
+                            <label
+                                class="btn btn-outline btn-outline-dashed btn-active-light-primary  d-flex align-items-center mb-5"
+                                for="kt_create_account_form_account_type_personal">
+                                <div class="symbol symbol-65px symbol-circle mb-3 me-4">
+                                    <span class="symbol-label fs-2x fw-semibold text-secondary bg-light-secondary">0</span>
+                                </div>
+                                <!--begin::Info-->
+                                <span class="d-block fw-semibold text-start">
+                                    <span class="text-dark fw-bold d-block fs-4 mb-2">CERO</span>
+
+                                    <span class="text-dark d-block fs-8">Próximo Folio: <span class="text-dark d-block fs-4"
+                                            id="FolioCero">0</span></span>
+                                </span>
+                                <!--end::Info-->
+                            </label>
+                            <!--end::Option-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <div class="col-lg-3 col-4">
+                            <label
+                                class="btn btn-outline btn-outline-dashed btn-active-light-primary  d-flex align-items-center mb-5"
+                                for="kt_create_account_form_account_type_personal">
+                                <div class="symbol symbol-65px symbol-circle mb-3 me-4">
+                                    <span class="symbol-label fs-2x fw-semibold text-secondary bg-light-secondary">1</span>
+                                </div>
+                                <!--begin::Info-->
+                                <span class="d-block fw-semibold text-start">
+                                    <span class="text-dark fw-bold d-block fs-4 mb-2">UNO</span>
+
+                                    <span class="text-dark d-block fs-8">Próximo Folio: <span class="text-dark d-block fs-4"
+                                            id="FolioUno">0</span></span>
+                                </span>
+                                <!--end::Info-->
+                            </label>
+                            <!--end::Option-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <div class="col-lg-3 col-4">
+                            <label
+                                class="btn btn-outline btn-outline-dashed btn-active-light-primary  d-flex align-items-center mb-5"
+                                for="kt_create_account_form_account_type_personal">
+                                <div class="symbol symbol-65px symbol-circle mb-3 me-4">
+                                    <span class="symbol-label fs-2x fw-semibold text-secondary bg-light-secondary">2</span>
+                                </div>
+                                <!--begin::Info-->
+                                <span class="d-block fw-semibold text-start">
+                                    <span class="text-dark fw-bold d-block fs-4 mb-2">DOS</span>
+
+                                    <span class="text-dark d-block fs-8">Próximo Folio: <span class="text-dark d-block fs-4"
+                                            id="FolioDos">0</span></span>
+                                </span>
+                                <!--end::Info-->
+                            </label>
+                            <!--end::Option-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                        <div class="col-lg-3 col-4">
+                            <label
+                                class="btn btn-outline btn-outline-dashed btn-active-light-primary  d-flex align-items-center mb-5"
+                                for="kt_create_account_form_account_type_personal">
+                                <div class="symbol symbol-65px symbol-circle mb-3 me-4">
+                                    <span
+                                        class="symbol-label fs-2x fw-semibold text-secondary bg-light-secondary">CNA</span>
+                                </div>
+                                <!--begin::Info-->
+                                <span class="d-block fw-semibold text-start">
+                                    <span class="text-dark fw-bold d-block fs-4 mb-2">CNA</span>
+
+                                    <span class="text-dark d-block fs-8">Próximo Folio: <span class="text-dark d-block fs-4"
+                                            id="FolioCNA">0</span></span>
+                                </span>
+                                <!--end::Info-->
+                            </label>
+                            <!--end::Option-->
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                    }
+                </div>
+
+                <div class="my-5">
+                    <div class="d-flex align-items-center position-relative my-1 justify-content-between">
+                        @* <div class="d-flex align-items-center position-relative my-1 justify-content-start ">
+                        <label class="justify-content-center align-items-center mb-6" for="IdAlmacen">Tipo
+                        Certificado:</label>
+                        <select class="form-control form-select mb-6 w-250px" data-control="select2"
+                        asp-items="(List<SelectListItem>)ViewBag.tCert" name="certificadoGrid"
+                        id="certificadoGrid">
+                        <option value="">Seleccione una opción</option>
+                        </select>
+                        </div> *@
+                        <div class="d-flex align-items-center position-relative my-1 justify-content-end">
+                            <label class="justify-content-center align-items-center mb-6">Buscar: &nbsp;</Label><input
+                                type="text" data-kt-filter="search" class="form-control form-control-sm w-250px mb-6"
+                                placeholder="Buscar" />
+                        </div>
+                    </div>
+                    <table class="table table-striped border rounded gy-5 gs-7 w-100" id="kt_datatable">
+                    </table>
+
+                </div>
+                <!--end::Body-->
+            </div>
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::LIst widget 1-->
+</div>
+<!--end::Col-->
+@* <div class="row">
+<!--begin::Col-->
+<div class="col-md-12">
+<!--begin::List widget 1-->
+<div class="card card-flush h-lg-100">
+<!--begin::Body-->
+<div class="card-body pt-5">
+<div class="row">
+<div class="col-md-3">
+<div class="form-group fv-row">
+<label class="form-label" for="IdAlmacen">Tipo Certificado</label>
+<select class="form-control form-select" data-control="select2"
+asp-items="(List<SelectListItem>)ViewBag.tCert" name="certificadoGrid"
+id="certificadoGrid">
+<option value="">Seleccione una opción</option>
+</select>
+</div>
+</div>
+</div>
+<div class="bottom-buffer">
+<div class="datatable datatable-bordered datatable-head-custom">
+<table class="table table-striped gx-7" id="kt_datatable"></table>
+</div>
+</div>
+</div>
+<!--end::Body-->
+</div>
+<!--end::LIst widget 1-->
+</div>
+<!--end::Col-->
+</div> *@
+
+@section Scripts {
+    <script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+
+    <script src="~/js/FoliosFormaValorada/smadot.index.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = ViewBag.id == 0 ? "Registrar Refrendo" : "Detalle Refrendo";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <style>
+        @*input:read-only{/*pointer-events:none;*/background:var(--kt-input-disabled-bg);}*@input:disabled {
+            pointer-events: none;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 43px !important;
+        }
+
+        .tableCustom>tbody>tr:nth-child(4n+1)>td,
+        .tableCustom>tbody>tr:nth-child(4n+2)>td {
+            background-color: #fff;
+        }
+
+        .tableCustom>tbody>tr:nth-child(4n+3)>td,
+        .tableCustom>tbody>tr:nth-child(4n+4)>td {
+            background-color: #f9f9f9;
+        }
+
+        #NumeroReferencia,
+        #Placa {
+            text-transform: uppercase;
+        }
+
+        /*.tableCustom > thead > tr {
+                    background-color: #f9f9f9;
+                }*/
+    </style>
+}
+
+@section breadcrumb {
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Trámites</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Certificados</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        @*<a asp-controller="Refrendo" asp-action="Index" class="text-muted text-hover-primary">Refrendos</a>*@
+        <a asp-controller="Exento" asp-action="Index" class="text-muted text-hover-primary">Exentos</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+@section toolbar {
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="Refrendo" asp-action="Index">Cancelar</a>
+    <button class="btn btn-sm fw-bold btn-primary d-none" type="button" id="btnGuardarRegistro">Guardar</button>
+    @*Se modifica los refrendos para pertenecer a un Exento (reunion 13/01/2023)*@
+    @*@if (ViewBag.id == 0)
+{
+<button class="btn btn-sm fw-bold btn-primary d-none" type="button" id="btnGuardarRegistro">Guardar</button>
+}*@
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-flush h-lg-100">
+            @*<div class="card-header pt-1">
+            <div class="col-md-4">
+            <div class="form-group fv-row">
+            <label class="form-label" for="almacenGrid">Almac&eacute;n</label>
+            <select class="form-control form-control-solid form-select" data-control="select2" id="almacenGrid"
+            asp-items="(List<SelectListItem>)ViewBag.Almacenes"><option>Todos</option></select>
+            </div>
+            </div>
+            </div>*@
+            <div class="card-body pt-5">
+                @*Se modifica los refrendos para pertenecer a un Exento (reunion 13/01/2023)*@
+                @*<div class="col-md-12">
+                <div class="form-group row">
+                <div class="col-md-3">
+                <label class="control-label" for="autocomplete">Placa / Número de serie</label>
+                <select class="form-control form-control-solid form-select" id="autocomplete"></select>
+                </div>
+                </div>
+                </div>*@
+                <div id="_datos"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var ViewBagId = '@ViewBag.id';
+        var ViewBagIdEx = '@ViewBag.idExento';
+    </script>
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/js/Refrendo/smadot.edit.js" asp-append-version="true"></script>
+}

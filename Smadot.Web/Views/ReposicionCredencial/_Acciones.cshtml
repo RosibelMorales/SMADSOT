@@ -1,0 +1,12 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.ReposicionCredencial.Response.vReposicionCredencialResponse
+
+@if (UserResolver.HasPermission(MenuReposicionCredenciales.Detalle))
+{
+    <div class="btn-group dropup drop-up dropdown">
+        <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnDetalle" data-id="@Model.Id" title="Detalle">
+            <i class="bi bi-eye"></i>
+        </a>
+    </div>
+}

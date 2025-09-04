@@ -1,0 +1,55 @@
+﻿@model Smadot.Models.Entities.ReposicionCredencial.Request.ReposicionCredencialRequest
+
+<div class="row mb-5">
+    <form role="form" id="form_registro_reposicion_credencial" class="=clearfix">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label" asp-for="IdCatMotivoReporteCredencial">Motivo: &nbsp; </label>
+                    <div class="position-relative">
+                        <select asp-for="IdCatMotivoReporteCredencial" asp-items="@((List<SelectListItem>)ViewBag.motivos)"
+                                class="form-control form-select-sm" data-control="select2" id="IdCatMotivoReporteCredencial">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group fv-row">
+                    <label class="form-label required">Empleado: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control input-sm" name="IdUserPuestoVerificentro" id="IdUserPuestoVerificentro" type="text" hidden />
+                        <input class="form-control input-sm" name="NombreUserPuestoVerificentro" id="NombreUserPuestoVerificentro" type="text" hidden />
+                        <select class="form-control form-select campos-desactivados" data-control="select2" id="autocomplete" name="autocomplete">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="form-group fv-row">
+                    <label class="form-label required">Denuncia: &nbsp;</label>
+                    <textarea class="form-control input-uppercase" name="Denuncia" id="Denuncia" rows="3" maxlength="150"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 mt-5" id="url-credencial" style="display:none">
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label required">Credencial: &nbsp;</label><br />
+                <div class="fv-row">
+                    <input class="form-control input-sm" name="ArchivoCredencial" id="ArchivoCredencial" type="text" value="" hidden/>
+                    <div class="dropzone" id="dropzonejs" name="dropzonejs">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,9 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.OrdenServicio.Response.OrdenServicioResponseData.OrdenServicioResponse
+@if (UserResolver.HasPermission(MenuOrdenesServicio.Detalle))
+{
+    <a class="btn btn-sm btn-secondary btnDetalle btn-text-primary btn-hover-primary btn-icon mr-2" data-id="@Model.Id" title="Detalle">
+        <i class="bi bi-eye"></i>
+    </a>
+}

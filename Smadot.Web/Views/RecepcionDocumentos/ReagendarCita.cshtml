@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    ViewData["Title"] = "Reagendar Cita";
+}
+
+@section styles{
+    @*<link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />*@
+    <link rel="stylesheet" href="~/lib/tempus-dominus/css/tempus-dominus.css" />
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            cursor: default;
+            z-index: 99999 !important;
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <a asp-controller="RecepcionDocumentos" asp-action="Index" class="text-muted text-hover-primary">Recepción de
+            Documentos</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-hover-primary">@ViewData["Title"]</a>
+    </li>
+}
+
+
+@section toolbar{
+    <a class="btn btn-sm fw-bold btn-primary" id="btnGuardarRegistro">Guardar</a>
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="RecepcionDocumentos" asp-action="Index">Cancelar</a>
+}
+
+@*<form role="form" id="form_registro" clase="clearfix">*@
+<div class="card shadow-sm mb-5">
+    <div class="card-body">
+        <input type="hidden" id="IdCita" name="IdCita" value="@ViewBag.Cita" />
+        <input type="hidden" id="Folio" name="Folio" value="@ViewBag.Folio" />
+        <partial name="~/Views/RecepcionDocumentos/_Reagendar.cshtml" model="string.Empty" />
+    </div>
+</div>
+
+@*</form>*@
+
+@section Scripts{
+    <script>
+        var min = "@Html.Raw(ViewBag.Min)";
+        var max = "@Html.Raw(ViewBag.Max)";
+
+    </script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script type="module" src="~/lib/tempus-dominus/js/tempus-dominus.min.js"></script>
+    <script type="module" src="~/lib/tempus-dominus/js/jQuery-provider.js"></script>
+    <script asp-append-version="true" src="~/js/RecepcionDocumentos/smadot.recepciondocumentos.reagendar.js"></script>
+    <script asp-append-version="true" src="~/js/RecepcionDocumentos/smadot.recepciondocumentos.reagendarcita.js"></script>
+}

@@ -1,0 +1,101 @@
+﻿@{
+    //ViewBag.Title = "Acreditación de Técnicos Verificadores";
+    ViewBag.Title = "Recepcion de Documentos";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" />
+    <link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />
+    <style>
+        @* .table-responsive>table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before,
+        table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
+            top: 1.3rem;
+            left: 95px;
+            height: 1.35rem;
+            width: 1.35rem;
+            line-height: 1.5;
+            text-indent: -999px !important;
+            margin-top: -0.675rem;
+            margin-right: 0.675rem;
+            display: inline-block;
+            position: relative;
+            font-size: 1.05rem;
+            border: 0;
+            box-shadow: none;
+            mask-size: 85%;
+            -webkit-mask-size: 85%;
+            content: ".";
+        } *@
+
+        .table-responsive>.table.gs-7 td.dtr-control:first-child,
+        .table.gs-7 th.dtr-control:first-child {
+            padding-left: 0 !important;
+        }
+
+        .table-responsive>.table.gs-7 td.dtr-control:first-child,
+        .table.gs-7 th.dtr-control:first-child {
+            padding: 0.5rem 1.2rem !important;
+            min-width: 119px;
+        }
+    </style>
+
+}
+
+@section breadcrumb {
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+@section toolbar {
+    <a class="btn btn-primary" asp-controller="PortalCitas" asp-action="Index" target="_blank">
+        <span class="menu-title">Portal de Citas</span>
+    </a>
+}
+
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            @*<div class="card-header pt-1">
+            <div class="col-md-4">
+            <div class="form-group fv-row">
+            <label class="form-label" for="almacenGrid">Almac&eacute;n</label>
+            <select class="form-control form-control-solid form-select" data-control="select2" id="almacenGrid"
+            asp-items="(List<SelectListItem>)ViewBag.Almacenes"><option>Todos</option></select>
+            </div>
+            </div>
+            </div>*@
+            <!--begin::Body-->
+            <div class="card-body pt-5">
+                <div class="my-5">
+                    <div class="d-flex align-items-center position-relative my-1 justify-content-end">
+                        <Label class="justify-content-center align-items-center mb-6">Buscar: &nbsp;</Label><input
+                            type="text" data-kt-filter="search" class="form-control form-control-sm w-250px mb-6"
+                            placeholder="Buscar" />
+                    </div>
+                    <table class="table table-striped border rounded gy-5 gs-7 w-100" id="kt_datatable">
+                    </table>
+
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::LIst widget 1-->
+        </div>
+        <!--end::Col-->
+    </div>
+</div>
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+@section Scripts {
+    <script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    @*<script src="~/lib/moment/js/moment-with-locales.js"></script>*@
+    @*<script src="~/lib/daterangepicker/js/daterangepicker.js"></script>*@
+    <script src="~/js/RecepcionDocumentos/smadot.recepciondocumentos.index.js" asp-append-version="true"></script>
+}

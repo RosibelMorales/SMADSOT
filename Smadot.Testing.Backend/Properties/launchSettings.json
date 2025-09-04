@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Smadot.Testing.Backend": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+         "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "https://localhost:63357;http://localhost:63358"
+    }
+  }
+}

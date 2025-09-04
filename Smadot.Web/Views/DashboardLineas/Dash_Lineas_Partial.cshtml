@@ -1,0 +1,311 @@
+﻿@model Smadot.Models.Entities.DashboardLineas.Response.DashboardLineaResponseData
+@using Smadot.Models.Dicts
+@using Smadot.Models.Dicts.ProveedorDicts
+<!--begin::Col-->
+<!--begin::List widget 10-->
+<div class="card card-flush" id="one-line">
+    <!--begin::Header-->
+    <div class="card-header pt-7">
+        <!--begin::Title-->
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bold text-gray-800">@Model.Linea</span>
+            <span class="text-gray-400 mt-1 fw-semibold fs-6">@Model.AutosEspera Autos En Espera</span>
+        </h3>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body py-0">
+        <!--begin::Item-->
+        <div class="m-0">
+            <span class="btn btn-sm btn-light my-4">Turno #@Model.Turno</span>
+            <!--begin::Wrapper-->
+            <div class="d-flex align-items-sm-center mb-5">
+                <!--begin::Symbol-->
+                <div class="symbol symbol-45px me-4">
+                    <span class="symbol-label bg-primary">
+                        <i class="text-inverse-primary fs-1 lh-0 fonticon-delivery"></i>
+                    </span>
+                </div>
+                <!--end::Symbol-->
+                <!--begin::Section-->
+                <div class="d-flex align-items-center flex-row-fluid flex-wrap">
+                    <div class="flex-grow-1 me-2">
+                        <span class="text-gray-700 fw-bold d-block fs-5">Dueño: @Model.Duenio</span>
+                        <span class="text-gray-700 fw-bold d-block fs-5">Placas: @Model.Placas</span>
+                        <span class="text-gray-700 fw-bold d-block fs-5">VIN: @Model.Serie</span>
+                        <span class="text-gray-500 fs-6 fw-semibold">Modelo: @Model.Modelo </span>
+                    </div>
+                </div>
+                <!--end::Section-->
+            </div>
+            <!--end::Wrapper-->
+            <!--begin::Timeline-->
+            <div class="timeline">
+                <!--begin::Timeline item-->
+                <div class="timeline-item align-items-center mb-7">
+                    <!--begin::Timeline line-->
+                    <div class="timeline-line w-40px mt-6 mb-n12"></div>
+                    <!--end::Timeline line-->
+                    <!--begin::Timeline icon-->
+                    <div class="timeline-icon" style="margin-left: 11px">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen015.svg-->
+                        <span class="svg-icon svg-icon-2 @(Model.EstatusPrueba >= 0 ? "svg-icon-success":"svg-icon-secondary")">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM6.39999 9.89999C6.99999 8.19999 8.40001 6.9 10.1 6.4C10.6 6.2 10.9 5.7 10.7 5.1C10.5 4.6 9.99999 4.3 9.39999 4.5C7.09999 5.3 5.29999 7 4.39999 9.2C4.19999 9.7 4.5 10.3 5 10.5C5.1 10.5 5.19999 10.6 5.39999 10.6C5.89999 10.5 6.19999 10.2 6.39999 9.89999ZM14.8 19.5C17 18.7 18.8 16.9 19.6 14.7C19.8 14.2 19.5 13.6 19 13.4C18.5 13.2 17.9 13.5 17.7 14C17.1 15.7 15.8 17 14.1 17.6C13.6 17.8 13.3 18.4 13.5 18.9C13.6 19.3 14 19.6 14.4 19.6C14.5 19.6 14.6 19.6 14.8 19.5Z" fill="currentColor"></path>
+                                <path d="M16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8C14.2 8 16 9.8 16 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Timeline icon-->
+                    <!--begin::Timeline content-->
+                    <div class="timeline-content m-0">
+                        <!--begin::Title-->
+                        <span class="fs-6 fw-bold text-gray-800">Asignacion de Linea</span>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Timeline content-->
+                </div>
+                <!--end::Timeline item-->
+                <!--begin::Timeline item-->
+                <div class="timeline-item align-items-center mb-7">
+                    <!--begin::Timeline line-->
+                    <div class="timeline-line w-40px mt-6 mb-n12"></div>
+                    <!--end::Timeline line-->
+                    <!--begin::Timeline icon-->
+                    <div class="timeline-icon" style="margin-left: 11px">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen015.svg-->
+                        <span class='svg-icon svg-icon-2 @((Model.EstatusPrueba>=EstatusVerificacion.TerminaPruebaVisual)? "svg-icon-success":"svg-icon-secondary")'>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM6.39999 9.89999C6.99999 8.19999 8.40001 6.9 10.1 6.4C10.6 6.2 10.9 5.7 10.7 5.1C10.5 4.6 9.99999 4.3 9.39999 4.5C7.09999 5.3 5.29999 7 4.39999 9.2C4.19999 9.7 4.5 10.3 5 10.5C5.1 10.5 5.19999 10.6 5.39999 10.6C5.89999 10.5 6.19999 10.2 6.39999 9.89999ZM14.8 19.5C17 18.7 18.8 16.9 19.6 14.7C19.8 14.2 19.5 13.6 19 13.4C18.5 13.2 17.9 13.5 17.7 14C17.1 15.7 15.8 17 14.1 17.6C13.6 17.8 13.3 18.4 13.5 18.9C13.6 19.3 14 19.6 14.4 19.6C14.5 19.6 14.6 19.6 14.8 19.5Z" fill="currentColor"></path>
+                                <path d="M16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8C14.2 8 16 9.8 16 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Timeline icon-->
+                    <!--begin::Timeline content-->
+                    <div class="timeline-content m-0">
+                        <!--begin::Title-->
+                        <span class="fs-6 fw-bold text-gray-800">Prueba Inpección Visual</span>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Timeline content-->
+                </div>
+                <!--end::Timeline item-->
+                <!--begin::Timeline item-->
+                <div class="timeline-item align-items-center mb-7">
+                    <!--begin::Timeline line-->
+                    <div class="timeline-line w-40px mt-6 mb-n12"></div>
+                    <!--end::Timeline line-->
+                    <!--begin::Timeline icon-->
+                    <div class="timeline-icon" style="margin-left: 11px">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen015.svg-->
+                        <span class="svg-icon svg-icon-2 @(Model.EstatusPrueba >= EstatusVerificacion.EnPruebaOBD && Model.PruebaOBD ? "svg-icon-success":"")">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM6.39999 9.89999C6.99999 8.19999 8.40001 6.9 10.1 6.4C10.6 6.2 10.9 5.7 10.7 5.1C10.5 4.6 9.99999 4.3 9.39999 4.5C7.09999 5.3 5.29999 7 4.39999 9.2C4.19999 9.7 4.5 10.3 5 10.5C5.1 10.5 5.19999 10.6 5.39999 10.6C5.89999 10.5 6.19999 10.2 6.39999 9.89999ZM14.8 19.5C17 18.7 18.8 16.9 19.6 14.7C19.8 14.2 19.5 13.6 19 13.4C18.5 13.2 17.9 13.5 17.7 14C17.1 15.7 15.8 17 14.1 17.6C13.6 17.8 13.3 18.4 13.5 18.9C13.6 19.3 14 19.6 14.4 19.6C14.5 19.6 14.6 19.6 14.8 19.5Z" fill="currentColor"></path>
+                                <path d="M16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8C14.2 8 16 9.8 16 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Timeline icon-->
+                    <!--begin::Timeline content-->
+                    <div class="timeline-content m-0">
+                        <!--begin::Title-->
+                        <span class="fs-6 fw-bold text-gray-800">Prueba OBD</span>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Timeline content-->
+                </div>
+                <!--end::Timeline item-->
+                <!--begin::Timeline item-->
+                <div class="timeline-item align-items-center mb-7">
+                    <!--begin::Timeline line-->
+                    <div class="timeline-line w-40px mt-6 mb-n12"></div>
+                    <!--end::Timeline line-->
+                    <!--begin::Timeline icon-->
+                    <div class="timeline-icon" style="margin-left: 11px">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen015.svg-->
+                        <span class="svg-icon svg-icon-2 @(Model.EstatusPrueba >= EstatusVerificacion.EnPruebaEstaticaDinamica && Model.PruebaEmisiones ?"svg-icon-success":"")">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM6.39999 9.89999C6.99999 8.19999 8.40001 6.9 10.1 6.4C10.6 6.2 10.9 5.7 10.7 5.1C10.5 4.6 9.99999 4.3 9.39999 4.5C7.09999 5.3 5.29999 7 4.39999 9.2C4.19999 9.7 4.5 10.3 5 10.5C5.1 10.5 5.19999 10.6 5.39999 10.6C5.89999 10.5 6.19999 10.2 6.39999 9.89999ZM14.8 19.5C17 18.7 18.8 16.9 19.6 14.7C19.8 14.2 19.5 13.6 19 13.4C18.5 13.2 17.9 13.5 17.7 14C17.1 15.7 15.8 17 14.1 17.6C13.6 17.8 13.3 18.4 13.5 18.9C13.6 19.3 14 19.6 14.4 19.6C14.5 19.6 14.6 19.6 14.8 19.5Z" fill="currentColor"></path>
+                                <path d="M16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8C14.2 8 16 9.8 16 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Timeline icon-->
+                    <!--begin::Timeline content-->
+                    <div class="timeline-content m-0">
+                        <!--begin::Title-->
+                        <span class="fs-6 fw-bold text-gray-800">Prueba Emisiones</span>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Timeline content-->
+                </div>
+                <div class="timeline-item align-items-center mb-7">
+                    <!--begin::Timeline line-->
+                    <div class="timeline-line w-40px mt-6 mb-n12"></div>
+                    <!--end::Timeline line-->
+                    <!--begin::Timeline icon-->
+                    <div class="timeline-icon" style="margin-left: 11px">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen015.svg-->
+                        <span class="svg-icon svg-icon-2 @(Model.EstatusPrueba >= EstatusVerificacion.EnPruebaOpacidad && Model.PruebaOpacidad ?"svg-icon-success":"")">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM6.39999 9.89999C6.99999 8.19999 8.40001 6.9 10.1 6.4C10.6 6.2 10.9 5.7 10.7 5.1C10.5 4.6 9.99999 4.3 9.39999 4.5C7.09999 5.3 5.29999 7 4.39999 9.2C4.19999 9.7 4.5 10.3 5 10.5C5.1 10.5 5.19999 10.6 5.39999 10.6C5.89999 10.5 6.19999 10.2 6.39999 9.89999ZM14.8 19.5C17 18.7 18.8 16.9 19.6 14.7C19.8 14.2 19.5 13.6 19 13.4C18.5 13.2 17.9 13.5 17.7 14C17.1 15.7 15.8 17 14.1 17.6C13.6 17.8 13.3 18.4 13.5 18.9C13.6 19.3 14 19.6 14.4 19.6C14.5 19.6 14.6 19.6 14.8 19.5Z" fill="currentColor"></path>
+                                <path d="M16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8C14.2 8 16 9.8 16 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Timeline icon-->
+                    <!--begin::Timeline content-->
+                    <div class="timeline-content m-0">
+                        <!--begin::Title-->
+                        <span class="fs-6 fw-bold text-gray-800">Prueba Opacidad</span>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Timeline content-->
+                </div>
+                <!--end::Timeline item-->
+                <!--begin::Timeline item-->
+                <div class="timeline-item align-items-center">
+                    <!--begin::Timeline line-->
+                    <div class="timeline-line w-40px"></div>
+                    <!--end::Timeline line-->
+                    <!--begin::Timeline icon-->
+                    <div class="timeline-icon" style="margin-left: 11px">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
+                        <span class="svg-icon svg-icon-2  @(Model.EstatusPrueba == EstatusVerificacion.VerificacionFinalizada || Model.EstatusPrueba == EstatusVerificacion.VerificacionAbortada ?"svg-icon-success":"svg-icon-secondary")">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM6.39999 9.89999C6.99999 8.19999 8.40001 6.9 10.1 6.4C10.6 6.2 10.9 5.7 10.7 5.1C10.5 4.6 9.99999 4.3 9.39999 4.5C7.09999 5.3 5.29999 7 4.39999 9.2C4.19999 9.7 4.5 10.3 5 10.5C5.1 10.5 5.19999 10.6 5.39999 10.6C5.89999 10.5 6.19999 10.2 6.39999 9.89999ZM14.8 19.5C17 18.7 18.8 16.9 19.6 14.7C19.8 14.2 19.5 13.6 19 13.4C18.5 13.2 17.9 13.5 17.7 14C17.1 15.7 15.8 17 14.1 17.6C13.6 17.8 13.3 18.4 13.5 18.9C13.6 19.3 14 19.6 14.4 19.6C14.5 19.6 14.6 19.6 14.8 19.5Z" fill="currentColor"></path>
+                                <path d="M16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8C14.2 8 16 9.8 16 12ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Timeline icon-->
+                    <!--begin::Timeline content-->
+                    <div class="timeline-content m-0">
+                        <!--begin::Title-->
+                        <span class="fs-6 fw-bold text-gray-800">Finalizado</span>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Timeline content-->
+                </div>
+                <!--end::Timeline item-->
+                @if (Model.Resultado != null)
+                {
+                    <div class="separator  my-6"></div>
+                    <div class="d-flex flex-row-fluid">
+                        <div class="flex-fill w-50">
+                            <span class="@(Model.CRechazo != CausaRechazo.NoAplica? "text-danger":"text-secondary") fw-bold d-block fs-6">Resultado: @Resultados.DictResultados[(int)Model.Resultado]</span>
+                        </div>
+
+
+                        @if (Model.CRechazo != CausaRechazo.NoAplica)
+                        {
+                            <div class="flex-fill">
+                                <span class="text-danger fw-bold d-block fs-6">Causa: @CausaRechazo.DictClaveRechazo[Model.CRechazo]</span>
+                            </div>
+                        }
+                    </div>
+                }
+
+
+            </div>
+            <!--end::Timeline-->
+        </div>
+        <!--end::Item-->
+        <!--begin::Separator-->
+        <div class="separator separator-dashed my-6"></div>
+        <!--end::Separator-->
+    </div>
+    <!--end: Card Body-->
+    <div class="card-footer pt-0">
+        <div class="d-flex justify-content-evenly ">
+            <div class="d-flex justify-content-center flex-column me-3">
+                @*<span class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">Camara <i class="bi bi-camera-video"></i></span>*@
+                <!--begin::Info-->
+                @if (@Model.Camara)
+                {
+                    <a href="javascript:;" data-bs-toggle="dropdown">
+                        <span class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">Camara <i class="bi bi-camera-video"></i></span>
+                    </a>
+                    @*  <ul class="dropdown-menu">
+                <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+                <li>
+                <a class="btnDetalle">
+                <label class="dropdown-item">
+                <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                <span class="navi-text">Ver</span>
+                </label>
+                </a>
+                </li>
+                </ul>*@
+
+                    <div class="mb-0 lh-1" style="margin-top: 4px;">
+                        <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
+                        <span class="fs-7 fw-semibold text-muted">Activada</span>
+                    </div>
+                }
+                else
+                {
+                    <span class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">Camara <i class="bi bi-camera-video"></i></span>
+                    <div class="mb-0 lh-1">
+                        <span class="badge badge-danger badge-circle w-10px h-10px me-1"></span>
+                        <span class="fs-7 fw-semibold text-muted">Desactivada</span>
+                    </div>
+                }
+                <!--end::Info-->
+            </div>
+            <div class="d-flex justify-content-center flex-column me-3">
+                <a href="javascript:;" data-bs-toggle="dropdown">
+                    <span class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1">Linea <i class="bi bi-chevron-double-down"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+                    <li>
+                        @if (!@Model.Line)
+                        {
+                            <a class="btnOpen" data-id="@Model.IdLinea">
+                                <label class="dropdown-item">
+                                    <span class="navi-icon"><i class="bi bi-toggle-on"></i></span>&nbsp;&nbsp;
+                                    <span class="navi-text">Abrir</span>
+                                </label>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btnClose" data-id="@Model.IdLinea">
+                                <label class="dropdown-item">
+                                    <span class="navi-icon"><i class="bi bi-toggle-off"></i></span>&nbsp;&nbsp;
+                                    <span class="navi-text">Cerrar</span>
+                                </label>
+                            </a>
+                        }
+                    </li>
+                </ul>
+                <!--begin::Info-->
+                @if (@Model.Line)
+                {
+                    <div class="mb-0 lh-1">
+                        <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
+                        <span class="fs-7 fw-semibold text-muted">Activada</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="mb-0 lh-1">
+                        <span class="badge badge-danger badge-circle w-10px h-10px me-1"></span>
+                        <span class="fs-7 fw-semibold text-muted">Desactivada</span>
+                    </div>
+                }
+                <!--end::Info-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::List widget 10-->
+<!--end::Col-->

@@ -1,0 +1,102 @@
+﻿<div class='py-2 px-0 col-md-12'>
+    <form role='form' class='clearfix' id="form_registro">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Verificentro:</label>
+                    <input class="form-control" type="text" value="@ViewBag.Verificentro" disabled="disabled">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Numero de Entrega: &nbsp;<strong class="obligatorio">*</strong></label>
+                    <input class="form-control" id="NumeroEntrega" placeholder="Numero de Entrega" type="text">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <label for="fechaRegistro">Fecha Inicial: &nbsp;<strong class="obligatorio">*</strong></label>
+                <div class="position-relative">
+                    <input class="form-control" id="FechaInicial" name="fechaInicial" type="text" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="fechaRegistro">Fecha Final: &nbsp;<strong class="obligatorio">*</strong></label>
+                <div class="position-relative">
+                    <input class="form-control" id="FechaFinal" name="fechaFinal" type="text" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="">
+            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-900 border-gray-200 text-center">
+                        <th colspan="5">Folios usados en el rango seleccionado</th>
+                    </tr>
+                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                        <th>Clave</th>
+                        <th>Tipo</th>
+                        <th>Cantidad*</th>
+                        <th>Serie Inicial*</th>
+                        <th>Serie Final*</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="trUno">
+                        <td>1701002</td>
+                        <td>"1" (UNO)<input type="number" value="3" style="display:none" /></td>
+                        <td class="fv-row"><input type="number" id="UnoCantidad" name="UnoCantidad" class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="UnoFolioInicial" class="form-control" value="0" min="0"></td>
+                        <td class="fv-row"><input type="number" name="UnoFolioFinal" class="form-control" value="0" min="0"></td>
+                        <td><button type="button" class="btn btn-success" id="addUno">+</button></td>
+                    </tr>
+                    <tr id="trDos">
+                        <td>1701003</td>
+                        <td>"2" (DOS)<input value="4" style="display:none" /></td>
+                        <td class="fv-row"><input type="number" id="DosCantidad" name="DosCantidad" class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="DosFolioInicial" class="form-control" value="0" min="0"></td>
+                        <td class="fv-row"><input type="number" name="DosFolioFinal" class="form-control" value="0" min="0"></td>
+                        <td><button type="button" class="btn btn-success" id="addDos">+</button></td>
+                    </tr>
+                    <tr id="trCero">
+                        <td>1701004</td>
+                        <td>"0" (CERO)<input type="number" value="2" style="display:none" /></td>
+                        <td class="fv-row"><input type="number" id="CeroCantidad" name="CeroCantidad" class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="CeroFolioInicial" class="form-control" value="0" min="0"></td>
+                        <td class="fv-row"><input type="number" name="CeroFolioFinal" class="form-control" value="0" min="0"></td>
+                        <td><button type="button" class="btn btn-success" id="addCero">+</button></td>
+                    </tr>
+                    <tr id="trDobleCero">
+                        <td>1701005</td>
+                        <td>"00" (DOBLE CERO)<input type="number" value="1" style="display:none" /> </td>
+                        <td class="fv-row"><input type="number" name="DobleCeroCantidad" class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="DobleCeroFolioInicial" class="form-control" value="0" min="0"></td>
+                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" class="form-control" value="0" min="0"></td>
+                        <td><button type="button" class="btn btn-success" id="addDobleCero">+</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <label class="form-label">Cargar Documento</label><br />
+                <div class="fv-row">
+                    <div class="dropzone" id="dropzonejs">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

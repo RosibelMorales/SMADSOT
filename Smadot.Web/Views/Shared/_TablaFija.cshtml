@@ -1,0 +1,28 @@
+﻿@model List<Smadot.Web.Models.TablaFijaViewModel.TablaFijaRow>
+
+<table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+    <thead>
+        <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+            <th>Tipo de Certificado</th>
+            <th>Cantidad</th>
+            <th>Folio Inicial</th>
+            <th>Folio Final*</th>
+            <th>Clave del Certificado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var tfr in Model)
+            {
+                <tr>
+                    <td>@tfr.TipoCertificado</td>
+                    <td class="fv-row"><input type="text" id="DobleCeroCantidad" @(ViewBag.Enabled == null ? "disabled":"") class="form-control cantidadInput" value="@tfr.Cantidad"></td>
+                    <td><input type="text" id="DobleCeroFolioInicial" @(ViewBag.Enabled ==null ? "disabled":"") class="form-control" value="@tfr.FolioInicial"></td>
+                    <td><input type="text" id="DobleCeroFolioFinal" @(ViewBag.Enabled == null ? "disabled":"") class="form-control" value="@tfr.FolioFinal"></td>
+                    <td>@tfr.ClaveCerfiticado</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

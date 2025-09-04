@@ -1,0 +1,343 @@
+﻿@using Smadot.Models.Entities.DevolucionSPF.Response;
+@using Smadot.Utilities.GestionTokens
+@model DevolucionSPFResponse
+@{
+    var usuario = LecturaToken.UsuarioActualEnSesion(Context);
+}
+<form role="form" id="form_registroDevolucionSPF" class="clearfix">
+    <input type="hidden" asp-for="isReadOnly" />
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Número de Devolución: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="NumeroDevolucion" class="form-control" placeholder="Número de Devolución"
+                    readonly>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Número de Solicitud: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="NumeroSolicitud" class="form-control"
+                    placeholder="Buscar Número de Solicitud" readonly="@Model.isReadOnly">
+                <input type="hidden" id="Solicitud" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Responsable de la entrega: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="ResponsableEntrega" class="form-control" placeholder="Buscar Responsable"
+                    readonly="@Model.isReadOnly">
+                <input type="hidden" id="Responsable" />
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-3">
+            <div class="form-group fv-row">
+                <label class="form-label" asp-for="FechaEntrega">Fecha Entrega: &nbsp;<strong
+                        class="obligatorio">*</strong></label>
+                <div class="position-relative" style="width: 50% !important">
+                    @*<input class="form-control form-control-solid" asp-for="FechaEntrega" type="text" />*@
+                    @if (Model.isReadOnly)
+                    {
+                        <input disabled class="form-control form-control-solid" id="FechaEntrega" name="FechaEntrega"
+                        asp-for="FechaEntregaStr" type="text" />
+                    }
+                    else
+                    {
+                        <input class="form-control form-control-solid" id="FechaEntrega" name="FechaEntrega"
+                        asp-for="FechaEntregaStr" type="text" />
+                    }
+                    <div class="position-absolute translate-middle-y top-50 end-0 me-3">
+                        <i class="fa-solid fa-calendar-days"
+                            onclick="document.getElementById('FechaEntrega').focus(); return false;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* <div class="col-md-3">
+            <div class="form-group fv-row">
+                <label class="form-label" asp-for="IdAlmacen">Almacen: &nbsp;<strong
+                        class="obligatorio">*</strong></label>
+                @if (Model.isReadOnly)
+                {
+
+                    <select disabled asp-for="IdAlmacen" asp-items="@((List<SelectListItem>)ViewBag.almacenes)"
+                        class="form-select form-select-transparent" data-control="select2"
+                        data-placeholder="Seleccionar Almacen"></select>
+                }
+                else
+                {
+
+                    <select asp-for="IdAlmacen" asp-items="@((List<SelectListItem>)ViewBag.almacenes)"
+                        class="form-select form-select-transparent" data-control="select2"
+                        data-placeholder="Seleccionar Almacen"></select>
+                }
+              
+            </div>
+        </div> *@
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Quién recibió en SPF: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="RecibioEnSPF" class="form-control" placeholder="Quién recibió en SPF"
+                    readonly="@Model.isReadOnly">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5" id="tablaFijaPartial">
+        <partial name="~/Views/Shared/_TablaFija2.cshtml" model="@Model.TablaFijaViewModel" />
+    </div>
+    <div class="row mb-5">
+        <div class="row col-md-12">
+            @if (Model.isReadOnly != true)
+            {
+                @*<div class="dropzone" id="devolucionSPF_dropzonejs">
+            <!--begin::Message-->
+            <div class="dz-message needsclick">
+            <!--begin::Icon-->
+            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+            <!--end::Icon-->
+            <!--begin::Info-->
+            <div class="ms-4">
+            <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargar..</h3>
+            <span class="fs-7 fw-semibold text-gray-400">Sube hasta 3 archivos</span>
+            </div>
+            <!--end::Info-->
+            </div>
+            </div>
+            <!--end::Dropzone-->*@
+                <div class="col-md-4 text-center">
+                    <label class="control-label fw-bold">Documento 1</label><br />
+                    <input asp-for="UrlDoc1" class="d-none">
+                    <div class="dropzone" id="dropzonejs1">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <label class="control-label fw-bold">Documento 2</label><br />
+                    <input asp-for="UrlDoc2" class="d-none">
+                    <div class="dropzone" id="dropzonejs2">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <label class="control-label fw-bold">Documento 3</label><br />
+                    <input asp-for="UrlDoc3" class="d-none">
+                    <div class="dropzone" id="dropzonejs3">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                @*<div claclass="d-flex justify-content-between">*@
+                @if (!string.IsNullOrEmpty(Model.UrlDoc1))
+                {
+                    var url1 = Model.UrlDoc1.Split("/")[Model.UrlDoc1.Split("/").Length - 1];
+
+                    <div class="col-md-4 text-center">
+                        <label class="control-label fw-bold">Documento 1</label>
+
+                        <br />
+                        <a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc"
+                            data-url='@(Model.IdDevolucionSPF + "/" + url1)'>
+                            @* <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDoc1"
+                    title="Descargar" role="button">*@
+                            <span class="svg-icon svg-icon-1">
+                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path
+                                            d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                            fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                        <path
+                                            d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                            fill="#000000" />
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+                            @url1
+                        </a>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.UrlDoc2))
+                {
+                    var url1 = Model.UrlDoc2.Split("/")[Model.UrlDoc2.Split("/").Length - 1];
+                    <div class="col-md-4 text-center">
+                        <label class="control-label fw-bold">Documento 2</label>
+
+                        <br />
+                        <a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc"
+                            data-url='@(Model.IdDevolucionSPF + "/" + url1)'>
+                            @* <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDoc2"
+                    title="Descargar" role="button">*@
+                            <span class="svg-icon svg-icon-1">
+                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path
+                                            d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                            fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                        <path
+                                            d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                            fill="#000000" />
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+                            @url1
+                        </a>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.UrlDoc3))
+                {
+                    var url1 = Model.UrlDoc3.Split("/")[Model.UrlDoc3.Split("/").Length - 1];
+                    <div class="col-md-4 text-center">
+                        <label class="control-label fw-bold">Documento 3</label>
+
+                        <br />
+                        <a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc"
+                data-url='@(Model.IdDevolucionSPF+"/"+url1)'>
+                        @* <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDoc3" *@
+                            title="Descargar" role="button">
+                            <span class="svg-icon svg-icon-1">
+                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path
+                                            d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                            fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                        <path
+                                            d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                            fill="#000000" />
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+                            @url1
+                        </a>
+                    </div>
+                }
+                @*</div>*@
+                @*<div claclass="d-flex justify-content-between">
+            <a href="#link" class="btn btn-outline btn-outline-dashed me-2 mb-2" role="button">
+            <span class="svg-icon svg-icon-1">
+            <!--begin::Svg Icon |
+            path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+            height="24px" viewBox="0 0 24 24" version="1.1">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon points="0 0 24 0 24 24 0 24" />
+            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959
+            L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751
+            19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667
+            C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369
+            12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606
+            10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874
+            C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776
+            8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802
+            12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334
+            L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905
+            C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+            </g>
+            </svg><!--end::Svg Icon-->
+            </span>
+            Documento1.pdf
+            </a>
+            <a href="#link" class="btn btn-outline btn-outline-dashed me-2 mb-2" role="button">
+            <span class="svg-icon svg-icon-1">
+            <!--begin::Svg Icon |
+            path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+            height="24px" viewBox="0 0 24 24" version="1.1">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon points="0 0 24 0 24 24 0 24" />
+            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959
+            L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751
+            19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667
+            C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369
+            12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606
+            10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874
+            C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776
+            8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802
+            12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334
+            L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905
+            C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+            </g>
+            </svg><!--end::Svg Icon-->
+            </span>
+            Documento2.png
+            </a>
+            <a href="#link" class="btn btn-outline btn-outline-dashed me-2 mb-2" role="button">
+            <span class="svg-icon svg-icon-1">
+            <!--begin::Svg Icon |
+            path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+            height="24px" viewBox="0 0 24 24" version="1.1">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon points="0 0 24 0 24 24 0 24" />
+            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959
+            L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751
+            19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667
+            C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369
+            12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606
+            10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874
+            C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776
+            8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802
+            12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334
+            L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905
+            C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+            </g>
+            </svg><!--end::Svg Icon-->
+            </span>
+            Documento3.jpeg
+            </a>
+            </div>*@
+            }
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-12 d-flex justify-content-end">
+            <p>
+                <strong>Aprobó:&nbsp;</strong>
+                @if (Model.isReadOnly)
+                {
+                    @Model.UserAprobo
+                }
+                else
+                {
+                    @usuario.Nombre
+                }
+
+
+            </p>
+        </div>
+    </div>
+</form>

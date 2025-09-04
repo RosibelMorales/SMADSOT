@@ -1,0 +1,93 @@
+﻿@model Smadot.Models.Entities.SeguimientoCVV.Response.SeguimientoCVVResponse
+@using Smadot.Utilities.FileStorage
+@{
+    int validacion = 0; int sumar = 2;
+    int apertura = Smadot.Models.Dicts.CierreAperturaLineaDic.Apertura;
+    int cierre = Smadot.Models.Dicts.CierreAperturaLineaDic.Cierre;
+}
+
+@section styles{
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+<br />
+
+<form role="form" id="form_detallesCierreAperturaLinea" class="clearfix">
+
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group fv-row">
+                <input type="hidden" asp-for="Id" id="idLinea" name="idLinea" />
+                <label class="form-label" for="NombreLinea">Línea</label>
+                <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" id="MotivoApertura" name="MotivoApertura" value="@Model.NombreLinea" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group fv-row">
+                <label class="form-label" for="NombreLinea">Clave Línea</label>
+                <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" id="Clave" name="Clave" value="@Model.Clave" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group fv-row">
+                <label class="form-label" for="NotaLineaMotivo">Estatus</label>
+                <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" id="NotasMotivo" name="NotasMotivo" value="@Model.Estatus" readonly />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group fv-row">
+                <label class="form-label" for="FechaRegistroLinea">Fecha de Registro de Línea</label>
+                <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" id="FechaRegistroLinea" name="FechaRegistroLinea" value="@Model.FechaRegistroLinea" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group fv-row">
+                <label class="form-label" for="NombreUsuario">Registró</label>
+                <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" id="NombreUsuario" name="NombreUsuario" value="@Model.NombreUsuario" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+        <!--begin::Col-->
+        <div class="col-md-12">
+            <!--begin::List widget 1-->
+            <div class="card card-flush h-lg-100">
+                <!--begin::Body-->
+                <div class="card-body pt-5">
+                    <div class="bottom-buffer">
+                        <div class="datatable datatable-bordered datatable-head-custom">
+                            <table class="table table-striped gx-7" id="kt_detalleTable" align="center"></table>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::LIst widget 1-->
+        </div>
+        <!--end::Col-->
+    </div>
+</form>
+
+
+
+
+

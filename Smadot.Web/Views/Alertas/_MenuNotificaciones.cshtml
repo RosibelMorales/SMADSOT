@@ -1,0 +1,47 @@
+﻿@using Smadot.Models.Entities.Alertas.Response;
+@model List<vAlertaResponse>
+
+@if (Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        <div class="row mb-5">
+            <div class="d-flex flex-stack py-4">
+                <div class="d-flex align-items-center">
+                    <div class="symbol symbol-35px me-4">
+                        <span class="symbol-label bg-light-danger">
+                            <span class="svg-icon svg-icon-2 svg-icon-danger">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"></rect>
+                                    <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="currentColor"></rect>
+                                    <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"></rect>
+                                </svg>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="mb-0 me-2">
+                       
+                        @if (item.TableName != "ConfiguradorCita")
+                        {
+                            string movimientoInicial = @item.MovimientoInicial?.Length > 250 ? @item.MovimientoInicial.Substring(0, 250) : @item.MovimientoInicial;
+                            <div class="text-gray-500 fs-7"><a href="#" class="alertDetalle" data="@item.Id">@movimientoInicial</a></div>
+                        }
+                        else
+                        {
+                            <div class="text-gray-500 fs-7"><div class="alertDetalle" data="@item.Id">@Html.Raw(item.MovimientoInicial)</div></div>
+
+                        }
+                            <div class="text-gray-400 fs-8">@item.Fecha.ToString("dd/MM/yyyy hh:mm tt")</div>
+                        @*<div class="text-gray-500 fs-7"><a asp-controller="Alertas" asp-action="Detalle" asp-route-id="@item.Id">@movimientoInicial</a></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row mb-5 text-center">
+        <span class="badge badge-light-dark w-50">No se encontraron alertas</span>
+    </div>
+}

@@ -1,0 +1,53 @@
+version: '3.4'
+
+services:
+  smadot.web:
+    container_name: smadotweb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - JWT_ClaveSecreta=c#hy%tPbuaxf2BB5cXShN8&FK9+a@D
+      - JWT_Issuer=https://localhost:7255/
+      - JWT_Audience=https://localhost:7255/
+      - TiempoExpiracionSesion=30000
+      - UrlAPI=http://20.225.208.34:9091
+      - AllowedHosts=*
+    depends_on:
+      - smadot.gateway
+    ports:
+      - "9090:80"
+
+  smadot.gateway:
+    container_name: smadotgateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev
+      - ASPNETCORE_URLS=http://+:80
+      - AllowedHosts=*
+    ports:
+      - "9091:80"
+
+  smadot.solicitudformavalorada.api:
+    container_name: smadotsolicitudformavaloradaapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - AllowedHosts=*
+      - ConnectionStrings_DefaultConnection="Server=ziondesarrollo.southcentralus.cloudapp.azure.com,1433;Initial Catalog=smadot_dev;Persist Security Info=True;User ID=desarrollo;Password=Z10nD3s4rR0l102023..;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"
+    ports:
+      - "9092:80"
+
+  smadot.autenticacion.api:
+    container_name: smadotautenticacionapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - AllowedHosts=*
+      - ConnectionStrings_DefaultConnection="Server=ziondesarrollo.southcentralus.cloudapp.azure.com,1433;Initial Catalog=smadot_dev;Persist Security Info=True;User ID=desarrollo;Password=Z10nD3s4rR0l102023..;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"
+      - TiempoExpiracionToken=30000
+      - JWT_ClaveSecreta=c#hy%tPbuaxf2BB5cXShN8&FK9+a@D
+      - JWT_Issuer=https://localhost:7255/
+      - JWT_Audience=https://localhost:7255/
+    ports:
+      - "9093:80"
+
+ 

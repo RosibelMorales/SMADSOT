@@ -1,0 +1,33 @@
+﻿@using Smadot.Models.Entities.Permiso.Response;
+@model List<PermisoTreeResponse>
+@{
+    var firstItems = Model.Where(x => x.IdPermisoPadre == null).ToList();
+}
+
+<div id="kt_tree" class="tree-demo">
+    <ul>
+        @foreach (var fItem in firstItems)
+        {
+            <li id="jtree_@fItem.Id" data-jstree='{"icon" : "fa-solid fa-user text-success"@(fItem.Selected && Model.Where(x => x.IdPermisoPadre == fItem.Id).All(x => x.Selected) && Model.Where(x => Model.Where(y => y.IdPermisoPadre == fItem.Id).Select(y => y.Id).ToList().Contains(x.IdPermisoPadre ?? 0)).All(x => x.Selected) ? ", \"selected\":\"true\"" : "") }'>
+                @fItem.Nombre
+                <ul>
+                    @foreach (var sItem in Model.Where(x => x.IdPermisoPadre == fItem.Id))
+                    {
+                        <li id="jtree_@sItem.Id" data-jstree='{"icon" : "fa-solid fa-user text-success" @(sItem.Selected && Model.Where(x => x.IdPermisoPadre == sItem.Id).All(x=>x.Selected) ? ", \"selected\":\"true\"" : "") }'>
+                            @sItem.Nombre
+
+                            <ul>
+                                @foreach (var tItem in Model.Where(x => x.IdPermisoPadre == sItem.Id))
+                                {
+                                    <li id="jtree_@tItem.Id" data-jstree='{"icon" : "fa-solid fa-user text-success" @(tItem.Selected ? ", \"selected\":\"true\"" : "" )}'>
+                                        @tItem.Nombre
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>

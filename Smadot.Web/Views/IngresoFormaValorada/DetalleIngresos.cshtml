@@ -1,0 +1,316 @@
+﻿@using Smadot.Models.Dicts;
+@using Smadot.Utilities.FileStorage
+@using Smadot.Models.Entities.IngresoFormaValorada.Response
+@model IngresoFormaValoradaFormResponse
+@{
+
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    ViewData["Title"] = "Detalle Ingreso de Formas Valoradas a CVV";
+}
+
+@section styles {
+    <link href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css">
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+
+        .fs-light-secondary {
+            color: #8b704a !important;
+            background: #e0ddd7 !important;
+        }
+
+        .fs-light-orange {
+            color: #f57d06 !important;
+            background: #f8ddc2 !important;
+        }
+
+        .fs-light-orange2 {
+            color: #f54e06 !important;
+            background: rgb(251, 200, 188) !important;
+        }
+    </style>
+}
+
+@section breadcrumb {
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administrar Formas Valoradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Entradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="/IngresoFormaValorada" class="text-muted text-hover-primary">Ingreso Forma Valorada </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@section toolbar {
+    <a class="btn btn-sm fw-bold btn-primary" id="btnSave">Guardar</a>
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="IngresoFormaValorada" asp-action="Index">Cancelar</a>
+}
+
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            <div class="card-header">
+                <h3 class="card-title">Ingreso de Formas Valoradas</h3>
+            </div>
+            <form class="form" action="#" method="post" id="form">
+
+                <!--begin::Body-->
+                <div class="card-body pt-5 row">
+                    <div class="col-md-4">
+                        <label class="form-label" asp-for="IdSolicitudFV">Número de Solicitud</label><br />
+                        <input class="form-control form-control-solid" type="text" asp-for="IdSolicitudFV" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" asp-for="FechaSolicitud">Fecha de Solicitud &nbsp;</label><br />
+                        <input class="form-control form-control-solid" type="text" asp-for="FechaSolicitud"
+                            value="@(Model.FechaSolicitud.ToString("dd/MM/yyyy"))" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" asp-for="Almacen">Almacén &nbsp;</label><br />
+                        <input class="form-control form-control-solid" type="text" asp-for="Almacen" readonly />
+                    </div>
+                    <div class="clearfix"><br /></div>
+
+                    <div class="col-md-4 form-group">
+                        <label class="form-label" asp-for="FechaEntrega">Fecha de Entrega: &nbsp;<strong
+                                class="obligatorio">*</strong></label>
+                        <div class="position-relative">
+                            <input class="form-control form-control-solid" asp-for="FechaEntrega" type="text" readonly
+                                disabled value="@(Model.FechaEntrega.ToString("dd/MM/yyyy"))" />
+                            <div class="position-absolute translate-middle-y top-50 end-0 me-3">
+                                <i class="fa-solid fa-calendar-days"
+                                    onclick="document.getElementById('FechaEntrega').focus(); return false;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 fv-row">
+                        <label class="form-label" asp-for="NombreRecibio">Quién recibió: &nbsp;<strong
+                                class="obligatorio">*</strong></label>
+                        <input class="form-control form-control-solid" readonly type="text" asp-for="NombreRecibio" />
+                    </div>
+                    <div class="clearfix"><br /></div>
+                    <div class="d-flex">
+                        @if (!string.IsNullOrEmpty(Model.UrlDoc1))
+                        {
+                            <div class="py-2 px-4 col-md-4">
+                                <label class="form-label">Documento 1</label><br />
+
+                                <div class="text-center mt-3">
+                                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                                        download="documento1_@(Model.FechaSolicitud.ToString("dd/MM/yyyy")+"."+StorageManager.GetPathExtension(Model.UrlDoc1))"
+                                        href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc1)"
+                                        title="Descargar" role="button">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path
+                                                        d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                                        fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path
+                                                        d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                                        fill="#000000" />
+                                                </g>
+                                            </svg>
+                                            Descargar
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.UrlDoc2))
+                        {
+                            <div class="py-2 px-4 col-md-4">
+                                <label class="form-label">Documento 2</label><br />
+                                <div class="text-center mt-3">
+                                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                                        download="documento1_@(Model.FechaSolicitud.ToString("dd/MM/yyyy")+"."+StorageManager.GetPathExtension(Model.UrlDoc2))"
+                                        href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc2)"
+                                        title="Descargar" role="button">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path
+                                                        d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                                        fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path
+                                                        d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                                        fill="#000000" />
+                                                </g>
+                                            </svg>
+                                            Descargar
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.UrlDoc3))
+                        {
+                            <div class="py-2 px-4 col-md-4">
+                                <label class="form-label">Documento 3</label><br />
+                                <div class="text-center mt-3">
+                                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                                        download="documento1_@(Model.FechaSolicitud.ToString("dd/MM/yyyy")+"."+StorageManager.GetPathExtension(Model.UrlDoc3))"
+                                        href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc3)"
+                                        title="Descargar" role="button">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path
+                                                        d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                                        fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path
+                                                        d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                                        fill="#000000" />
+                                                </g>
+                                            </svg>
+                                            Descargar
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!--begin::Repeater-->
+
+
+                    <div class="card-body container align-items">
+                        <span class="my-3 text-gray-700 parent-hover-primary fs-3 fw-bold">
+                            Certificados
+                        </span>
+                        <hr />
+                        <div class="row g-5 mb-10">
+
+                            @foreach (var cantidad in Model.certificadosTotalData)
+                            {
+                                <div class="col-lg-3">
+                                    <div class="card card-px-0 shadow-sm">
+                                        @* <div class="card-header">
+                                    </div> *@
+                                        <h3 class="fs-3 px-3 m-0 pt-5">@cantidad.NombreCertificado</h3>
+                                        <div class="card-body p-0">
+                                            <div class="d-flex align-items-center">
+                                                <div class="border border-gray-300 border-dashed rounded m-2 p-4">
+                                                    <!--begin::Number-->
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="fa fa-clipboard-list fs-3 text-warning me-2">
+                                                        </span>
+                                                        <div class="fs-2 fw-bold"
+                                                            id="kt_countup_solicitadas_@cantidad.IdCatTipoCertificado"
+                                                            data-kt-countup="true"
+                                                            data-kt-countup-value="@cantidad.CantidadSolicitada"
+                                                            data-kt-countup-prefix="">0</div>
+                                                    </div>
+                                                    <!--end::Number-->
+
+                                                    <!--begin::Label-->
+                                                    <div class="fw-semibold fs-6 ">Cantidad Solicitada</div>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <div class="border border-gray-300 border-dashed rounded m-5 p-4">
+                                                    <!--begin::Number-->
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="fa fa-file-invoice fs-3 text-secondary me-2">
+                                                        </span>
+                                                        <div class="fs-2 fw-bold count-up-rc"
+                                                            data-idcertificado="@cantidad.IdCatTipoCertificado"
+                                                            id="kt_countup_recibidas_@cantidad.IdCatTipoCertificado"
+                                                            data-kt-countup="true"
+                                                            data-kt-countup-value="@(cantidad.CantidadRecibida)"
+                                                            data-kt-countup-prefix="">0</div>
+                                                    </div>
+                                                    <!--end::Number-->
+
+                                                    <!--begin::Label-->
+                                                    <div class="fw-semibold fs-6 ">Cantidad Recibida</div>
+                                                    <!--end::Label-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="row g-5 mb-10" id="container-datacertificados">
+
+                            @foreach (var item in Model.certificados)
+                            {
+
+                                @if (item.Certificados.Count > 0)
+                                {
+                                    <h3 class="mb-5">@item.NombreCertificado - @item.Clave </h3>
+                                    <div class="table-responsive">
+                                        <table class="table table-rounded table-striped border gy-7 gs-7">
+                                            <thead>
+                                                <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+                                                    <th>Cantidad</th>
+                                                    <th>Folio Inicial</th>
+                                                    <th>Folio Final</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                                @foreach (var certificado in item.Certificados)
+                                                {
+                                                    <tr>
+
+                                                        <td>@certificado.CantidadRecibida</td>
+                                                        <td>@certificado.FolioInicial</td>
+                                                        <td>@certificado.FolioFinal</td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr />
+                                }
+
+                            }
+                        </div>
+
+                    </div>
+                    <!--end::Body-->
+            </form>
+        </div>
+        <!--end::LIst widget 1-->
+    </div>
+    <!--end::Col-->
+</div>
+
+@section Scripts {
+    @* <script src="~/lib/moment/js/moment-with-locales.js"></script>
+<script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+<script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+<script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<script src="~/assets/plugins/custom/formrepeater/formrepeater.bundle.js"></script>
+<script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script> *@
+    @* <script src="~/js/IngresoFormaValorada/smadot.editingresos.js" asp-append-version="true"></script> *@
+}

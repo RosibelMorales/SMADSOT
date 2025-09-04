@@ -1,0 +1,47 @@
+﻿@model Smadot.Models.Entities.FoliosRegresadosSPF.Response.FoliosRegresadosSPFResponse
+<div class="d-flex">
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Clave de certificado</span>
+        <div class="fw-semibold text-gray-400">@Model.ClaveCertificado</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Clave de devolución</span>
+        <div class="fw-semibold text-gray-400">@Model.ClaveDevolucion</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Clave de solicitud</span>
+        <div class="fw-semibold text-gray-400">@Model.ClaveSolicitud</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Clave de venta</span>
+        <div class="fw-semibold text-gray-400">@Model.ClaveVenta</div>
+    </div>
+</div>
+<div class="d-flex">
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Tipo de certificado</span>
+        <div class="fw-semibold text-gray-400">@Model.TipoCertificado</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Folio inicial</span>
+        <div class="fw-semibold text-gray-400">@Model.FolioInicial</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Folio final</span>
+        <div class="fw-semibold text-gray-400">@Model.FolioFinal</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Responsable de entrega</span>
+        <div class="fw-semibold text-gray-400">@Model.ResponsableEntrega</div>
+    </div>
+</div>
+<div class="d-flex">    
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Persona que validó</span>
+        <div class="fw-semibold text-gray-400">@Model.PersonaValido</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Fecha</span>
+        <div class="fw-semibold text-gray-400">@Model.Fecha.ToString("dd/MM/yyyy")</div>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+﻿@model Smadot.Models.Entities.VentaCVV.Response.VentaCertificadoResponse
+@using Smadot.Utilities.FileStorage
+@{
+    ViewData["Title"] = "Detalle Venta de Formas Valoradas a CVV";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Trámites </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Certificados </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <a href="/VentaCVV" class="text-muted text-hover-primary">Venta de Formas Valoradas a CVV </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+
+@section toolbar{
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="VentaCVV" asp-action="Index">Cancelar</a>
+}
+
+<div class="card shadow-sm mb-5">
+    <div class="card-body ">
+        <h4>Consultar</h4>
+        <div class="d-flex mb-6 mt-6">
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label">Verificentro: &nbsp;</label>
+                <div class="position-relative">
+                    <input class="form-control" value="@Model.NombreVerificentro" type="text" disabled />
+                </div>
+            </div>
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label" for="IdAlmacen">Almacén:</label>
+                <div class="position-relative">
+                    <input class="form-control" type="text" value="@Model.NombreAlmacen" disabled />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex mb-6 mt-6">
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label">Último reporte revalidado: &nbsp;</label><br />
+                <input class="form-control" value="@Model.FechaReporteRevalidado?.ToString("dd/MM/yyyy")" disabled type="text" />
+            </div>
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label">Último tercer tanto validado: &nbsp;</label><br />
+                <input class="form-control" value="@Model.FechaReporteValidado?.ToString("dd/MM/yyyy")" disabled type="text" />
+            </div>
+        </div>
+        <div class="d-flex mb-6 mt-6">
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label ">Número de referencia: &nbsp;</label>
+                <div class="position-relative">
+                    <input class="form-control" value="@Model.NumeroReferencia" disabled type="text" />
+                </div>
+            </div>
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label ">Fecha de venta: &nbsp;</label>
+                <div class="position-relative">
+                    <input class="form-control" value="@Model.FechaVenta.ToString("dd/MM/yyyy")" disabled type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex mb-6 mt-6">
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label">Número de referencia: &nbsp;</label>
+                <div class="position-relative">
+                    <input class="form-control" value="@Model.NumeroReferencia" disabled type="text" />
+                </div>
+            </div>
+            <div class="py-2 px-4 col-md-6">
+                <label class="form-label">Número de compra: &nbsp;</label>
+                <div class="position-relative">
+                    <input class="form-control" value="@Model.NumeroCompra" disabled type="text" />
+                </div>
+            </div>
+        </div>
+        <hr class=" mb-6 mt-6" />
+        <div class="d-flex">
+            <div class="py-2 px-4 col-md-3">
+                @if (Model.UrlDoc1 != null)
+                {
+                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                   download="identificacion_oficial_@(Model.UrlDoc1+"."+StorageManager.GetPathExtension(Model.UrlDoc1))"
+                   href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc1)" title="Descargar"
+                   role="button">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                             height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                      fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                      fill="#000000" />
+                                </g>
+                            </svg>
+                        </span>
+                        Identificación Oficial
+                    </a>
+                }
+            </div>
+            <div class="py-2 px-4 col-md-3">
+                @if (Model.UrlDoc2 != null)
+                {
+                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                   download="tarjeta_circulacion_@(Model.UrlDoc2+"."+StorageManager.GetPathExtension(Model.UrlDoc2))"
+                   href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc2)" title="Descargar"
+                   role="button">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                             height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                      fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                      fill="#000000" />
+                                </g>
+                            </svg>
+                        </span>
+                        Tarjeta de Circulación
+                    </a>
+                }
+            </div>
+            <div class="py-2 px-4 col-md-3">
+                @if (Model.UrlDoc3 != null)
+                {
+                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                   download="referencia_pago_@(Model.UrlDoc3+"."+StorageManager.GetPathExtension(Model.UrlDoc3))"
+                   href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc3)" title="Descargar"
+                   role="button">
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                             height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                      fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                      fill="#000000" />
+                                </g>
+                            </svg>
+                        </span>
+                        Comprobante de Pago
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="card-body container align-items">
+            <span class="my-3 text-gray-700 parent-hover-primary fs-3 fw-bold">
+                Certificados
+            </span>
+            <hr />
+
+            <div class="row g-5 mb-10" id="container-datacertificados">
+
+
+                <div class="table-responsive">
+                    <table class="table table-rounded table-striped border gy-7 gs-7">
+                        <thead>
+                            <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+                                <th>Tipo Certificado</th>
+                                <th>Cantidad</th>
+                                <th>Folio Inicial</th>
+                                <th>Folio Final</th>
+                                <th>Importe Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var certificado in Model.certificadosTotalData)
+                            {
+                                <tr>
+                                    <td>@certificado.NombreHolograma</td>
+                                    <td>@certificado.Cantidad</td>
+                                    <td>@certificado.FolioInicial</td>
+                                    <td>@certificado.FolioFinal</td>
+                                    <th>@certificado.ImporteTotal</th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <hr />
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

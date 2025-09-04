@@ -1,0 +1,31 @@
+﻿<div class='py-2 px-4 col-md-10 offset-md-1'>
+    <form role='form' class='clearfix' id="form_registro">
+        <div class="col-md-12">
+                <div class="form-group">
+                    <label for="verificentro">Verificentro:</label>
+                    <input class="form-control" type="text" value="@ViewBag.Verificentro" disabled="disabled">
+                </div>
+         </div>
+         <br />
+		 <div class="col-md-12">
+            <input type="text" id="_idProveedor" value ="" name="_idProveedor" class="form-control" style="display:none">
+            <label class="control-label" for="autocomplete">Proveedor</label>
+            <select class="form-control form-control-solid form-select" id="autocomplete"></select>
+        </div>
+    </form>
+</div>
+<br />
+<br />
+<div class="py-2 px-4 col-md-10 offset-md-1">
+    <label class="form-label">Cargar Documento</label><br />
+    <div class="fv-row">
+        <div class="dropzone" id="dropzonejs">
+            <div class="dz-message needsclick">
+                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                <div class="ms-4">
+                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

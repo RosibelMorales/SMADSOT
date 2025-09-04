@@ -1,0 +1,120 @@
+﻿@model Smadot.Models.Entities.DirectorioCentrosVerificacion.Response.NuevoVerificentroResponse
+
+<div class="row mb-5">
+    <form role="form" id="form_registroCVV" class="clearfix">
+        <input asp-for="Id" name="Id" id="Id" hidden />
+        <input asp-for="ApiKey" name="ApiKey" id="ApiKey" hidden />
+        <input asp-for="ApiEndPoint" name="ApiEndPoint" id="ApiEndPoint" hidden />
+        <input asp-for="Activo" name="Activo" id="Activo" hidden />
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div for="Nombre" class="form-group fv-row">
+                    <label class="form-label required">Nombre CVV: &nbsp;</label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Nombre" id="Nombre" asp-for="Nombre" placeholder="Nombre" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row" for="Clave">
+                    <label class="form-label">Clave</label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Clave" id="Clave" asp-for="Clave" placeholder="Clave"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                 <div class="form-group fv-row">
+                    <label class="form-label" for="Direccion">Dirección: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Direccion" id="Direccion" asp-for="Direccion" placeholder="Dirección"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Rfc">RFC: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Rfc" id="Rfc" asp-for="Rfc" maxlength="13" placeholder="RFC" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Telefono">Teléfono: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Telefono" id="Telefono" asp-for="Telefono" maxlength="10" placeholder="Teléfono" onkeypress="return SoloNumeros(this,'Telefono')" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Correo">Correo: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Correo" id="Correo" asp-for="Correo" placeholder="Correo"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="GerenteTecnico">Gerente: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="GerenteTecnico" id="GerenteTecnico" asp-for="GerenteTecnico"  placeholder="Gerente"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row" for="RepresentanteLegal">
+                    <label class="form-label">Representante Legal: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="RepresentanteLegal" id="RepresentanteLegal" asp-for="RepresentanteLegal" placeholder="Representante Legal" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row" for="DirectorGestionCalidadAire">
+                    <label class="form-label required">Director de Gestión de Calidad del Aire: &nbsp;</label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="DirectorGestionCalidadAire" id="DirectorGestionCalidadAire" asp-for="DirectorGestionCalidadAire" placeholder="Director"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Municipio">Municipio: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Municipio" id="Municipio" asp-for="Municipio" placeholder="Municipio"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Latitud">Latitud: </label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control form-control-sm" name="Latitud" id="Latitud" asp-for="Latitud" placeholder="Latitud" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Longitud">Longitud: </label>
+                    <div class="position-relative">
+                        <input type="text"  class="form-control form-control-sm" name="Longitud" id="Longitud" asp-for="Longitud" placeholder="Longitud"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="clearfix">
+            <div class="pull-left text-muted text-vertical-align-button">
+                * Campos obligatorios
+            </div>
+        </div>
+    </form>
+</div>

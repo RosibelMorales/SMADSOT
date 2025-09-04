@@ -1,0 +1,593 @@
+﻿@*@model Smadot.Models.Entities.Personal.Request.PersonalRequest*@
+@using Smadot.Models.Dicts.ProveedorDicts
+@model Smadot.Models.Entities.RecepcionDocumentos.Response.RecepcionDocumentosResponseData.RecepcionDocumentosGridResponse
+@{
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    if (Model?.DataDocumentos != null)
+    {
+        ViewData["Title"] = "Recepción de Documentos";
+
+    }
+    else
+    {
+        ViewData["Title"] = "Recepción de Documentos";
+
+    }
+
+    //var cf = "0";
+
+    //if (Model.Anio >= DateTime.Now.AddYears(-2).Year && Model.Anio <= DateTime.Now.AddYears(1).Year)
+    //{
+    //    cf = "1";
+    //}
+
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" />
+    <link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />
+    <link rel="stylesheet" href="~/lib/tempus-dominus/css/tempus-dominus.css" />
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            cursor: default;
+            z-index: 99999 !important;
+        }
+
+        .modalminH {
+            min-height: 350px
+        }
+
+        .form-check-secondary.form-check-custom.form-check-solid > .form-check-input:checked {
+            background-color: var(--kt-primary-active) !important;
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a asp-action="Index" class="text-hover-primary">@ViewData["Title"]</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a class="text-hover-primary">Cita @Model.Folio</a>
+    </li>
+    }
+
+
+@section toolbar{
+    <a class="btn btn-sm fw-bold btn-primary" id="btnCancelarCita" data-id="@Model.IdCita" data-folio="@Model.Folio">Cancelar Cita</a>
+    <a class="btn btn-sm fw-bold btn-primary" id="btnGuardarDoc">Guardar</a>
+    }
+<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+    <div class="d-flex flex-lg-row-fluid">
+        <!--begin::Content-->
+
+        <img class="theme-light-show mx-auto start mw-100 w-150px w-lg-400px mb-10 " src="/assets/media/logos/smadot2.png" alt="" />
+        <!--begin::Image-->
+        <!--end::Image-->
+        <!--begin::Image-->
+
+        <img class="theme-light-show mx-auto end mw-100 w-150px w-lg-400px mb-10 " src="/assets/media/logos/smadot1.png" alt="" />
+        <!--end::Image-->
+        <!--end::Content-->
+    </div>
+</div>
+<form role="form" id="form_registro" clase="clearfix">
+    <div class="card shadow-sm mb-5">
+        <div class="card-header d-flex align-items-center justify-content-between py-3">
+            <h2 class="card-title m-0">
+                Folio de la Cita: @Model?.Folio
+            </h2>
+
+            <!--begin::Toggle-->
+            <a href="#" class="btn btn-sm btn-icon btn-color-primary btn-light btn-active-light-primary d-lg-none" data-bs-toggle="tooltip" data-bs-dismiss="click" data-bs-placement="top" id="kt_inbox_aside_toggle" aria-label="Toggle inbox menu" data-bs-original-title="Toggle inbox menu" data-kt-initialized="1">
+                <i class="ki-duotone ki-burger-menu-2 fs-3 m-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>
+            </a>
+            <!--end::Toggle-->
+        </div>
+        <div class="card-body">
+            <h4>Datos de la Cita</h4>
+            <input asp-for="IdCita" id="IdCita" hidden />
+            <input asp-for="IdRecepcionDocumento" hidden />
+            <div class="d-flex mb-6 mt-6 row">
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" @Html.Raw(string.IsNullOrEmpty(Model.NombrePersona) ?"checked":"") id="PersonaMoral" />
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Persona Moral
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-flex mb-6 mt-6 row">
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required titulo-check">@Html.Raw(string.IsNullOrEmpty(Model.NombrePersona) ?"Razón Social: &nbsp;":"Nombre del Propietario: &nbsp;")</label>
+                    @*   <div class="position-relative">
+                    <input class="form-control form-control-sm input-uppercase" disabled asp-for="RazonSocial" type="text" />
+                    </div>*@
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm input-uppercase" asp-for="NombrePersona" type="text" />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required">Nombre de Quien Verifica: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm  input-uppercase" asp-for="NombreGeneraCita" type="text" />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required">Placa: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm  input-uppercase" asp-for="Placa" />
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-6 mt-6 row">
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required">Serie de Vehículo: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm input-uppercase" asp-for="Serie" type="text" name="Serie" id="Serie" />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required">Marca: &nbsp;</label>
+                    <div class="position-relative">
+                        <select class="form-control form-select " data-control="select2" asp-for="Marca" asp-items="(List<SelectListItem>)ViewBag.Marcas" id="IdCatMarcaVehiculo" name="IdCatMarcaVehiculo">
+                            <option value="">Seleccione...</option>
+                        </select>
+                        @* <input class="form-control form-control-sm input-uppercase" type="hidden" asp-for="Marca" name="Marca" id="Marca" /> *@
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(Model?.VchLinea))
+                {
+                    <div class="py-2 px-4 col-md-4 fv-row">
+                        <label class="form-label required">Modelo del Registro: &nbsp;</label>
+                        <div class="position-relative">
+                            <input type="text" value="@Model.VchLinea" class="form-control form-control-sm input-uppercase" readonly disabled />
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+
+            <div class="d-flex mb-6 mt-6 row">
+                <div class="py-2 px-4 col-md-4  fv-row">
+                    <label class="form-label required">Año Modelo: &nbsp;</label>
+                    @if (Model.Anio != 0)
+                    {
+                        <div class="position-relative">
+                            <input class="form-control form-control-sm" asp-for="Anio" type="text" name="Anio" id="Anio" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="position-relative">
+                            <input class="form-control form-control-sm" asp-for="Anio" type="text" name="Anio" id="Anio" />
+                        </div>
+                    }
+                </div>
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required">Tipo de Combustible: &nbsp;</label>
+                    <div class="position-relative">
+                        <select class="form-control form-select" asp-for="IdTipoCombustible"
+                                data-control="select2" asp-items="(List<SelectListItem>)ViewBag.Combustible">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-4 fv-row">
+                    <label class="form-label required">Submarca: &nbsp;</label>
+                    <div class="position-relative">
+                        <select class="form-control form-control-sm form-select-sm"
+                                name="Modelo" id="Modelo">
+                            <option value="@Model.IdSubMarcaVehiculo">@Model.Modelo</option>
+                        </select>
+                        @* <input class="form-control form-control-sm  input-uppercase" readonly disabled asp-for="Modelo" type="text" name="Modelo" id="Modelo" /> *@
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex row">
+                <div class="py-2 px-4 mb-6 col-md-4 fv-row">
+                    <label class="form-label required">Numero de Referencia Multa: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm input-uppercase" asp-for="NumeroReferencia" />
+                        <label><p class="text-danger">Si no aplica, ingrese "0"</p></label>
+                        @* <input class="form-control form-control-sm  input-uppercase" readonly disabled asp-for="Modelo" type="text" name="Modelo" id="Modelo" /> *@
+                    </div>
+                </div>
+
+                <div class="py-2 px-4 mb-6 col-md-4  fv-row">
+                    <label class="form-label required">Color: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm" asp-for="ColorVehiculo" type="text" name="Color" id="Color" />
+                    </div>
+                </div>
+                <div class="py-2 px-4 mb-6 col-md-4  fv-row">
+                    <label class="form-label required">Tipo Servicio: &nbsp;</label>
+                    <div class="position-relative">
+                        @if (Model.DataDocumentos != null)
+                        {
+                            <select class="form-control form-select" asp-items="(List<SelectListItem>)ViewBag.tServicio" asp-for="@Model.DataDocumentos.IdCatTipoServicio" name="IdTipoServicio" id="IdTipoServicio">
+                                <option value="">Seleccione...</option>
+
+                            </select>
+                        }
+                        else
+                        {
+                            <select class="form-control form-select" asp-items="(List<SelectListItem>)ViewBag.tServicio" name="IdTipoServicio" id="IdTipoServicio">
+                                <option value="">Seleccione...</option>
+
+                            </select>
+
+                        }
+                    </div>
+                </div>
+
+                <div class="py-2 px-4 mb-6 col-md-4  fv-row">
+                    <label class="form-label required">Motivo de verificación: &nbsp;</label>
+                    <div class="position-relative">
+                        <select class="form-control form-select form-select-sm" data-control="select2" asp-items="(List<SelectListItem>)ViewBag.MotivosVer" asp-for="IdMotivoVerificacion">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="py-2 px-4 mb-6 col-md-4  fv-row " id="containerEstado">
+                    <label class="form-label required">Entidad de Procedencia del Vehículo: &nbsp;</label>
+                    <div class="position-relative">
+                        <select class="form-control form-select form-select-sm" data-control="select2" asp-items="(List<SelectListItem>)ViewBag.Estados" asp-for="Estado">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="py-2 px-4 mb-6 col-md-4  fv-row">
+                    <label class="form-label required">Folio Certificado Anterior: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-sm" asp-for="FolioCertificadoAnterior" />
+                    </div>
+                </div>
+                <div class="py-2 px-4 mb-6 col-md-4 fv-row d-none" id="conteinerFechaFacturacion">
+                    <div class="form-group input-group-sm">
+                        <label for="fechaFacturacion">Fecha de Facturación: &nbsp;<strong class="obligatorio">*</strong></label>
+                        <div class="position-relative">
+                            <input class="form-control" id="FechaFacturacion" name="FechaFacturacion" type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* <div class="d-flex mb-6 mt-6 row ">
+            <div class="py-2 px-4 col-md-4  fv-row" @Html.Raw(Model.IdTipoCombustible!= Combustible.Diesel ? "style=\"display:none;\"":"") id="dieselcont">
+            <label class="form-label required">Diesel: &nbsp;</label>
+            <div class="position-relative">
+            <select class="form-control form-select" name="IdDiesel" id="IdDiesel"
+            data-control="select2" asp-items="(List<SelectListItem>)ViewBag.Diesel">
+            <option value="">Seleccione...</option>
+            </select>
+            </div>
+            </div>
+            <div class="py-2 px-4 col-md-4  fv-row " id="divSubDiesel">
+            <label class="form-label required">SubDiesel: &nbsp;</label>
+            <div class="position-relative">
+            <select class="form-control form-select form-select-sm" name="IdSubDiesel" id="IdSubDiesel">
+            <option value="">Seleccione...</option>
+            </select>
+            </div>
+            </div>
+            </div> *@
+
+        </div>
+    </div>
+    <!--begin::List widget 1-->
+    <div class="card h-lg-100 mb-5">
+        <!--begin::Body-->
+        <div class="card-header d-flex align-items-center justify-content-between py-3">
+            <h2 class="card-title m-0">
+                Parámetros Tabla Maestra
+            </h2>
+        </div>
+        <div class="card-body pt-5">
+            <div class="my-5">
+                <div class="d-flex align-items-center position-relative my-1 justify-content-end">
+                    <Label class="justify-content-center align-items-center mb-6">Buscar: &nbsp;</Label><input type="text" data-kt-filter="search"
+                                                                                                               class="form-control form-control-sm w-250px mb-6" placeholder="Buscar" />
+                </div>
+                <div class="fv-plugins-message-container"><div data-field="Table" class="fv-help-block" id="error-tabla" style="display: none;">Debe seleccionar los parámetros que se usarán durante la prueba.</div></div>
+                <table class="table table-striped border rounded gy-5 gs-7 w-100" id="kt_datatable">
+                </table>
+            </div>
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::LIst widget 1-->
+
+
+
+    <div class="col-xl-12 mb-5">
+        <div class="card card-flush h-md-100">
+            <div class="card-header pt-7">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800">Documentos</span>
+                </h3>
+            </div>
+            <div class="card-body pt-6 d-flex row">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label required">Folio Tarjeta Circulación: &nbsp;</label>
+                    <div class="position-relative">
+                        @if (Model?.DataDocumentos != null)
+                        {
+                            <input class="form-control form-control-sm" @(string.IsNullOrEmpty(Model?.DataDocumentos.URLAltaPlacas)?"":"checked") type="text" name="FolioTarjeta" id="FolioTarjeta" value="@Model?.DataDocumentos?.FolioTarjetaCirculacion" />
+
+                        }
+                        else
+                        {
+
+                            <input class="form-control form-control-sm" type="text" name="FolioTarjeta" id="FolioTarjeta" value="@Model?.DataDocumentos?.FolioTarjetaCirculacion" />
+                        }
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    @*<label class="form-label ">Cambio de Placas</label>
+
+                    <div class="form-check form-check-custom form-check-success form-check-solid">
+                    <input class="form-check-input h-30px w-30px" type="checkbox" value="" id="CheckCambio" name="CheckCambio">
+                    <label class="form-check-label" for=""></label>
+                    </div>*@
+                </div>
+                <div class="py-2 px-4 col-md-4">
+                    <label class="form-label required">Identificación</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs1">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model?.DataDocumentos?.URLIdentificacion))
+                    {
+                        var urlvalidacion = Model?.DataDocumentos?.URLIdentificacion.Split("/")[Model.DataDocumentos.URLIdentificacion.Split("/").Length - 1];
+                        <div class="text-center mt-3">
+                            @*<a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="https://storageverificentros.blob.core.windows.net/documentos/ProgramacionCalibracion/91/sample.pdf" role="button">*@
+                            <a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@urlvalidacion" href="@ViewBag.URLIdentificacion" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000"></path>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                @{
+                                    //var urlvalidacion = Model?.DataDocumentos?.URLIdentificacion.Split("/")[Model.DataDocumentos.URLIdentificacion.Split("/").Length - 1];
+                                }
+                                @urlvalidacion
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="py-2 px-4 col-md-4" id="divFactura" style="display:none">
+                    <label class="form-label required">Factura/Carta Factura</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs2">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model?.DataDocumentos?.URLFactura))
+                    {
+                        var urlvalidacion = Model?.DataDocumentos?.URLFactura.Split("/")[Model.DataDocumentos.URLFactura.Split("/").Length - 1];
+                        <div class="text-center mt-3">
+                            @*<a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="https://storageverificentros.blob.core.windows.net/documentos/ProgramacionCalibracion/91/sample.pdf" role="button">*@
+                            <a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@urlvalidacion" href="@ViewBag.URLFactura" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000"></path>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                @{
+                                    //var urlvalidacion = Model?.DataDocumentos?.URLFactura.Split("/")[Model.DataDocumentos.URLFactura.Split("/").Length - 1];
+                                }
+                                @urlvalidacion
+                            </a>
+                        </div>
+                    }
+                </div>
+
+
+                <div class="py-2 px-4 col-md-4">
+                    <label class="form-label">Evidencia Multa</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs3">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*@if (!string.IsNullOrEmpty(Model?.DataDocumentos?.URLCartaFactura))
+                    {
+                    var urlvalidacion = Model?.DataDocumentos?.URLCartaFactura.Split("/")[Model.DataDocumentos.URLCartaFactura.Split("/").Length - 1];
+                    <div class="text-center mt-3">
+                    <a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@urlvalidacion" href="@ViewBag.URLCartaFactura" title="Descargar" role="button">
+                    <span class="svg-icon svg-icon-1">
+                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000"></path>
+                    </g>
+                    </svg><!--end::Svg Icon-->
+                    </span>
+                    @{
+                    //var urlvalidacion = Model?.DataDocumentos?.URLCartaFactura.Split("/")[Model.DataDocumentos.URLCartaFactura.Split("/").Length - 1];
+                    }
+                    @urlvalidacion
+                    </a>
+                    </div>
+                    }*@
+                </div>
+                <div class="py-2 px-4 col-md-4">
+                    <label class="form-label required">Validación Certificado</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs4">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model?.DataDocumentos?.URLValidacionCertificado))
+                    {
+                        var urlvalidacion = Model?.DataDocumentos?.URLValidacionCertificado.Split("/")[Model.DataDocumentos.URLValidacionCertificado.Split("/").Length - 1];
+                        <div class="text-center mt-3">
+                            @*<a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="https://storageverificentros.blob.core.windows.net/documentos/ProgramacionCalibracion/91/sample.pdf" role="button">*@
+                            <a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@urlvalidacion" href="@ViewBag.URLValidacionCertificado" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000"></path>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                @{
+                                    //var urlvalidacion = Model?.DataDocumentos?.URLValidacionCertificado.Split("/")[Model.DataDocumentos.URLValidacionCertificado.Split("/").Length - 1];
+                                }
+                                @urlvalidacion
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="py-2 px-4 col-md-4 divPlacasUrl" id="divAlta" style="display:none">
+                    <label class="form-label required">Baja Placas</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs5">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model?.DataDocumentos?.URLBajaPlacas))
+                    {
+                        var urlvalidacion = Model?.DataDocumentos?.URLBajaPlacas.Split("/")[Model.DataDocumentos.URLBajaPlacas.Split("/").Length - 1];
+                        <div class="text-center mt-3">
+                            @*<a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="https://storageverificentros.blob.core.windows.net/documentos/ProgramacionCalibracion/91/sample.pdf" role="button">*@
+                            <a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@urlvalidacion" href="@ViewBag.URLBajaPlacas" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000"></path>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                @{
+                                    //var urlvalidacion = Model?.DataDocumentos?.URLBajaPlacas.Split("/")[Model.DataDocumentos.URLBajaPlacas.Split("/").Length - 1];
+                                }
+                                @urlvalidacion
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="py-2 px-4 col-md-4 divPlacasUrl" id="divBaja" style="display:none">
+                    <label class="form-label required">Alta Placas</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs6">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model?.DataDocumentos?.URLAltaPlacas))
+                    {
+                        var urlvalidacion = Model?.DataDocumentos?.URLAltaPlacas.Split("/")[Model.DataDocumentos.URLAltaPlacas.Split("/").Length - 1];
+                        <div class="text-center mt-3">
+                            @*<a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="https://storageverificentros.blob.core.windows.net/documentos/ProgramacionCalibracion/91/sample.pdf" role="button">*@
+                            <a style="border: 1px dashed var(--bs-link-color);" class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@urlvalidacion" href="@ViewBag.URLBajaPlacas" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000"></path>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                @{
+                                    //var urlvalidacion = Model?.DataDocumentos?.URLAltaPlacas.Split("/")[Model.DataDocumentos.URLAltaPlacas.Split("/").Length - 1];
+                                }
+                                @urlvalidacion
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+@section Scripts{
+    <script>
+        var min = "@Html.Raw(ViewBag.Min)";
+        var max = "@Html.Raw(ViewBag.Max)";
+        var IdTipoCombustible = @Html.Raw(Model.IdTipoCombustible);
+        var IdDiesel = @Html.Raw(Combustible.Diesel);
+        var IdSubMarca = @Html.Raw(Model?.DataDocumentos?.IdCatSubmarcaVehiculo.ToString()??"null");
+        var Cilindros = @Html.Raw(Model?.DataDocumentos?.CILINDROS.ToString()??"null");
+        var Cilindrada = @Html.Raw(Model?.DataDocumentos?.CILINDRADA.ToString()??"null");
+        //var HasCf = Html.Raw(cf);
+    </script>
+
+    <script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script type="module" src="~/lib/tempus-dominus/js/tempus-dominus.min.js"></script>
+    <script type="module" src="~/lib/tempus-dominus/js/jQuery-provider.js"></script>
+    <script asp-append-version="true" src="~/js/RecepcionDocumentos/smadot.recepciondocumentos.reagendar.js"></script>
+    <script asp-append-version="true" src="~/js/RecepcionDocumentos/smadot.recepciondocumentos.documentos.js"></script>
+}

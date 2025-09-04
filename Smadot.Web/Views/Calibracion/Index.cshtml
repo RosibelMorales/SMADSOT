@@ -1,0 +1,76 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    ViewData["Title"] = "Historial de Calibraciones";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" />
+    <link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Seguimiento a Centros de Verificación</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Equipos</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@section toolbar{
+    @if (UserResolver.HasPermission(MenuCalibraciones.Registrar))
+    {
+        <button class="btn btn-sm fw-bold btn-primary" type="button" id="bntRegistrar">Registrar</button>
+    }
+}
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            <!--begin::Body-->
+            <div class="card-body pt-5">
+                <div class="my-5">
+
+                    <div class="d-flex align-items-center position-relative my-1 justify-content-end">
+                        <label class="justify-content-center align-items-center mb-6">Buscar: &nbsp;</Label><input
+                            type="text" data-kt-filter="search" class="form-control form-control-sm w-250px mb-6"
+                            placeholder="Buscar" />
+                    </div>
+                    <table class="table table-striped border rounded gy-5 gs-7 w-100" id="kt_datatable">
+                    </table>
+
+                </div>
+                <!--end::Body-->
+            </div>
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::LIst widget 1-->
+</div>
+
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+<partial name="~/Views/Shared/_ModalNotificacion.cshtml" model="string.Empty" />
+<partial name="~/Views/Shared/_ModalNotificacionCalibracion.cshtml" model="string.Empty" />
+
+@section Scripts{
+    <script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/js/Calibracion/smadot.calibracion.index.js" asp-append-version="true"></script>
+    <script src="~/js/Calibracion/smadot.calibracion.detalle.js" asp-append-version="true"></script>
+}
+

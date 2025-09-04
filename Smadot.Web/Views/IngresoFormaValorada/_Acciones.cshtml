@@ -1,0 +1,70 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.SolicitudFormaValorada.Response.SolicitudFormaValoradaResponse
+<div class="btn-group dropstart drop-down dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+        data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        @if (UserResolver.HasPermission(MenuIngresoFormasValoradas.RegistrarIngreso) && Model.IdCatEstatusSolicitudFV ==
+        EstatusSolicitud.Solicitado)
+        {
+            <li>
+                <a asp-action="EditIngresos" asp-controller="IngresoFormaValorada" asp-route-idSolicitudFV="@Model.IdSolicitudFV"
+                    >
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-plus-square"></i></span>
+                        <span class="navi-text"> Registrar Ingreso</span>
+                    </label>
+                </a>
+            </li>
+        }
+        else if (UserResolver.HasPermission(MenuIngresoFormasValoradas.RegistrarIngreso) &&
+        Model.IdCatEstatusSolicitudFV ==
+        EstatusSolicitud.Entregado)
+        {
+            <li>
+                <a asp-action="EditIngresos" asp-controller="IngresoFormaValorada" asp-route-id="@Model.IdIngresoFV"
+                    asp-route-idSolicitudFV="@Model.IdSolicitudFV"
+                    >
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-pencil-square"></i></span>
+                        <span class="navi-text"> Editar Ingreso</span>
+                    </label>
+                </a>
+            </li>
+        }
+
+        @if (UserResolver.HasPermission(MenuIngresoFormasValoradas.RegistrarIngreso) && Model.IdCatEstatusSolicitudFV >=
+        EstatusSolicitud.Entregado)
+        {
+            <li><a asp-action="DetalleIngresos" asp-controller="IngresoFormaValorada" asp-route-id="@Model.IdIngresoFV"
+                    asp-route-idSolicitudFV="@Model.IdSolicitudFV">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>
+                        <span class="navi-text"> Detalle Ingresos</span>
+                    </label>
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>
+
+        @* '<li><a href="/IngresoFormaValorada/Cajas/' + row.idSolicitudFV + '">' +
+        // '<label class="dropdown-item">' +
+        // '<span class="navi-icon"><i class="bi bi-plus-square"></i></span>' +
+        // '<span class="navi-text"> Registrar Cajas</span>' +
+        // '</label>' +
+        // '</a></li>'
+        *@
+        @* // '<li><a href="/IngresoFormaValorada/DetalleCajas/' + row.idSolicitudFV + '">' +
+        // '<label class="dropdown-item">' +
+        // '<span class="navi-icon"><i class="bi bi-search"></i></span>' +
+        // '<span class="navi-text"> Detalle Cajas</span>' +
+        // '</label>' +
+        // '</a></li>' *@

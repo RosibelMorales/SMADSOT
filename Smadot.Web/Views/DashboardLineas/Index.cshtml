@@ -1,0 +1,35 @@
+﻿@model List<Smadot.Models.Entities.DashboardLineas.Response.DashboardLineaResponseData>
+@{
+    ViewData["Title"] = "Dashboard Lineas";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">Seguimiento a CVV</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">Estadística</li>
+<li class="breadcrumb-item text-muted">
+    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+</li>
+    <li class="active">Dashboard Lineas</li>
+}
+
+<span class="fs-2 ">@ViewBag.Verificentro</span>
+
+<br />
+<br />
+
+<div class="row" id="rowDashboardLineasLayoutSMADSOT">
+@foreach (var linea in ViewBag.Lineas)
+{
+        <div class="col-xl-4 mb-xl-4">
+            @Html.Partial("Dash_Lineas_Partial", (Smadot.Models.Entities.DashboardLineas.Response.DashboardLineaResponseData)linea)
+        </div>
+}
+</div>
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+@section Scripts{
+    <script src="~/js/DashboardLineas/smadot.dashboardlineas.js" asp-append-version="true"></script>
+}

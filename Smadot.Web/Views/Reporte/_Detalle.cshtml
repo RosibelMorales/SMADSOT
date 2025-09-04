@@ -1,0 +1,66 @@
+﻿@model Smadot.Models.Entities.Reportes.Response.ReporteTercerTantoResponseData.ReporteTercerTantoResponse
+@{
+    var values = Model.reporteTercerTantoCertificados;
+}
+
+
+<div class="d-flex">
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Numero de Entrega</span>
+        <div class="fw-semibold text-gray-400">@Model.NumeroEntrega</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        @{ var url1 = Model.UrlDocumento.Split("/")[Model.UrlDocumento.Split("/").Length - 1];
+             <label class="control-label fw-bold">Documento</label><br />
+                //<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model.Id+"/"+url1)">
+            <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDocumento" title="Descargar" role="button">
+                    <span class="svg-icon svg-icon-1">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24" />
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                            </g>
+                        </svg><!--end::Svg Icon-->
+                    </span>
+                    @url1
+                </a>
+        }
+    </div>
+</div>
+<div class="d-flex">
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Fecha Inicial</span>
+        <div class="fw-semibold text-gray-400">@Model.FechaInicial</div>
+    </div>
+    <div class="border border-gray-300 border-dashed rounded min-w-100px w-100 py-2 px-4 me-6 mb-3">
+        <span class="fs-6 text-gray-700 fw-bold">Fecha Final</span>
+        <div class="fw-semibold text-gray-400">@Model.FechaFinal</div>
+    </div>
+</div>
+<div class="d-flex">
+    <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+        <thead>
+            <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                <th>Clave</th>
+                <th>Tipo</th>
+                <th>Cantidad*</th>
+                <th>Serie Inicial*</th>
+                <th>Serie Final*</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var items in values)
+            {
+                <tr>
+                    <td>@items.ClaveCertificado</td>
+                    <td> @items.NombreCatTipoReporte </td>
+                    <td> @items.Cantidad </td>
+                    <td> @items.SerieInicial </td>
+                    <td> @items.SerieFinal </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

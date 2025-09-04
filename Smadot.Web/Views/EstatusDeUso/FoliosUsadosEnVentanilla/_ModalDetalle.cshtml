@@ -1,0 +1,82 @@
+﻿@model Smadot.Models.Entities.FoliosUsadosEnVentanilla.Response.FoliosUsadosEnVentanillaResponse
+@using System.Globalization;
+<div class="row mb-5">
+    <div class="col-md-4">
+        <label class="form-label">Folio de trámite</label>
+        <div class="position-relative">
+            <input  class="form-control" value="@Model.FolioTramite" type="text" disabled/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Tipo de trámite</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.TipoTramite" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Datos del vehículo</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.DatosVehiculo" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-4">
+        <label class="form-label">Folio del certificado o constancia</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.FolioCertificado" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Razón</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Razon" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Persona que generó el trámite</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.PersonaGeneroTramite" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+     <div class="col-md-4">
+        <label class="form-label">Monto del trámite</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.MontoTramite?.ToString("C2", new CultureInfo("es-MX"))" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Referencia Bancaria</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.ReferenciaBancaria" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Nombre del usuario</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.NombreUsuario" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-4">
+        <label class="form-label">Teléfono del usuario</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.TelefonoUsuario" type="text" disabled />
+        </div>
+    </div>
+     <div class="col-md-4">
+        <label class="form-label">Correo del usuario</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.CorreoUsuario" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Fecha</label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Fecha.ToString("dd/MM/yyyy")" type="text" disabled />
+        </div>
+    </div>
+</div>

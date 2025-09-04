@@ -1,0 +1,1342 @@
+@using Smadot.Models.Dicts;
+
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    string linkSolicitudFormaValorada = "null";
+    string linkTramites = "null";
+    string linkAdministracion = "null";
+    string linkSeguimientoCVV = "null";
+    string linkAdminCVV = "null";
+    var permisos = UserResolver.GetPermisos();
+}
+<!--begin::Menu wrapper-->
+<div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true"
+    data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}"
+    data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="end"
+    data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true"
+    data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"
+    data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
+    <!--begin::Menu-->
+    <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
+        id="kt_app_header_menu" data-kt-menu="true">
+        <!--begin:Menu item-->
+        <div data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2" )">
+            <!--begin:Menu link-->
+            @*<a class="menu-link" href="javascript.void(0);">
+            <span class="menu-title">Recepción</span>
+            <span class="menu-arrow d-lg-none"></span>
+            </a>*@
+            <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+        @if (permisos.Contains(PermisosMenu.SolicitudesdeFormasValoradas) ||
+        permisos.Contains(PermisosMenu.IngresodeFormasValoradas) ||
+        permisos.Contains(PermisosMenu.AsignacionStockdeVentanilla) || permisos.Contains(PermisosMenu.DevolucionaSPF) ||
+        permisos.Contains(PermisosMenu.FoliosCancelados) || permisos.Contains(PermisosMenu.DeterminaciondeStockMinimo)
+        || permisos.Contains(PermisosMenu.ConsultaStockDVRF) || permisos.Contains(PermisosMenu.FoliosUsadosenVentanilla)
+                                                                  @*permisos.Contains(PermisosMenu.FoliosVendidosaCentrosdeVerificacion) ||*@
+                                                                  @*permisos.Contains(PermisosMenu.FoliosRegresadosaSPF) ||*@)
+        {
+            <!--begin:Menu item-->
+            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+                class="menu-item menu-lg-down-accordion me-0 me-lg-2) @Html.Raw($"{linkSolicitudFormaValorada}")">
+                <!--begin:Menu link-->
+                <a class="menu-link">
+                    <span class="menu-title">Administrar Formas Valoradas</span>
+                    <span class="menu-arrow d-lg-none"></span>
+                </a>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" style="">
+                    @if (permisos.Contains(PermisosMenu.SolicitudesdeFormasValoradas) ||
+                   permisos.Contains(PermisosMenu.IngresodeFormasValoradas))
+                    {
+
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen035.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                                transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Entradas</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.SolicitudesdeFormasValoradas))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="SolicitudFormaValorada" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Solicitudes de Formas Valoradas de CVV</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.IngresodeFormasValoradas))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="IngresoFormaValorada" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Ingreso de Formas Valoradas a CVV</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.AsignacionStockdeVentanilla) ||
+                   permisos.Contains(PermisosMenu.DevolucionaSPF))
+                    {
+
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                            <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Salidas</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.AsignacionStockdeVentanilla))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="AsignacionStockVentanilla" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Asignación Stock Ventanilla</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                <!--begin:Menu item-->
+                                @*<div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" asp-controller="SolicitudFormaValorada" asp-action="Index">
+                        <span class="menu-bullet">
+                        <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title" >Retorno Stock Ventanilla</span>
+                        </a>
+                        <!--end:Menu link-->
+                        </div>*@
+                                <!--end:Menu item-->
+                                @if (permisos.Contains(PermisosMenu.DevolucionaSPF))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="DevolucionSPF" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Devolución a SPF</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.FoliosCancelados))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen034.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                            <rect x="7" y="15.3137" width="12" height="2" rx="1"
+                                                transform="rotate(-45 7 15.3137)" fill="currentColor" />
+                                            <rect x="8.41422" y="7" width="12" height="2" rx="1"
+                                                transform="rotate(45 8.41422 7)" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Folios Cancelados</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                <!--begin:Menu item-->
+                                <div class="menu-item">
+                                    <!--begin:Menu link-->
+                                    <a class="menu-link" asp-controller="FoliosCancelados" asp-action="Index">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Consulta de Folios Cancelados</span>
+                                    </a>
+                                    <!--end:Menu link-->
+                                </div>
+                                <!--end:Menu item-->
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.DeterminaciondeStockMinimo) ||
+                   permisos.Contains(PermisosMenu.ConsultaStockDVRF) ||
+                   permisos.Contains(PermisosMenu.FoliosUsadosenVentanilla) @*||
+                permisos.Contains(PermisosMenu.FoliosVendidosaCentrosdeVerificacion) ||*@
+                                                                              @*permisos.Contains(PermisosMenu.FoliosRegresadosaSPF) ||*@)
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen037.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                            <path
+                                                d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Estatus de Uso</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.DeterminaciondeStockMinimo))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="StockMinimo" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Determinación del Stock Mínimo</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.ConsultaStockDVRF))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="ConsultaStockDVRF" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Consulta Stock DVRF</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.FoliosUsadosenVentanilla))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="FoliosUsadosEnVentanilla" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Folios Usados en Ventanilla</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.FoliosVendidosaCentrosdeVerificacion))
+                                {
+                                    @*<!--begin:Menu item-->
+                        <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" asp-controller="FoliosVendidosCentrosVerificacion" asp-action="Index">
+                        <span class="menu-bullet">
+                        <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Folios Vendidos a Centros de Verificación</span>
+                        </a>
+                        <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->*@
+                                }
+                                <!--begin:Menu item-->
+                                @*<div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" asp-controller="FoliosRegresadosSPF" asp-action="Index">
+                        <span class="menu-bullet">
+                        <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Folios Regresados a SPF</span>
+                        </a>
+                        <!--end:Menu link-->
+                        </div>*@
+                                <!--end:Menu item-->
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                </div>
+                <!--end:Menu sub-->
+            </div>
+            <!--end:Menu item-->
+        }
+        @if (permisos.Contains(PermisosMenu.VentadeFormasValoradasaCVV) || permisos.Contains(PermisosMenu.Reposiciones)
+        || permisos.Contains(PermisosMenu.Exentos) || permisos.Contains(PermisosMenu.Administrativas) ||
+        permisos.Contains(PermisosMenu.ConstanciasdeUltimaVerificacion) ||
+        permisos.Contains(PermisosMenu.ConsultadePruebasdeVerificacion) ||
+        permisos.Contains(PermisosMenu.ConsultadeTablaMaestra) ||
+        permisos.Contains(PermisosMenu.DirectoriodeVerificentros) || permisos.Contains(PermisosMenu.HistorialCitas) ||
+        permisos.Contains(PermisosMenu.Testificacion))
+        {
+            <!--begin:Menu item-->
+            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+                class="menu-item menu-lg-down-accordion me-0 me-lg-2) @Html.Raw($"{linkTramites}")">
+                <!--begin:Menu link-->
+                <a class="menu-link">
+                    <span class="menu-title">Trámites</span>
+                    <span class="menu-arrow d-lg-none"></span>
+                </a>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" style="">
+                    @if (permisos.Contains(PermisosMenu.VentadeFormasValoradasaCVV) ||
+                   permisos.Contains(PermisosMenu.Reposiciones) || permisos.Contains(PermisosMenu.Exentos) ||
+                   permisos.Contains(PermisosMenu.Administrativas) || permisos.Contains(PermisosMenu.Testificacion))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen035.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3"
+                                                d="M18 22C19.7 22 21 20.7 21 19C21 18.5 20.9 18.1 20.7 17.7L15.3 6.30005C15.1 5.90005 15 5.5 15 5C15 3.3 16.3 2 18 2H6C4.3 2 3 3.3 3 5C3 5.5 3.1 5.90005 3.3 6.30005L8.7 17.7C8.9 18.1 9 18.5 9 19C9 20.7 7.7 22 6 22H18Z"
+                                                fill="currentColor" />
+                                            <path d="M18 2C19.7 2 21 3.3 21 5H9C9 3.3 7.7 2 6 2H18Z" fill="currentColor" />
+                                            <path d="M9 19C9 20.7 7.7 22 6 22C4.3 22 3 20.7 3 19H9Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Certificados</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.VentadeFormasValoradasaCVV))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="VentaCVV" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Venta de Formas Valoradas a CVV</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Reposiciones))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Reposicion" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Reposiciones</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Exentos))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Exento" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Exentos</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @*<!--begin:Menu item-->
+                        <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" asp-controller="Refrendo" asp-action="Index">
+                        <span class="menu-bullet">
+                        <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title" >Refrendos</span>
+                        </a>
+                        <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->*@
+                                @if (permisos.Contains(PermisosMenu.Administrativas))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Administrativa" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Administrativas</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Testificacion))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Testificacion" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Testificación</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.ConstanciasdeUltimaVerificacion))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3"
+                                                d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM12.5 18C12.5 17.4 12.6 17.5 12 17.5H8.5C7.9 17.5 8 17.4 8 18C8 18.6 7.9 18.5 8.5 18.5L12 18C12.6 18 12.5 18.6 12.5 18ZM16.5 13C16.5 12.4 16.6 12.5 16 12.5H8.5C7.9 12.5 8 12.4 8 13C8 13.6 7.9 13.5 8.5 13.5H15.5C16.1 13.5 16.5 13.6 16.5 13ZM12.5 8C12.5 7.4 12.6 7.5 12 7.5H8C7.4 7.5 7.5 7.4 7.5 8C7.5 8.6 7.4 8.5 8 8.5H12C12.6 8.5 12.5 8.6 12.5 8Z"
+                                                fill="currentColor" />
+                                            <rect x="7" y="17" width="6" height="2" rx="1" fill="currentColor" />
+                                            <rect x="7" y="12" width="10" height="2" rx="1" fill="currentColor" />
+                                            <rect x="7" y="7" width="6" height="2" rx="1" fill="currentColor" />
+                                            <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Constancias</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                <!--begin:Menu item-->
+                                <div class="menu-item">
+                                    <!--begin:Menu link-->
+                                    <a class="menu-link" asp-controller="ConstanciaUltimaVerificacion" asp-action="Index">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Constancias de Última Verificación</span>
+                                    </a>
+                                    <!--end:Menu link-->
+                                </div>
+                                <!--end:Menu item-->
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.ConsultadePruebasdeVerificacion) ||
+                   permisos.Contains(PermisosMenu.ConsultadeTablaMaestra) ||
+                   permisos.Contains(PermisosMenu.DirectoriodeVerificentros) ||
+                   permisos.Contains(PermisosMenu.HistorialCitas))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen034.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                                transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                            <path
+                                                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Consultas</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.ConsultadePruebasdeVerificacion))
+                                {
+                                @*    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="ConsultaPruebaVerificacion" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Consulta de Pruebas de Verificación</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item--> *@
+                                }
+                                @if (permisos.Contains(PermisosMenu.HistorialCitas))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Citas" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Historial de Citas</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.ConsultadeTablaMaestra))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="ConsultaTablaMaestra" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Consulta de Tabla Maestra</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.DirectoriodeVerificentros))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="DirectorioCentrosVerificacion" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Directorio de Verificentros</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                </div>
+                <!--end:Menu sub-->
+            </div>
+        }
+        @if (@*permisos.Contains(PermisosMenu.AccesoaCamarasCVV) ||*@
+        permisos.Contains(PermisosMenu.InventariodeEquipos) || permisos.Contains(PermisosMenu.Calibraciones) ||
+        permisos.Contains(PermisosMenu.Proveedores) || permisos.Contains(PermisosMenu.Laboratorios) ||
+        permisos.Contains(PermisosMenu.ProveedoresFolio) || permisos.Contains(PermisosMenu.OrdenesdeServicio) ||
+        permisos.Contains(PermisosMenu.Instalaciones) || permisos.Contains(PermisosMenu.UsodeSuministros) ||
+        permisos.Contains(PermisosMenu.Lineas) || permisos.Contains(PermisosMenu.ReporteMensual) ||
+        permisos.Contains(PermisosMenu.ReporteTercerTanto) || permisos.Contains(PermisosMenu.ConsultadeCirculares) ||
+        permisos.Contains(PermisosMenu.Dashboard) || permisos.Contains(PermisosMenu.DashboardLineas))
+        {
+            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+                class="menu-item menu-lg-down-accordion me-0 me-lg-2) @Html.Raw($"{linkSeguimientoCVV}")">
+                <!--begin:Menu link-->
+                <a class="menu-link">
+                    <span class="menu-title">Seguimiento a CVV</span>
+                    <span class="menu-arrow d-lg-none"></span>
+                </a>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" style="">
+                    @*@if (permisos.Contains(PermisosMenu.AccesoaCamarasCVV))
+                {
+                <!--begin:Menu item-->
+                <a class="menu-link" asp-controller="AccesoCamaras" asp-action="Index">
+                <span class="menu-icon">
+                <!--begin::Svg Icon | path:
+                /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen035.svg-->
+                <span class="svg-icon svg-icon-muted svg-icon-3">
+                <svg fill="currentColor" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                <g opacity="0.2">
+                <path
+                d="M208,64H175.99414l-16-24h-64l-16,24H48A16,16,0,0,0,32,80V192a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V80A16,16,0,0,0,208,64ZM128,168a36,36,0,1,1,36-36A36,36,0,0,1,128,168Z"
+                />
+                </g>
+                <g>
+                <path
+                d="M208,56H180.27539l-13.625-20.4375A7.99942,7.99942,0,0,0,159.99414,32h-64a7.99943,7.99943,0,0,0-6.65625,3.5625L75.71289,56H48A24.0275,24.0275,0,0,0,24,80V192a24.0275,24.0275,0,0,0,24,24H208a24.0275,24.0275,0,0,0,24-24V80A24.0275,24.0275,0,0,0,208,56Zm8,136a8.00917,8.00917,0,0,1-8,8H48a8.00917,8.00917,0,0,1-8-8V80a8.00917,8.00917,0,0,1,8-8H79.99414a7.99942,7.99942,0,0,0,6.65625-3.5625L100.27539,48h55.4375l13.625,20.4375A7.99943,7.99943,0,0,0,175.99414,72H208a8.00917,8.00917,0,0,1,8,8Z"
+                />
+                <path
+                d="M128,88a44,44,0,1,0,44,44A44.04978,44.04978,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28.03146,28.03146,0,0,1,128,160Z"
+                />
+                </g>
+                </svg>
+                </span>
+                <!--end::Svg Icon-->
+                </span>
+                <span class="menu-title">Accceso a Cámaras CVV</span>
+                </a> <!--end:Menu item-->
+                }*@
+                    @if (permisos.Contains(PermisosMenu.InventariodeEquipos) ||
+                   permisos.Contains(PermisosMenu.Calibraciones))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M1.34375 3.9463V15.2178C1.34375 16.119 2.08105 16.8563 2.98219 16.8563H8.65093V19.4594H6.15702C5.38853 19.4594 4.75981 19.9617 4.75981 20.5757V21.6921H19.2403V20.5757C19.2403 19.9617 18.6116 19.4594 17.8431 19.4594H15.3492V16.8563H21.0179C21.919 16.8563 22.6562 16.119 22.6562 15.2178V3.9463C22.6562 3.04516 21.9189 2.30786 21.0179 2.30786H2.98219C2.08105 2.30786 1.34375 3.04516 1.34375 3.9463ZM12.9034 9.9016C13.241 9.98792 13.5597 10.1216 13.852 10.2949L15.0393 9.4353L15.9893 10.3853L15.1297 11.5727C15.303 11.865 15.4366 12.1837 15.523 12.5212L16.97 12.7528V13.4089H13.9851C13.9766 12.3198 13.0912 11.4394 12 11.4394C10.9089 11.4394 10.0235 12.3198 10.015 13.4089H7.03006V12.7528L8.47712 12.5211C8.56345 12.1836 8.69703 11.8649 8.87037 11.5727L8.0107 10.3853L8.96078 9.4353L10.148 10.2949C10.4404 10.1215 10.759 9.98788 11.0966 9.9016L11.3282 8.45467H12.6718L12.9034 9.9016ZM16.1353 7.93758C15.6779 7.93758 15.3071 7.56681 15.3071 7.1094C15.3071 6.652 15.6779 6.28122 16.1353 6.28122C16.5926 6.28122 16.9634 6.652 16.9634 7.1094C16.9634 7.56681 16.5926 7.93758 16.1353 7.93758ZM2.71385 14.0964V3.90518C2.71385 3.78023 2.81612 3.67796 2.94107 3.67796H21.0589C21.1839 3.67796 21.2861 3.78023 21.2861 3.90518V14.0964C15.0954 14.0964 8.90462 14.0964 2.71385 14.0964Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Equipos</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.InventariodeEquipos))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Equipo" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Inventario</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Calibraciones))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Calibracion" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Calibraciones</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.Proveedores) || permisos.Contains(PermisosMenu.Laboratorios) ||
+                   permisos.Contains(PermisosMenu.ProveedoresFolio) || permisos.Contains(PermisosMenu.OrdenesdeServicio) ||
+                   permisos.Contains(PermisosMenu.Instalaciones) || permisos.Contains(PermisosMenu.UsodeSuministros))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen034.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3"
+                                                d="M22.1 11.5V12.6C22.1 13.2 21.7 13.6 21.2 13.7L19.9 13.9C19.7 14.7 19.4 15.5 18.9 16.2L19.7 17.2999C20 17.6999 20 18.3999 19.6 18.7999L18.8 19.6C18.4 20 17.8 20 17.3 19.7L16.2 18.9C15.5 19.3 14.7 19.7 13.9 19.9L13.7 21.2C13.6 21.7 13.1 22.1 12.6 22.1H11.5C10.9 22.1 10.5 21.7 10.4 21.2L10.2 19.9C9.4 19.7 8.6 19.4 7.9 18.9L6.8 19.7C6.4 20 5.7 20 5.3 19.6L4.5 18.7999C4.1 18.3999 4.1 17.7999 4.4 17.2999L5.2 16.2C4.8 15.5 4.4 14.7 4.2 13.9L2.9 13.7C2.4 13.6 2 13.1 2 12.6V11.5C2 10.9 2.4 10.5 2.9 10.4L4.2 10.2C4.4 9.39995 4.7 8.60002 5.2 7.90002L4.4 6.79993C4.1 6.39993 4.1 5.69993 4.5 5.29993L5.3 4.5C5.7 4.1 6.3 4.10002 6.8 4.40002L7.9 5.19995C8.6 4.79995 9.4 4.39995 10.2 4.19995L10.4 2.90002C10.5 2.40002 11 2 11.5 2H12.6C13.2 2 13.6 2.40002 13.7 2.90002L13.9 4.19995C14.7 4.39995 15.5 4.69995 16.2 5.19995L17.3 4.40002C17.7 4.10002 18.4 4.1 18.8 4.5L19.6 5.29993C20 5.69993 20 6.29993 19.7 6.79993L18.9 7.90002C19.3 8.60002 19.7 9.39995 19.9 10.2L21.2 10.4C21.7 10.5 22.1 11 22.1 11.5ZM12.1 8.59998C10.2 8.59998 8.6 10.2 8.6 12.1C8.6 14 10.2 15.6 12.1 15.6C14 15.6 15.6 14 15.6 12.1C15.6 10.2 14 8.59998 12.1 8.59998Z"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M17.1 12.1C17.1 14.9 14.9 17.1 12.1 17.1C9.30001 17.1 7.10001 14.9 7.10001 12.1C7.10001 9.29998 9.30001 7.09998 12.1 7.09998C14.9 7.09998 17.1 9.29998 17.1 12.1ZM12.1 10.1C11 10.1 10.1 11 10.1 12.1C10.1 13.2 11 14.1 12.1 14.1C13.2 14.1 14.1 13.2 14.1 12.1C14.1 11 13.2 10.1 12.1 10.1Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Mantenimiento</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.Proveedores))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Proveedor" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Proveedores</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Laboratorios))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Laboratorio" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Laboratorios</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.ProveedoresFolio))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="ProveedorFolioServicio" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Proveedores - Laboratorios Folio</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.OrdenesdeServicio))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="OrdenServicio" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Ordenes de Servicio</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Instalaciones))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Instalaciones" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Instalaciones</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.UsodeSuministros))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="UsoSuministro" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Uso de Suministros</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                    }
+                    @if (permisos.Contains(PermisosMenu.Lineas))
+                    {
+                        <!--begin:Menu link-->
+                        <a class="menu-link" asp-controller="CierreAperturaLinea" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 19H4C2.9 19 2 18.1 2 17H22C22 18.1 21.1 19 20 19Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M20 5H4C3.4 5 3 5.4 3 6V17H21V6C21 5.4 20.6 5 20 5Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Líneas</span>
+                        </a>
+                    }
+                    @if (permisos.Contains(PermisosMenu.ReporteMensual) ||
+                   permisos.Contains(PermisosMenu.ReporteTercerTanto))
+                    {
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 100 100" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <path
+                                                    d="M72.17,35.82l16.44,0.06c-0.02,4.38-1.78,8.58-4.9,11.65c-0.74,0.73-1.54,1.38-2.4,1.96L72.17,35.82 L72.17,35.82z M1.18,122.01C0.49,121.69,0,121,0,120.18V2c0-1.1,0.89-2,2-2H21.4h79.72c1.1,0,2,0.89,2,2v107.73 c0,0.11-0.01,0.21-0.02,0.31c-0.28,3.93-1.56,6.99-3.86,9.18c-2.3,2.18-5.53,3.4-9.72,3.64c-0.09,0.01-0.17,0.02-0.26,0.02H2.83 C2.15,122.88,1.54,122.53,1.18,122.01L1.18,122.01z M35.5,34.9h5.01c0.27,0,0.48,0.22,0.48,0.48v9.85c0,0.27-0.22,0.48-0.48,0.48 H35.5c-0.27,0-0.48-0.22-0.48-0.48v-9.85C35.02,35.12,35.23,34.9,35.5,34.9L35.5,34.9z M16.85,28.87h5.01 c0.27,0,0.48,0.22,0.48,0.48v15.89c0,0.27-0.22,0.48-0.48,0.48h-5.01c-0.27,0-0.48-0.22-0.48-0.48V29.35 C16.36,29.09,16.58,28.87,16.85,28.87L16.85,28.87L16.85,28.87z M26.18,25.48h5.01c0.27,0,0.48,0.22,0.48,0.48v19.28 c0,0.27-0.22,0.48-0.48,0.48h-5.01c-0.27,0-0.48-0.22-0.48-0.48V25.96C25.69,25.69,25.91,25.48,26.18,25.48L26.18,25.48z M99.13,109.68V3.99H21.4H3.99v114.9h85.26l0.04,0c3.21-0.18,5.61-1.04,7.2-2.55C98.06,114.85,98.93,112.62,99.13,109.68 L99.13,109.68z M16.82,106.64c-1.09,0-1.98-0.89-1.98-2c0-1.1,0.88-1.99,1.98-1.99h70.5c1.09,0,1.98,0.89,1.98,1.99 c0,1.1-0.88,2-1.98,2H16.82L16.82,106.64z M17.14,92.08c-1.09,0-1.98-0.89-1.98-2c0-1.1,0.88-2,1.98-2h70c1.09,0,1.98,0.89,1.98,2 c0,1.1-0.88,2-1.98,2H17.14L17.14,92.08z M16.82,77.52c-1.09,0-1.98-0.89-1.98-2c0-1.1,0.88-1.99,1.98-1.99h30.13 c1.09,0,1.98,0.89,1.98,1.99c0,1.1-0.88,2-1.98,2H16.82L16.82,77.52z M54.64,77.52c-1.09,0-1.98-0.89-1.98-2 c0-1.1,0.88-1.99,1.98-1.99h32.5c1.09,0,1.98,0.89,1.98,1.99c0,1.1-0.88,2-1.98,2H54.64L54.64,77.52z M16.82,64.53 c-1.09,0-1.98-0.89-1.98-2c0-1.1,0.88-2,1.98-2h24.84c1.09,0,1.98,0.89,1.98,2c0,1.1-0.88,2-1.98,2H16.82L16.82,64.53z M16.82,13.91c-1.09,0-1.98-0.89-1.98-2s0.88-2,1.98-2h14.84c1.09,0,1.98,0.89,1.98,2s-0.88,2-1.98,2H16.82L16.82,13.91z M70.49,32.56l-0.88-17.57c-0.02-0.35,0.25-0.64,0.6-0.66c0.1-0.01,0.22-0.01,0.35-0.01c0.11,0,0.23-0.01,0.35-0.01 c4.83-0.05,9.25,1.78,12.56,4.82c3.31,3.05,5.5,7.31,5.84,12.13c0.02,0.35-0.24,0.65-0.58,0.67l-17.58,1.26 c-0.35,0.02-0.65-0.24-0.67-0.58C70.49,32.59,70.49,32.57,70.49,32.56L70.49,32.56z M70.9,15.57l0.82,16.32l16.3-1.16 c-0.46-4.23-2.45-7.96-5.38-10.66c-3.08-2.84-7.21-4.54-11.7-4.49L70.9,15.57L70.9,15.57z M68.52,35.06l8.81,15.26 c-2.68,1.55-5.72,2.36-8.81,2.36c-9.73,0-17.62-7.89-17.62-17.62c0-8.74,6.41-16.17,15.06-17.43L68.52,35.06L68.52,35.06z" />
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Reportes</span>
+                                <span class="menu-arrow"></span>
+
+                            </span>
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.ReporteMensual))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="ReporteMensual" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Reporte Mensual</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.ReporteTercerTanto))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Reporte" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Reporte Tercer Tanto</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            @*<span class="menu-arrow"></span>*@
+                        </div>
+                    }
+                    @if (permisos.Contains(PermisosMenu.ConsultadeCirculares))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen034.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                                transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                            <path
+                                                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Consultas</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.ConsultadeCirculares))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="ConsultaCirculares" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Consulta de Circulares</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                    @if (permisos.Contains(PermisosMenu.Dashboard) || permisos.Contains(PermisosMenu.DashboardLineas))
+                    {
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/graphs/gra001.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3"
+                                                d="M14 3V21H10V3C10 2.4 10.4 2 11 2H13C13.6 2 14 2.4 14 3ZM7 14H5C4.4 14 4 14.4 4 15V21H8V15C8 14.4 7.6 14 7 14Z"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M21 20H20V8C20 7.4 19.6 7 19 7H17C16.4 7 16 7.4 16 8V20H3C2.4 20 2 20.4 2 21C2 21.6 2.4 22 3 22H21C21.6 22 22 21.6 22 21C22 20.4 21.6 20 21 20Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Estadística</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.Dashboard))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="EstadisiticaUsoFormaValorada" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Dashboard</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.DashboardLineas))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="DashboardLineas" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Dashboard Lineas</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                            </div>
+                            <!--end:Menu sub-->
+                        </div>
+                        <!--end:Menu item-->
+                    }
+                </div>
+                <!--end:Menu sub-->
+            </div>
+        }
+        @if (permisos.Contains(PermisosMenu.Personal) || permisos.Contains(PermisosMenu.Acreditaciones) ||
+        permisos.Contains(PermisosMenu.Capacitaciones) || permisos.Contains(PermisosMenu.ReposiciondeCredenciales) ||
+        permisos.Contains(PermisosMenu.AutorizacionesyValidacionesDVRF) || permisos.Contains(PermisosMenu.Roles) ||
+        permisos.Contains(PermisosMenu.Usuarios) || permisos.Contains(PermisosMenu.Permisos) ||
+        permisos.Contains(PermisosMenu.RecepcionDocumentos) || permisos.Contains(PermisosMenu.Impresiones))
+        {
+            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+                class="menu-item menu-lg-down-accordion me-0 me-lg-2) @Html.Raw($"{linkAdminCVV}")">
+                <!--begin:Menu link-->
+                <a class="menu-link">
+                    <span class="menu-title">Administración CVV</span>
+                    <span class="menu-arrow d-lg-none"></span>
+                </a>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" style="">
+                    @if (permisos.Contains(PermisosMenu.Personal))
+                    {
+                        <!--begin:Menu link-->
+                        <a class="menu-link" asp-controller="Personal" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z"
+                                            fill="currentColor" />
+                                        <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="currentColor" />
+                                        <path
+                                            d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z"
+                                            fill="currentColor" />
+                                        <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Personal</span>
+                        </a>
+                    }
+                    @if (permisos.Contains(PermisosMenu.Acreditaciones))
+                    {
+                        <a class="menu-link" asp-controller="AcreditacionTecnicoVerificador" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/ecommerce/ecm008.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M14 18V16H10V18L9 20H15L14 18Z" fill="currentColor" />
+                                        <path opacity="0.3"
+                                            d="M20 4H17V3C17 2.4 16.6 2 16 2H8C7.4 2 7 2.4 7 3V4H4C3.4 4 3 4.4 3 5V9C3 11.2 4.8 13 7 13C8.2 14.2 8.8 14.8 10 16H14C15.2 14.8 15.8 14.2 17 13C19.2 13 21 11.2 21 9V5C21 4.4 20.6 4 20 4ZM5 9V6H7V11C5.9 11 5 10.1 5 9ZM19 9C19 10.1 18.1 11 17 11V6H19V9ZM17 21V22H7V21C7 20.4 7.4 20 8 20H16C16.6 20 17 20.4 17 21ZM10 9C9.4 9 9 8.6 9 8V5C9 4.4 9.4 4 10 4C10.6 4 11 4.4 11 5V8C11 8.6 10.6 9 10 9ZM10 13C9.4 13 9 12.6 9 12V11C9 10.4 9.4 10 10 10C10.6 10 11 10.4 11 11V12C11 12.6 10.6 13 10 13Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Acreditaciones</span>
+                        </a>
+                    }
+                    @if (permisos.Contains(PermisosMenu.Capacitaciones))
+                    {
+                        <a class="menu-link" asp-controller="Capacitacion" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M18 21.6C16.3 21.6 15 20.3 15 18.6V2.50001C15 2.20001 14.6 1.99996 14.3 2.19996L13 3.59999L11.7 2.3C11.3 1.9 10.7 1.9 10.3 2.3L9 3.59999L7.70001 2.3C7.30001 1.9 6.69999 1.9 6.29999 2.3L5 3.59999L3.70001 2.3C3.50001 2.1 3 2.20001 3 3.50001V18.6C3 20.3 4.3 21.6 6 21.6H18Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M12 12.6H11C10.4 12.6 10 12.2 10 11.6C10 11 10.4 10.6 11 10.6H12C12.6 10.6 13 11 13 11.6C13 12.2 12.6 12.6 12 12.6ZM9 11.6C9 11 8.6 10.6 8 10.6H6C5.4 10.6 5 11 5 11.6C5 12.2 5.4 12.6 6 12.6H8C8.6 12.6 9 12.2 9 11.6ZM9 7.59998C9 6.99998 8.6 6.59998 8 6.59998H6C5.4 6.59998 5 6.99998 5 7.59998C5 8.19998 5.4 8.59998 6 8.59998H8C8.6 8.59998 9 8.19998 9 7.59998ZM13 7.59998C13 6.99998 12.6 6.59998 12 6.59998H11C10.4 6.59998 10 6.99998 10 7.59998C10 8.19998 10.4 8.59998 11 8.59998H12C12.6 8.59998 13 8.19998 13 7.59998ZM13 15.6C13 15 12.6 14.6 12 14.6H10C9.4 14.6 9 15 9 15.6C9 16.2 9.4 16.6 10 16.6H12C12.6 16.6 13 16.2 13 15.6Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M15 18.6C15 20.3 16.3 21.6 18 21.6C19.7 21.6 21 20.3 21 18.6V12.5C21 12.2 20.6 12 20.3 12.2L19 13.6L17.7 12.3C17.3 11.9 16.7 11.9 16.3 12.3L15 13.6V18.6Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Capacitaciones</span>
+                        </a>
+                    }
+                    @if (permisos.Contains(PermisosMenu.ReposiciondeCredenciales))
+                    {
+                        <a class="menu-link" asp-controller="ReposicionCredencial" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/technology/teh002.svg-->
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M3 6C2.4 6 2 5.6 2 5V3C2 2.4 2.4 2 3 2H5C5.6 2 6 2.4 6 3C6 3.6 5.6 4 5 4H4V5C4 5.6 3.6 6 3 6ZM22 5V3C22 2.4 21.6 2 21 2H19C18.4 2 18 2.4 18 3C18 3.6 18.4 4 19 4H20V5C20 5.6 20.4 6 21 6C21.6 6 22 5.6 22 5ZM6 21C6 20.4 5.6 20 5 20H4V19C4 18.4 3.6 18 3 18C2.4 18 2 18.4 2 19V21C2 21.6 2.4 22 3 22H5C5.6 22 6 21.6 6 21ZM22 21V19C22 18.4 21.6 18 21 18C20.4 18 20 18.4 20 19V20H19C18.4 20 18 20.4 18 21C18 21.6 18.4 22 19 22H21C21.6 22 22 21.6 22 21ZM16 11V9C16 6.8 14.2 5 12 5C9.8 5 8 6.8 8 9V11C7.2 11 6.5 11.7 6.5 12.5C6.5 13.3 7.2 14 8 14V15C8 17.2 9.8 19 12 19C14.2 19 16 17.2 16 15V14C16.8 14 17.5 13.3 17.5 12.5C17.5 11.7 16.8 11 16 11ZM13.4 15C13.7 15 14 15.3 13.9 15.6C13.6 16.4 12.9 17 12 17C11.1 17 10.4 16.5 10.1 15.7C10 15.4 10.2 15 10.6 15H13.4Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M9.2 12.9C9.1 12.8 9.10001 12.7 9.10001 12.6C9.00001 12.2 9.3 11.7 9.7 11.6C10.1 11.5 10.6 11.8 10.7 12.2C10.7 12.3 10.7 12.4 10.7 12.5L9.2 12.9ZM14.8 12.9C14.9 12.8 14.9 12.7 14.9 12.6C15 12.2 14.7 11.7 14.3 11.6C13.9 11.5 13.4 11.8 13.3 12.2C13.3 12.3 13.3 12.4 13.3 12.5L14.8 12.9ZM16 7.29998C16.3 6.99998 16.5 6.69998 16.7 6.29998C16.3 6.29998 15.8 6.30001 15.4 6.20001C15 6.10001 14.7 5.90001 14.4 5.70001C13.8 5.20001 13 5.00002 12.2 4.90002C9.9 4.80002 8.10001 6.79997 8.10001 9.09997V11.4C8.90001 10.7 9.40001 9.8 9.60001 9C11 9.1 13.4 8.69998 14.5 8.29998C14.7 9.39998 15.3 10.5 16.1 11.4V9C16.1 8.5 16 8 15.8 7.5C15.8 7.5 15.9 7.39998 16 7.29998Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Reposición de Credenciales</span>
+                        </a>
+                    }
+
+                    @*<span class="menu-arrow"></span>*@
+                    @if (permisos.Contains(PermisosMenu.AutorizacionesyValidacionesDVRF))
+                    {
+                        <a class="menu-link" asp-controller="Alertas" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen035.svg-->
+                                <span class="svg-icon svg-icon-muted svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3"
+                                            d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M12.0006 11.1542C13.1434 11.1542 14.0777 10.22 14.0777 9.0771C14.0777 7.93424 13.1434 7 12.0006 7C10.8577 7 9.92348 7.93424 9.92348 9.0771C9.92348 10.22 10.8577 11.1542 12.0006 11.1542Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M15.5652 13.814C15.5108 13.6779 15.4382 13.551 15.3566 13.4331C14.9393 12.8163 14.2954 12.4081 13.5697 12.3083C13.479 12.2993 13.3793 12.3174 13.3067 12.3718C12.9257 12.653 12.4722 12.7981 12.0006 12.7981C11.5289 12.7981 11.0754 12.653 10.6944 12.3718C10.6219 12.3174 10.5221 12.2902 10.4314 12.3083C9.70578 12.4081 9.05272 12.8163 8.64456 13.4331C8.56293 13.551 8.49036 13.687 8.43595 13.814C8.40875 13.8684 8.41781 13.9319 8.44502 13.9864C8.51759 14.1133 8.60828 14.2403 8.68991 14.3492C8.81689 14.5215 8.95295 14.6757 9.10715 14.8208C9.23413 14.9478 9.37925 15.0657 9.52439 15.1836C10.2409 15.7188 11.1026 15.9999 11.9915 15.9999C12.8804 15.9999 13.7421 15.7188 14.4586 15.1836C14.6038 15.0748 14.7489 14.9478 14.8759 14.8208C15.021 14.6757 15.1661 14.5215 15.2931 14.3492C15.3838 14.2312 15.4655 14.1133 15.538 13.9864C15.5833 13.9319 15.5924 13.8684 15.5652 13.814Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Autorizaciones y Validaciones DVRF</span>
+                            @*<span class="menu-arrow"></span>*@
+                        </a>
+                    }
+                    @if (permisos.Contains(PermisosMenu.Roles) || permisos.Contains(PermisosMenu.Usuarios) ||
+                   permisos.Contains(PermisosMenu.Permisos) || permisos.Contains(PermisosMenu.Impresiones))
+                    {
+                        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
+                            class="menu-item menu-lg-down-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.3"
+                                                d="M22.0318 8.59998C22.0318 10.4 21.4318 12.2 20.0318 13.5C18.4318 15.1 16.3318 15.7 14.2318 15.4C13.3318 15.3 12.3318 15.6 11.7318 16.3L6.93177 21.1C5.73177 22.3 3.83179 22.2 2.73179 21C1.63179 19.8 1.83177 18 2.93177 16.9L7.53178 12.3C8.23178 11.6 8.53177 10.7 8.43177 9.80005C8.13177 7.80005 8.73176 5.6 10.3318 4C11.7318 2.6 13.5318 2 15.2318 2C16.1318 2 16.6318 3.20005 15.9318 3.80005L13.0318 6.70007C12.5318 7.20007 12.4318 7.9 12.7318 8.5C13.3318 9.7 14.2318 10.6001 15.4318 11.2001C16.0318 11.5001 16.7318 11.3 17.2318 10.9L20.1318 8C20.8318 7.2 22.0318 7.59998 22.0318 8.59998Z"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M4.23179 19.7C3.83179 19.3 3.83179 18.7 4.23179 18.3L9.73179 12.8C10.1318 12.4 10.7318 12.4 11.1318 12.8C11.5318 13.2 11.5318 13.8 11.1318 14.2L5.63179 19.7C5.23179 20.1 4.53179 20.1 4.23179 19.7Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Configuración</span>
+                                <span class="menu-arrow"></span>
+
+                            </span>
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-250px"
+                                style="">
+                                @if (permisos.Contains(PermisosMenu.Roles))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Roles" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Roles</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Usuarios))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Usuarios" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Usuarios</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+                                @if (permisos.Contains(PermisosMenu.Permisos))
+                                {
+                                    <!--begin:Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin:Menu link-->
+                                        <a class="menu-link" asp-controller="Permiso" asp-action="Index">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Permisos</span>
+                                        </a>
+                                        <!--end:Menu link-->
+                                    </div>
+                                    <!--end:Menu item-->
+                                }
+
+
+                            </div>
+                            @*<span class="menu-arrow"></span>*@
+                        </div>
+                    }
+                    @if (permisos.Contains(PermisosMenu.Impresiones))
+                    {
+                        <a class="menu-link" asp-controller="FoliosFormaValorada" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <span class="svg-icon svg-icon-3"><svg width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3" d="M10 4H21C21.6 4 22 4.4 22 5V7H10V4Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M13 14.4V9C13 8.4 12.6 8 12 8C11.4 8 11 8.4 11 9V14.4H13Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M10.4 3.60001L12 6H21C21.6 6 22 6.4 22 7V19C22 19.6 21.6 20 21 20H3C2.4 20 2 19.6 2 19V4C2 3.4 2.4 3 3 3H9.20001C9.70001 3 10.2 3.20001 10.4 3.60001ZM13 14.4V9C13 8.4 12.6 8 12 8C11.4 8 11 8.4 11 9V14.4H8L11.3 17.7C11.7 18.1 12.3 18.1 12.7 17.7L16 14.4H13Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Impresiones</span>
+                        </a>
+                    }
+                    @if (permisos.Contains(PermisosMenu.RecepcionDocumentos))
+                    {
+                        <a class="menu-link" asp-controller="RecepcionDocumentos" asp-action="Index">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-11-24-050857/core/html/src/media/icons/duotune/general/gen036.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.3" d="M10 4H21C21.6 4 22 4.4 22 5V7H10V4Z" fill="currentColor" />
+                                        <path opacity="0.3"
+                                            d="M10.3 15.3L11 14.6L8.70002 12.3C8.30002 11.9 7.7 11.9 7.3 12.3C6.9 12.7 6.9 13.3 7.3 13.7L10.3 16.7C9.9 16.3 9.9 15.7 10.3 15.3Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M10.4 3.60001L12 6H21C21.6 6 22 6.4 22 7V19C22 19.6 21.6 20 21 20H3C2.4 20 2 19.6 2 19V4C2 3.4 2.4 3 3 3H9.20001C9.70001 3 10.2 3.20001 10.4 3.60001ZM11.7 16.7L16.7 11.7C17.1 11.3 17.1 10.7 16.7 10.3C16.3 9.89999 15.7 9.89999 15.3 10.3L11 14.6L8.70001 12.3C8.30001 11.9 7.69999 11.9 7.29999 12.3C6.89999 12.7 6.89999 13.3 7.29999 13.7L10.3 16.7C10.5 16.9 10.8 17 11 17C11.2 17 11.5 16.9 11.7 16.7Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Recepción de Documentos</span>
+                        </a>
+                    }
+                </div>
+                <!--end:Menu sub-->
+            </div>
+            <!--end:Menu item-->
+        }
+    </div>
+    <!--end::Menu-->
+</div>
+<!--end::Menu wrapper-->

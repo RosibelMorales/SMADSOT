@@ -1,0 +1,53 @@
+﻿@using Smadot.Models.Entities.Reposicion.Response;
+@using Smadot.Models.DataBase;
+@model vDataTramiteVentanillaResponse
+@{
+    var trcolor = 0;
+}
+
+<table class="table table-sm table-responsive">
+    <tbody>
+        <tr class="@((trcolor % 2 == 0) ? "table-active" : "")">
+            @*<th style="text-align-last:center;vertical-align:middle"><input class="r_select" data-id="@list.Id" type="checkbox" id="rselect_@list.Id" name="radio_select" /></th>*@            
+            <th>
+                <div class="row"><b>Placa</b></div>
+                <div class="row"><label>@Model.Placa</label></div>
+                <div class="row"><b>SubMarca</b></div>
+                <div class="row"><label>@Model.Submarca</label></div>
+                <div class="row"><b>Semestre</b></div>
+                <div class="row"><label>@Model.Semestre</label></div>
+                <div class="row"><b>Entidad de Procedencia</b></div>
+                <div class="row"><label>@Model.EntidadProcedencia</label></div>              
+            </th>
+            <th>
+                <div class="row"><b>Serie</b></div>
+                <div class="row"><label>@Model.Serie</label></div>
+                <div class="row"><b>Modelo</b></div>
+                <div class="row"><label>@Model.Modelo</label></div>
+                <div class="row"><b>Fecha</b></div>
+                <div class="row"><label>@Model.Fecha.ToString("dd/MM/yyyy")</label></div>
+                <div class="row"><b>Combustible</b></div>
+                <div class="row"><label>@Model.Combustible</label></div>                             
+            </th>
+            <th>
+                <div class="row"><b># Tarjeta circulación</b></div>
+                <div class="row"><label>@Model.TarjetaCirculacion</label></div>
+                <div class="row"><b>Tipo Certificado</b></div>
+                <div class="row"><label>@Model.TipoCertificadoFV</label></div>
+                <div class="row"><b>Vigencia</b></div>
+                <div class="row"><label>@Model.Vigencia</label></div>
+                <div class="row"><b>Nombre Propietario</b></div>
+                <div class="row"><label>@Model.Propietario</label></div>
+            </th>
+            <th>
+                <div class="row"><b>Marca</b></div>
+                <div class="row"><label>@Model.Marca</label></div>
+                <div class="row"><b>Folio del Certificado</b></div>
+                <div class="row"><label>@Model.FolioCertificado</label></div>
+                <div class="row"><b>CVV</b></div>
+                <div class="row"><label>@Model.NombreVerificentro</label></div>              
+            </th>
+        </tr>
+
+    </tbody>
+</table>

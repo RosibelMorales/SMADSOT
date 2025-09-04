@@ -1,0 +1,33 @@
+﻿
+@using Smadot.Models.Entities.Generic.Response;
+@model List<TablaFijaViewModel.TablaFijaRow>
+
+<table class="table table-dark table-striped table-rounded border gy-7 gs-7" id="TableAsignacion">
+    <thead>
+        <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+            <th>Clave del Certificado</th>
+            <th>Tipo de Certificado</th>
+            <th>Cantidad</th>
+            <th>Folio Inicial</th>
+            <th>Folio Final&nbsp;<strong class="obligatorio">*</strong></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+
+            foreach (var tfr in Model.OrderBy(x => x.ClaveCerfiticado))
+            {
+                <tr>
+                    <td>@tfr.ClaveCerfiticado</td>
+                    <td data-tipocertificado="@tfr.IdTipoCertificado">@tfr.TipoCertificado</td>
+                    <td class="fv-row"><input type="text" id="DobleCeroCantidad" name="Cantidad[]" @(ViewBag.Enabled == null ? "disabled":"") class="form-control cantidadInput" min="0" value="@tfr.Cantidad"></td>
+                    <td><input type="text" id="DobleCeroFolioInicial" name="FolioInicial[]" @(ViewBag.Enabled ==null ? "disabled":"") class="form-control folioInicialInput" min="0" value="@tfr.FolioInicial"></td>
+                    <td><input type="text" id="DobleCeroFolioFinal" name="FolioFinal[]" disabled class="form-control" min="0" value="@tfr.FolioFinal"></td>
+                    
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+﻿@using Smadot.Models.Entities.DirectorioCentrosVerificacion.Response;
+@model List<DirectorioCentrosVerificacionResponse>;
+
+
+<div class="row">
+    <div class="col-md-12 table table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Centro de Atención</th>
+                    <th>Domicilio</th>
+                    <th>Enlace Ubicación</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0 && Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.Direccion</td>
+                            <td>
+                                <a href="@Html.Raw(item.Link+item.Longitud+','+item.Latitud)" target="_blank"><span
+                                        class="d-flex align-items-center fs-7 fw-bold text-gray-400 mb-2">
+                                        <i class="fa-solid fa-map-pin fs-6 text-gray-600 me-2"></i> Ubicación
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2">
+                            No se encontró información
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

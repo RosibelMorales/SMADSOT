@@ -1,0 +1,102 @@
+﻿@model Smadot.Models.Entities.AcreditacionTecnicoVerificador.Request.AcreditacionTecnicoSolicitudRequest
+@{
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    ViewData["Title"] = "Registrar Acreditación";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            cursor: default;
+            z-index: 99999 !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 43px !important;
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administración a CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a asp-controller="AcreditacionTecnicoVerificador" asp-action="Index" class="text-muted text-hover-primary">Acreditaciones</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewBag.Title</li>
+    }
+
+
+@section toolbar{
+    <a class="btn btn-sm fw-bold btn-primary" id="btnSave">Guardar</a>
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="AcreditacionTecnicoVerificador" asp-action="Index">Cancelar</a>
+    }
+
+<form role="form" id="form_registro" clase="clearfix">
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+             
+            <input asp-for="Id" id="Id" hidden />
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label required">Número de Solicitud: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase" asp-for="NumeroSolicitud" name="NumeroSolicitud" id="NumeroSolicitud" type="text" />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label" for="autocomplete">Empleado</label>
+                    <select class="form-control form-control-solid form-select" id="autocomplete"></select>
+                    @*<label class="form-label required">Correo: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid" asp-for="CorreoUsuario" name="CorreoUsuario" id="CorreoUsuario" name="CorreoUsuario" id="CorreoUsuario" type="text" />
+                    </div>*@
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <div class="col-xl-12 mb-5">
+        <div class="card card-flush h-md-100">
+            <div class="card-header pt-7">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800">Empleados</span>
+                </h3>
+            </div>
+            <div class="card-body pt-6">
+                <div class="table-responsive col-xl-6">
+                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                        <thead>
+                            <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
+                                <th class="p-0 pb-3 min-w-175px text-start">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyEmpleados">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</form>
+
+@section Scripts{
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/lib/jquery-ui/dist/jquery-ui.min.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script asp-append-version="true" src="~/js/AcreditacionTecnicoVerificador/smadot.acreditaciontecnico.registro.js"></script>
+    }

@@ -1,0 +1,21 @@
+﻿@using Smadot.Models.Dicts;
+@using Smadot.Utilities.FileStorage
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.ConstanciaUltimaVerificacion.Response.ConstanciaUltimaVerificacionGridResponse
+<div class="btn-group dropup drop-up dropdown">
+    @if (UserResolver.HasPermission(MenuConstanciasUltimaVerificacion.Detalle))
+    {
+        <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" asp-controller="ConstanciaUltimaVerificacion" asp-action="Detalle" asp-route-id="@Model.Id" title="Detalle">
+            <i class="bi bi-eye"></i>
+        </a>
+    }
+    @if (UserResolver.HasPermission(MenuConstanciasUltimaVerificacion.GenerarOficio))
+    {       
+        <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+            download="identificacion_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.CodigoQr))"
+            href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.CodigoQr)"
+            role="button" title="Generar Oficio">
+            <i class="bi bi-download"></i>
+        </a>
+    }
+</div>

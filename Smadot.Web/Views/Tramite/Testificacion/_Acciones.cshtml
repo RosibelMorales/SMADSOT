@@ -1,0 +1,50 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Testificacion.Response.TestificacionResponseGrid
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+        @if (UserResolver.HasPermission(MenuTestificacion.Detalle))
+        {
+            <li class="btnDetalle" data-id="@Model.IdFoliosFormaValoradaVerificentro">
+                <a asp-action="Detalle" asp-controller="Testificacion" asp-route-id="@Model.IdFoliosFormaValoradaVerificentro">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-zoom-in"></i></span>
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuTestificacion.GenerarCertificado))
+        {
+            <li class="btnGenerarCertificado" data-id="@Model.IdFoliosFormaValoradaVerificentro">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-download"></i></span>
+                    <span class="navi-text">Certificado Testificación</span>
+                </label>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuTestificacion.Eliminar))
+        {
+            <li>
+                <a class="btnEliminar" data-id="@Model.IdTestificacion" title="Eliminar Registro">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-trash"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Eliminar Registro</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @*<li>
+        <a class="btnEliminar" data-id="@Model.IdTestificacion" title="Eliminar Registro">
+        <label class="dropdown-item">
+        <span class="navi-icon"><i class="bi bi-trash"></i></span>&nbsp;&nbsp;
+        <span class="navi-text">Eliminar Registro</span>
+        </label>
+        </a>
+        </li>*@
+    </ul>
+</div>

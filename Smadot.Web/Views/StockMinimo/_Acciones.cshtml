@@ -1,0 +1,15 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.StockMinimo.Response.StockMinimoResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    @*<a data-id="@Model.IdStockMinimo" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnGuardar" title="Guardar">
+        <i class="bi bi-save"></i>
+    </a>*@
+    @if (UserResolver.HasPermission(MenuDeterminacionStockMinimo.Registrar))
+    {
+       <button class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnGuardar" onclick="guardarRegistro(@Model.IdStockMinimo)" type="button" data-id="@Model.IdStockMinimo" title="Guardar">
+            <i class="bi bi-save"></i>
+        </button>   
+    }
+</div>

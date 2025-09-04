@@ -1,0 +1,102 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.PortalCita.Response.HistorialCitasResponse
+<div class="btn-group dropstart drop-down dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+        data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        @if (UserResolver.HasPermission(MenuHistorialCitas.Expediente))
+        {
+            @if (Model.EstatusPrueba == EstatusVerificacion.VerificacionAbortada
+           || Model.EstatusPrueba == EstatusVerificacion.VerificacionFinalizada
+           || Model.EstatusPrueba == EstatusVerificacion.FolioImpreso)
+            {
+                <li>
+                    <a asp-controller="Citas" asp-action="Expediente" asp-route-id="@Model.Id">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-folder2"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Expediente</span>
+                        </label>
+                    </a>
+                </li>
+            }
+        }
+
+        @if ((Model.EstatusPrueba == EstatusVerificacion.VerificacionAbortada
+        || Model.EstatusPrueba == EstatusVerificacion.VerificacionFinalizada
+        || Model.EstatusPrueba == EstatusVerificacion.FolioImpreso) && Model.Fecha.Date == DateTime.Now.Date)
+        {
+            @if (@Model.IdFolioFormaValoradaVerificentro == null)
+            {
+                @if (UserResolver.HasPermission(MenuHistorialCitas.GenerarFolio))
+                {
+                    <li>
+                        <a id="btn-reimprimir" data-generado="false" data-id="@Model.IdFolioFormaValoradaVerificentro"
+                            data-idverificacion="@Model.Id" data-serie="@Model.Serie" data-placa="@Model.Placa">
+                            <label class="dropdown-item">
+                                <span class="navi-icon"><i class="bi bi-file-text"></i></span>&nbsp;&nbsp;
+                                <span class="navi-text">Generar Certificado</span>
+                            </label>
+                        </a>
+                    </li>
+                }
+            }
+            else
+            {
+                @if (UserResolver.HasPermission(MenuHistorialCitas.ReimpresionFolio))
+                {
+                    <li>
+                        <a id="btn-reimprimir" data-generado="true" data-id="@Model.IdFolioFormaValoradaVerificentro"
+                            data-folio="@Model.Folio" data-serie="@Model.Serie" data-placa="@Model.Placa">
+                            <label class="dropdown-item">
+                                <span class="navi-icon"><i class="bi bi-file-text"></i></span>&nbsp;&nbsp;
+                                <span class="navi-text">Generar Nuevo Certificado</span>
+                            </label>
+                        </a>
+                    </li>
+                }
+            }
+
+
+        }
+
+        @if (Model.IdFolioFormaValoradaVerificentro != null && Model.Fecha.Date == DateTime.Now.Date &&
+        UserResolver.HasPermission(MenuHistorialCitas.ReimpresionCertificado))
+        {
+            <li>
+                <a class="btnImprimir" data-id="@Model.IdFolioFormaValoradaVerificentro">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-printer"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Volver a imprimir</span>
+                    </label>
+                </a>
+            </li>
+        }
+
+        <li>
+            <a asp-controller="PortalCitas" asp-action="ConsultaIdCita" asp-route-id="@Model.IdCita">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-calendar-date"></i></span>&nbsp;&nbsp;
+                    <span class="navi-text">Cita</span>
+                </label>
+            </a>
+        </li>
+        @if (UserResolver.HasPermission(MenuHistorialCitas.ReiniciarCita) && Model.Fecha.Date == DateTime.Now.Date &&
+        Model.IdRecepcionDocumentos != null)
+        {
+            <li>
+                <a class="btnReiniciarCita" data-idCita="@Model.IdCita" data-idVerificacion="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-arrow-clockwise"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Reiniciar Verificación</span>
+                    </label>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

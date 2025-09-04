@@ -1,0 +1,242 @@
+﻿@using Smadot.Models.Dicts;
+@model List<Smadot.Models.Entities.IngresoFormaValorada.Response.IngresoFormaValoradaResponse>
+@{
+    
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    var id = long.Parse(Url.ActionContext.RouteData.Values["id"].ToString() ?? "0");
+    var isDetail = ViewBag.isDetail == "Detalle" ? true : false;
+    ViewData["Title"] = isDetail ? "Detalle Cajas" : "Registrar Cajas";
+    var ListResult = (List<Smadot.Models.DataBase.Caja>)ViewBag.ListaCajas;
+}
+
+@section styles{
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administrar Formas Valoradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Entradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="/IngresoFormaValorada" class="text-muted text-hover-primary">Ingreso Forma Valorada</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@section toolbar{
+    @if (!isDetail)
+    {
+        <a class="btn btn-sm fw-bold btn-primary" id="btnSave">Guardar</a>
+    }
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="IngresoFormaValorada" asp-action="Index">Cancelar</a>
+}
+
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            <div class="card-header">
+                <h3 class="card-title">@(isDetail ? "Detalle Cajas" : "Registrar Cajas")</h3>
+            </div>
+            <form class="form" action="#" method="post" id="form">
+                <!--begin::Body-->
+                <div class="card-body pt-5 row">
+                    <div class="col-md-4">
+                        <label class="form-label">Número de Solicitud</label><br />
+                        <label class="form-control form-control-solid">@(id)</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha Solicitud</label><br />
+                        <input class="form-control form-control-solid" type="text" id="FechaEntregaIFV" name="FechaEntregaIFV" value="@(@Model[0].FechaSolicitud)" readonly />
+                        <input class="form-control form-control-solid" type="text" id="IdIngresoFV" name="IdIngresoFV" value="@Model[0].Id" readonly  hidden/>
+
+                    </div>
+
+                    <div>
+                        <br />
+                        @if (!isDetail)
+                        {
+                            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                                        <th>Clave del Certificado</th>
+                                        <th>Tipo de Certificado</th>
+                                        <th>Caja*</th>
+                                        <th>Folio Inicial*</th>
+                                        <th>Folio Final*</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1701001</td>
+                                        <td>"E" (EXENTO)</td>
+                                        <td class="fv-row"><input type="number" id="ExentosCaja" name="ExentosCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701002</td>
+                                        <td>"1" (UNO)</td>
+                                        <td class="fv-row"><input type="number" id="UnoCaja" name="UnoCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701003</td>
+                                        <td>"2" (DOS)</td>
+                                        <td class="fv-row"><input type="number" id="DosCaja" name="DosCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="DosFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="DosFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701004</td>
+                                        <td>"0" (CERO)</td>
+                                        <td class="fv-row"><input type="number" id="CeroCaja" name="CeroCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701005</td>
+                                        <td>"00" (DOBLE CERO)</td>
+                                        <td class="fv-row"><input type="number" id="DobleCeroCaja" name="DobleCeroCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701006</td>
+                                        <td>"CNA" (CONSTANCIAS)</td>
+                                        <td class="fv-row"><input type="number" id="ConstanciaNoAprobadoCaja" name="ConstanciaNoAprobadoCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701014</td>
+                                        <td>"T" (TESTIFICACIÓN)</td>
+                                        <td class="fv-row"><input type="number" id="TestificacionCaja" name="TestificacionCaja" class="form-control cantidadInput" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioInicial" class="form-control" min="0" value="0"></td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioFinal" class="form-control" min="0" value="0"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                                        <th>Clave del Certificado</th>
+                                        <th>Tipo de Certificado</th>
+                                        <th>Caja*</th>
+                                        <th>Folio Inicial*</th>
+                                        <th>Folio Final*</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @{
+                                            var exento = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Exentos);
+                                        }
+                                        <td>1701001</td>
+                                        <td>"E" (EXENTO)</td>
+                                        <td class="fv-row"><input type="number" id="ExentosCaja" name="ExentosCaja" class="form-control cantidadInput" min="0" value="@exento.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioInicial" class="form-control" min="0" value="@exento.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioFinal" class="form-control" min="0" value="@exento.FolioFinal" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var uno = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Uno);
+                                        }
+                                        <td>1701002</td>
+                                        <td>"1" (UNO)</td>
+                                        <td class="fv-row"><input type="number" id="UnoCaja" name="UnoCaja" class="form-control cantidadInput" min="0" value="@uno.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioInicial" class="form-control" min="0" value="@uno.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioFinal" class="form-control" min="0" value="@uno.FolioFinal" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var dos = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Dos);
+                                        }
+                                        <td>1701003</td>
+                                        <td>"2" (DOS)</td>
+                                        <td class="fv-row"><input type="number" id="DosCaja" name="DosCaja" class="form-control cantidadInput" min="0" value="@dos.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="DosFolioInicial" class="form-control" min="0" value="@dos.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="DosFolioFinal" class="form-control" min="0" value="@dos.FolioFinal" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var cero = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Cero);
+                                        }
+                                        <td>1701004</td>
+                                        <td>"0" (CERO)</td>
+                                        <td class="fv-row"><input type="number" id="CeroCaja" name="CeroCaja" class="form-control cantidadInput" min="0" value="@cero.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioInicial" class="form-control" min="0" value="@cero.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioFinal" class="form-control" min="0" value="@cero.FolioFinal" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var doblecero = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.DobleCero);
+                                        }
+                                        <td>1701005</td>
+                                        <td>"00" (DOBLE CERO)</td>
+                                        <td class="fv-row"><input type="number" id="DobleCeroCaja" name="DobleCeroCaja" class="form-control cantidadInput" min="0" value="@doblecero.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioInicial" class="form-control" min="0" value="@doblecero.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" class="form-control" min="0" value="@doblecero.FolioFinal" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var cna = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.ConstanciasNoAprobado);
+                                        }
+                                        <td>1701006</td>
+                                        <td>"CNA" (CONSTANCIAS)</td>
+                                        <td class="fv-row"><input type="number" id="ConstanciaNoAprobadoCaja" name="ConstanciaNoAprobadoCaja" class="form-control cantidadInput" min="0" value="@cna.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioInicial" class="form-control" min="0" value="@cna.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioFinal" class="form-control" min="0" value="@cna.FolioFinal" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var test = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Testificacion);
+                                        }
+                                        <td>1701014</td>
+                                        <td>"T" (TESTIFICACIÓN)</td>
+                                        <td class="fv-row"><input type="number" id="TestificacionCaja" name="TestificacionCaja" class="form-control cantidadInput" min="0" value="@test.NumeroCaja" readonly></td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioInicial" class="form-control" min="0" value="@test.FolioInicial" readonly></td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioFinal" class="form-control" min="0" value="@test.FolioFinal" readonly></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+                <!--end::Body-->
+            </form>
+        </div>
+        <!--end::LIst widget 1-->
+    </div>
+    <!--end::Col-->
+</div>
+
+@section Scripts{
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/js/IngresoFormaValorada/smadot.cajas.js" asp-append-version="true"></script>
+}

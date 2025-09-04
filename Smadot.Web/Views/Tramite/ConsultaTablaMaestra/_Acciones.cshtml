@@ -1,0 +1,10 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.ConsultaTablaMaestra.Response.ConsultaTablaMaestraResponseData.ConsultaTablaMaestraResponseGrid
+
+@if (UserResolver.HasPermission(MenuConsultaTablaMaestra.Editar))
+{
+    <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btn-editar" href="javascript:; "data-id="@Model.Id" title="Editar">
+        <i class="bi bi-pencil-square"></i>
+    </a>
+}

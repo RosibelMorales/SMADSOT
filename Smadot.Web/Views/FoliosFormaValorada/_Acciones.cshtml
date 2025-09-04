@@ -1,0 +1,40 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.FoliosFormaValorada.Response.FolioPendienteImprimirResponse
+@if (!(Model.Impreso ?? false))
+{
+    <div class="btn-group dropup drop-up dropdown">
+        <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+            data-bs-toggle="dropdown">
+            <i class="bi bi-three-dots"></i>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <h6 class="dropdown-header">Selecciona una acción:</h6>
+            </li>
+            @if (UserResolver.HasPermission(MenuImpresiones.PermisoMenuPadre))
+            {
+                <li>
+                    <a class="btnImprimir" data-id="@Model.IdFolioFormaValorada" data-idverificacion="@Model.IdVerificacion">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Imprimir</span>
+                        </label>
+                    </a>
+                </li>
+            }
+            @if (UserResolver.HasPermission(MenuImpresiones.RecalcularFolio))
+            {
+                <li>
+                    <a class="btnRecalcularFolio" data-id="@Model.IdFolioFormaValorada" data-idverificentro="@Model.IdVerificentro">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-file-earmark-break"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Re-calcular folio</span>
+                        </label>
+                    </a>
+                </li>
+            }
+            
+        </ul>
+    </div>
+}

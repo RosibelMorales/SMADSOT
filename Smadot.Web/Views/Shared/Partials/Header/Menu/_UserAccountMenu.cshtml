@@ -1,0 +1,63 @@
+﻿@using Smadot.Utilities.GestionTokens
+@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+	var usuario = LecturaToken.UsuarioActualEnSesion(Context);
+	var isCommonUser = usuario.RoleNames.Contains("Usuario Verificador");
+}
+
+<!--begin::User account menu-->
+<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+	data-kt-menu="true">
+	<!--begin::Menu item-->
+	<div class="menu-item px-3">
+		<div class="menu-content d-flex align-items-center px-3">
+			<!--begin::Avatar-->
+			<div class="symbol symbol-50px me-5">
+				<img alt="Logo" src="~/assets/media/avatars/blank.png" />
+			</div>
+			<!--end::Avatar-->
+			<!--begin::Username-->
+			<div class="d-flex flex-column">
+				<div class="fw-bold d-flex align-items-center fs-5">
+					@(usuario?.Nombre)
+				</div>
+				@if (!isCommonUser)
+				{
+					<div class="fw-bold d-flex align-items-center fs-6 mb-2">
+						<div class="text-primary"> @(usuario?.CicloVerificacion)</div>
+					</div>
+					<div class="fw-bold d-flex align-items-center fs-9">
+						<div class="text-muted"> @(usuario?.NombreVerificentro)</div>
+					</div>
+					<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">@(usuario?.Email)</a>
+				}
+			</div>
+			<!--end::Username-->
+		</div>
+	</div>
+	<!--end::Menu item-->
+	<!--begin::Menu separator-->
+	<div class="separator my-2"></div>
+	<!--end::Menu separator-->
+	@if (UserResolver.HasPermission(MenuConfiguracion.PermisoMenuPadre))
+	{
+		<div class="menu-item px-5 my-1">
+			<a href="javascript:void(0);" class="menu-link px-5 btnModalConfiguracion"
+				id="btnModalLayoutRegistroConfiguracion">Configuración</a>
+			@*<a asp-controller="DirectorioCentrosVerificacion" asp-action="ConfiguracionLayout" class="menu-link px-5"
+		>Configuración</a>*@
+		</div>
+	}
+	<!--begin::Menu item-->
+	<div class="menu-item px-5 my-1">
+		<a asp-controller="Autenticacion" asp-action="CambiarContrasenia" class="menu-link px-5">Cambiar Contraseña</a>
+	</div>
+	<!--end::Menu item-->
+	<!--begin::Menu item-->
+	<div class="menu-item px-5">
+		<a asp-controller="Autenticacion" asp-action="CerrarSesion" class="menu-link px-5">Cerrar Sesión</a>
+	</div>
+	<!--end::Menu item-->
+</div>
+<!--end::User account menu-->

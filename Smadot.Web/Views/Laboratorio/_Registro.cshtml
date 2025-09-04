@@ -1,0 +1,40 @@
+﻿@using static Smadot.Models.Entities.Proveedor.Response.ProveedorResponseData
+@model ProveedorResponse;
+
+<form role="form" id="form_registroProveedor" class="clearfix">
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Nombre: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="Nombre" class="form-control" placeholder="Nombre" >
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Correo Electronico: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="CorreoElectronico" class="form-control" placeholder="Correo Electronico">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Número de Telefono: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="Telefono" class="form-control" placeholder="Número de Telefono" maxlength="10" onkeypress="return SoloNumeros(this,'Telefono')">
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Dirección: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="Direccion" class="form-control" placeholder="Dirección">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Empresa: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="Empresa" class="form-control" placeholder="Empresa">
+            </div>
+        </div>
+    </div>
+    
+</form>

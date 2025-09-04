@@ -1,0 +1,16 @@
+﻿@*@model Smadot.Web.Controllers.ConsultaCirculares.ConsultaCircularResponse*@
+@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.ConsultaCircular.Response.ConsultaCircularResponseData.ConsultaCircularResponse
+
+@*<div class="d-flex align-items-center position-relative my-1 justify-content-end">
+    <input type="text" data-kt-filter="search" class="form-control form-control-sm w-250px mb-6" placeholder="Buscar" />
+</div>*@
+@if (UserResolver.HasPermission(MenuConsultaCirculares.Detalle))
+{
+    <div class="btn-group dropup drop-up dropdown">
+        <a data-id="@Model.Id" data-leido="@Model.Leidos" data-no-leido="@Model.NoLeidos" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnEditar" title="Detalle">
+            <i class="bi bi-search"></i>
+        </a>
+    </div>
+}

@@ -1,0 +1,3040 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7021"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/Autenticacion/Login",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Autenticacion/Login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Autenticacion/Registro",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Autenticacion/Registro",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Autenticacion/CambiarContrasenia",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Autenticacion/CambiarContrasenia",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Autenticacion/CambiarVerificentro",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Autenticacion/CambiarVerificentro",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Autenticacion/GetVerificentrosByUsername/{username}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Autenticacion/GetVerificentrosByUsername/{username}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SolicitudFormaValorada/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/SolicitudFormaValorada/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SolicitudFormaValorada",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/SolicitudFormaValorada",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SolicitudFormaValorada/StockMinimo",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/SolicitudFormaValorada/StockMinimo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/IngresoFormaValorada/Caja/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Caja/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/IngresoFormaValorada/Caja",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Caja",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/IngresoFormaValorada/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/IngresoFormaValorada/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/IngresoFormaValorada",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/IngresoFormaValorada",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/FoliosCancelados",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/FoliosCancelados",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/FoliosCancelados/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/FoliosCancelados/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/FoliosAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/FoliosCancelados/FoliosAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConsultaCircular",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaCircular",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConsultaCircular/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaCircular/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConfirmarCircular",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaCircular/ConfirmarCircular",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Almacen",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Almacen",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/Catalogos/TipoServicio",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/CatalogosVerificacion/TipoServicio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/Catalogos/MotivoVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/CatalogosVerificacion/MotivoVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SolicitudFormaValorada/{IdAlmacen}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/SolicitudFormaValorada/{IdAlmacen}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/VentaCVV",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/VentaCVV",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/VentaCVV/VerificentrosAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/VentaCVV/VerificentrosAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/VentaCVV/InventarioVentaCVV",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/VentaCVV/InventarioVentaCVV",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/VentaCVV/VentaCertificados",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/VentaCVV/VentaCertificados",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Exento",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Exento",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TipoCertificado",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/TipoCertificado",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TipoEquipo",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/TipoEquipo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TipoPuesto",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/TipoPuesto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Exento/{id}",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/Exento/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Reposicion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Reposicion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Reposicion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Reposicion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PlacaSerieAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Reposicion/PlacaSerieAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DataVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Reposicion/DataVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ListDataVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Reposicion/ListDataVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/GuardarCarga",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/GuardarCarga",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/EditCVV/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/EditCVV/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConsultaPruebaVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaPruebaVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConsultaPruebaVerificacion/BuscarPlacaSerie",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaPruebaVerificacion/BuscarPlacaSerie",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Instalacion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Instalacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Instalacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Instalacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ProveedorAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Instalacion/ProveedorAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Refrendo/Detalle/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Refrendo/Detalle/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Personal",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/ValidarUsuario",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/ValidarUsuario",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/Baja",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/Baja",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/EstatusPuesto",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/EstatusPuesto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Refrendo/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Refrendo/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Refrendo",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Refrendo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Refrendo/Autocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Refrendo/Autocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Administrativa",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Administrativa",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Administrativa/{id}",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/Administrativa/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PlacaAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Administrativa/PlacaAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Catalogo/MotivoTramite",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/MotivoTramite",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/AsignacionStock",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/AsignarStock",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/AsignacionStock/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/AsignarStock/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/DevolucionSPF",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConstanciaUltimaVerificacion/{id}/{verificacion}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConstanciaUltimaVerificacion/{id}/{verificacion}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConstanciaUltimaVerificacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConstanciaUltimaVerificacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConstanciaUltimaVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConstanciaUltimaVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConstanciaUltimaVerificacion/Autocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConstanciaUltimaVerificacion/Autocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConsultaTablaMaestra",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TablaMaestra/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TablaMaestra",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TablaMaestra/ConsultaSubMarca",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/ConsultaSubMarca",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConsultaCicloVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/ConsultaCicloVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutocompleteMarca",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/AutocompleteMarca",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutocompleteSubmarca",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/AutocompleteSubmarca",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutocompleteLinea",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/AutocompleteLinea",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutocompleteModelo",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/AutocompleteModelo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutocompleteSolicitud",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF/Autocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutocompleteResponsable",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF/AutocompleteResponsable",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/DevolucionSPF/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/Equipo",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post",
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Equipo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/Equipo/Validacion",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Equipo/Validacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/Equipo/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Equipo/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Venta/Proveedor",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Proveedor",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Venta/Proveedor/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Proveedor/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Venta/CambiarAutorizacion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Proveedor/CambiarAutorizacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/OrdenServicio",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/OrdenServicio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/OrdenServicio/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/OrdenServicio/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/EquipoAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/OrdenServicio/EquipoAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/CatTipoOrdenServicio",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/OrdenServicio/CatTipoOrdenServicio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/CierreAperturaLinea",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/CierreAperturaLinea",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/CierreAperturaLinea/GetDetalle",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/CierreAperturaLinea/GetDetalle",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/CierreAperturaLinea/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/CierreAperturaLinea/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Venta/ProveedorFolio",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ProveedorFolioServicio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Venta/ProveedorFolio/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ProveedorFolioServicio/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Venta/Proveedor/Autocomplete",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Proveedor/Autocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/ProgramacionCalibracion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ProgramacionCalibracion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/ProgramacionCalibracion/Validar",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ProgramacionCalibracion/Validar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/ProgramacionCalibracion/Rechazar",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ProgramacionCalibracion/Rechazar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/ProgramacionCalibracion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ProgramacionCalibracion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TipoCalibracion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/TipoCalibracion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/MotivoVerificacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/MotivoVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReporteMensual",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ReporteMensual",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReporteMensual/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ReporteMensual/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AcreditacionTecnicoVerificador",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/AcreditacionTecnicoVerificador",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReporteTercerTanto",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ReporteTercerTanto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReporteTercerTanto/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ReporteTercerTanto/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/Calibracion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post",
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/Calibracion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/GetPersonalById",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/GetPersonalById",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/Movimiento",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/Movimiento",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/GetPuestos",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/GetPuestos",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Personal/GetByIdPuestoVerificentro",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Personal/GetByIdPuestoVerificentro",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/Equipo/Linea",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Equipo/Linea",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Capacitacion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Capacitacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Capacitacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Capacitacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Capacitacion/GetByIdEmpleado/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Capacitacion/GetByIdEmpleado/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/CierreAperturaLinea/GetByCA/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/CierreAperturaLinea/GetByCA/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AcreditacionTecnicoVerificador/Autocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/AcreditacionTecnicoVerificador/Autocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AcreditacionTecnicoVerificador/{id}",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/AcreditacionTecnicoVerificador/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AcreditacionTecnicoVerificador/GetEvidenciaBySolicitud",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/AcreditacionTecnicoVerificador/GetEvidenciaBySolicitud",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AcreditacionTecnicoVerificador/RegistroEvidencia",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/AcreditacionTecnicoVerificador/RegistroEvidencia",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AcreditacionTecnicoVerificador/AutorizarAcreditacion",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/AcreditacionTecnicoVerificador/AutorizarAcreditacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/TipoAcreditacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/TipoAcreditacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/NormaAcreditacion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/NormaAcreditacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/UsoSuministro",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/UsoSuministro",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/UsoSuministro/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/UsoSuministro/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Catalogo/MotivoReporteCredencial",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/MotivoReporteCredencial",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReposicionCredencial",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ReposicionCredencial",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReposicionCredencial/{id}",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/ReposicionCredencial/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReposicionCredencial/Aprobacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/ReposicionCredencial/Aprobacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReposicionCredencial/Rechazo/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/ReposicionCredencial/Rechazo/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ReposicionCredencial/UserPuestoAutocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/ReposicionCredencial/UserPuestoAutocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/ConsultaDiasNoLaborales",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/ConsultaDiasNoLaborales",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/GetConfiguradorByCVV",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/GetConfiguradorByCVV",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/ConfiguradorCita",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/ConfiguradorCita",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/RegistroDiaNoLaboral",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/RegistroDiaNoLaboral",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/DeleteDiaNoLaboral",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/DeleteDiaNoLaboral",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Alerta",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Alerta",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Alerta/AutorizacionIngresoManual",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Alerta/AutorizacionIngresoManual",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Roles",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Roles",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Roles/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Roles/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Alerta/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Alerta/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Usuarios",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Usuarios",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Usuarios/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Usuarios/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Permiso",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Permiso",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Permiso/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Permiso/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Permiso/Rol",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Permiso/Rol",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Calibracion/SolicitudModificacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion/SolicitudModificacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Calibracion/Validacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion/Validacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Calibracion/Autorizacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion/Autorizacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/SendPlacas",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/SavePlacas",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/ListaMotivosAbortar",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/ListaMotivosAbortar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/InfoLineas",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/InfoLineas",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/ConsultaVerificacion",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/ConsultaVerificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/AbortarPrueba",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/AbortarPrueba",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/PruebaVisual",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/PruebaVisual",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/VolverImprimir",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/VolverImprimir",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AutorizacionTecnicoAPP",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/AutorizacionTecnicoApp",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita/GetPortalCitasCalendarioByIdCvv",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita/GetPortalCitasCalendarioByIdCvv",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita/GetCitaData",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita/GetCitaData",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita/CancelarCita",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita/CancelarCita",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita/ConfirmarCita",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita/ConfirmarCita",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/GetInventarioByAlmacen",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF/GetInventarioByAlmacen",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/GetNumeroDevolucion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF/GetNumeroDevolucion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/CambiarLinea/{idVerificacion}",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/CambiarLinea/{idVerificacion}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/Reagendar",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/Reagendar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/ConsultaTablaMaestra",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/ConsultaTablaMaestra",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Catalogo/MarcaVehiculo",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/MarcaVehiculo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Catalogo/SubMarcaVehiculo",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/SubMarcaVehiculo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Catalogo/SubMarcaVehiculo/ConsultaSecundaria",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/SubMarcaVehiculo/ConsultaSecundaria",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7296
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/Autocomplete",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/Autocomplete",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/ConsultaSubDiesel",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/ConsultaSubDiesel",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConfiguracionLayout",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConfiguracionLayout",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/EventosVerificentro/{clave}/RegistrarEvento",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/EventosVerificentro/{clave}/RegistrarEvento",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/EventosVerificentro/{clave}/ActualizarPrueba",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/EventosVerificentro/{clave}/ActualizarPrueba",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/AdministracionStock/DevolucionSPF/GetDoc",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DevolucionSPF/GetDoc",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/FolioFormaValorada/Consulta",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/FormaValorada/Consulta",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/FolioFormaValorada/Recalcular",
+      "UpstreamhttpsMethod": [
+        "PUT"
+      ],
+      "DownstreamPathTemplate": "/api/FormaValorada/Recalcular",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita/Consulta",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita/GetHistorialCitas",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/Expediente/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/Expediente/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/CierreAperturaLinea/DashboardLineaAperturaCierre",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/CierreAperturaLinea/DashboardLineaAperturaCierre",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/DataImpresion",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/EventosVerificentro/DataImpresion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Refrendo/PDFFormaValorada/{id}}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Refrendo/PDFFormaValorada/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DashboardVerificaciones/ConsultaEstadisticasDashboard",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DashboardVerificaciones/ConsultaEstadisticasDashboard",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DashboardVerificaciones/GetConteoCertificados",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DashboardVerificaciones/GetConteoCertificados",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DashboardVerificaciones/ConsultaEstadisticaUsoFormaValorada",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DashboardVerificaciones/ConsultaEstadisticaUsoFormaValorada",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DashboardVerificaciones/ConsultaGraficaBarras",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DashboardVerificaciones/ConsultaGraficaBarras",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DashboardVerificaciones/ConsultaGraficaPie",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DashboardVerificaciones/ConsultaGraficaPie",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DashboardVerificaciones/ConsultaGraficaGauge",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DashboardVerificaciones/ConsultaGraficaGauge",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/PruebaFinalizada/{id}",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/PruebaFinalizada/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/ConsultaPruebaVisual",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/ConsultaPruebaVisual",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/PruebaVisual/Gasolina",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/PruebaVisual/Gasolina",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/PruebaVisual/Diesel",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/PruebaVisual/Diesel",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Calibracion/RechazarDocumentacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion/RechazarDocumentacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Calibracion/RechazarSolicitar/{id}",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Calibracion/RechazarSolicitar/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7269
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/IngresoFormaValorada/IngresoFormaValorada/GetIngresoCertificadoById",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/IngresoFormaValorada/IngresoFormaValorada/GetIngresoCertificadoById",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/IngresoFormaValorada/Caja/GetCajaById",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Caja/GetCajaById",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/VentaCVV/AutocompleteSolicitud",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/VentaCVV/AutocompleteSolicitud",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/EventosVerificentro/ReimprimirFolio",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/EventosVerificentro/ReimprimirFolio",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ActualizarTablaMaestra",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/ConsultaTablaMaestra/ActualizarTablaMaestra",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/RecepcionDocumentos/CambiarLinea",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/RecepcionDocumentos/CambiarLinea",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Testificacion",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Testificacion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Testificacion/{id}",
+      "UpstreamhttpsMethod": [
+        "Get",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/Testificacion/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7190
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/CalcularResultados/{id}",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/EventosVerificentro/GenerarFolio/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/ConfiguradorCitaList",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/ConfiguradorCitaList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/EditFecha",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/EditFecha",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+
+    {
+      "UpstreamPathTemplate": "/gateway/DirectorioCentrosVerificacion/RegistroCVV",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/DirectorioCentrosVerificacion/RegistroCVV",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Verificacion/BuscarVin",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/Verificacion/BuscarVin",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Usuarios/ActivarDesactivar",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/Usuarios/ActivarDesactivar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/SeguimientoCVV/Usuarios/CambiarContrasenia",
+      "UpstreamhttpsMethod": [
+        "Put"
+      ],
+      "DownstreamPathTemplate": "/api/Usuarios/CambiarContrasenia",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7164
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/PortalCita/ReiniciarCita",
+      "UpstreamhttpsMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/PortalCita/ReiniciarCita",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7126
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/FolioFormaValorada/ProximosFolios",
+      "UpstreamhttpsMethod": [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/FormaValorada/ProximosFolios",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7124
+        }
+      ]
+    }
+  ]
+}

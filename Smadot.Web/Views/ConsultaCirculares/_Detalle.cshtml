@@ -1,0 +1,27 @@
+﻿@model Smadot.Models.Entities.ConsultaCircular.Response.ConsultaCircularResponseData.ConsultaCircularResponse
+<div class='row mb-5 mt-5'>
+    <form role='form' class='clearfix'>
+        <div class='row fv-row mb-5'>
+            <div class='col-md-12'>
+                <div class='form-group'>
+                    <label for='name'>Mensaje: &nbsp;</label>
+                    <textarea readonly disabled id="DetalleMensaje" name="DetalleMensaje" class='form-control'>@Model.Mensaje</textarea>
+                </div>
+            </div>
+        </div>
+        <div class='row fv-row mb-5'>
+            <div class='col-md-6'>
+                <div class='form-group'>
+                    <label for='name'>Leído: &nbsp;</label>
+                    <input readonly disabled type='text' value='@Model.Leidos' class='form-control' />
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <div class='form-group'>
+                    <label for='name'>No leído: &nbsp;</label>
+                    <input readonly disabled type='text' value='@Model.NoLeidos' class='form-control' />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

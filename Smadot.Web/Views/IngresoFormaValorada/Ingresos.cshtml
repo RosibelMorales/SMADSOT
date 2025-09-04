@@ -1,0 +1,478 @@
+﻿@using Smadot.Models.Dicts;
+@model List<Smadot.Models.Entities.SolicitudFormaValorada.Response.SolicitudFormaValoradaResponse>
+@{
+
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    var id = long.Parse(Url.ActionContext.RouteData.Values["id"].ToString() ?? "0");
+    var isDetail = ViewBag.isDetail == "Detalle" ? true : false;
+    ViewData["Title"] = isDetail ? "Detalle Ingreso de Formas Valoradas" : "Ingreso de Formas Valoradas";
+    var icount = Model.Count() - 1;
+    var ListResult = (List<Smadot.Models.DataBase.IngresoCertificado>)ViewBag.ListaCertificados;
+}
+
+@section styles{
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administrar Formas Valoradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Entradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="/IngresoFormaValorada" class="text-muted text-hover-primary">Ingreso Forma Valorada </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@section toolbar{
+    @if (!isDetail)
+    {
+        <a class="btn btn-sm fw-bold btn-primary" id="btnSave">Guardar</a>
+    }
+
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="IngresoFormaValorada" asp-action="Index">Cancelar</a>
+}
+
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            <div class="card-header">
+                <h3 class="card-title">@(isDetail ? "Detalle Ingreso de Formas Valoradas" : "Ingreso de Formas Valoradas")</h3>
+            </div>
+            <form class="form" action="#" method="post" id="form">
+                
+                <!--begin::Body-->
+                <div class="card-body pt-5 row">
+                    <div class="col-md-4">
+                        <label class="form-label" for="IdSolicitudFV">Número de Solicitud</label><br />
+                        <input class="form-control form-control-solid" type="text" id="IdSolicitudFV" name="IdSolicitudFV" value="@(id)" readonly/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha de Solicitud &nbsp;</label><br />
+                        <input class="form-control form-control-solid" type="text" id="FechaSolicitudFV" name="FechaSolicitudFV" value="@Model[0].FechaSolicitud" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Almacén &nbsp;</label><br />
+                        <input class="form-control form-control-solid" type="text" id="AlmacenFV" name="AlmacenFV" value="@Model[0].AlmacenFV" readonly />
+                    </div>
+                    <div class="clearfix"><br /></div>
+                    
+                    <div class="col-md-4 form-group">
+                        <label class="form-label" for="FechaEntrega">Fecha de Entrega: &nbsp;<strong class="obligatorio">*</strong></label>
+                        <div class="position-relative">
+                            <input class="form-control form-control-solid" id="FechaEntregaIFV" name="FechaEntregaIFV" @*value="@(id == 1)"*@ @(isDetail ? "readonly" : "")  value="@(isDetail ? Model[0].FechaEntregaIFV.HasValue ? Model[0].FechaEntregaIFV.Value.ToString("dd/MM/yyyy") : "" : "")"/>
+                            <div class="position-absolute translate-middle-y top-50 end-0 me-3">
+                                <i class="fa-solid fa-calendar-days" onclick="document.getElementById('FechaEntregaIFV').focus(); return false;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 fv-row">
+                        <label class="form-label" for="NombreRecibio">Quién recibió: &nbsp;<strong class="obligatorio">*</strong></label>
+                        <input class="form-control form-control-solid" type="text" id="NombreRecibio" name="NombreRecibio" @(isDetail ? "readonly" : "") value="@(isDetail ? Model[0] != null ? Model[0].NombreRecibioIFV : "" : "")" />
+                    </div>
+                    <div class="clearfix"><br /></div>
+                        <div class="d-flex">
+                        @if (!isDetail)
+                        {
+                            <div class="py-2 px-4 col-md-4">
+                                <label class="form-label">Documento 1</label><br />
+                                <div class="fv-row">
+                                    <div class="dropzone" id="dropzonejs1">
+                                        <div class="dz-message needsclick">
+                                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                            <div class="ms-4">
+                                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2 px-4 col-md-4">
+                                <label class="form-label">Documento 2</label><br />
+                                <div class="fv-row">
+                                    <div class="dropzone" id="dropzonejs2">
+                                        <div class="dz-message needsclick">
+                                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                            <div class="ms-4">
+                                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2 px-4 col-md-4">
+                                <label class="form-label">Documento 3</label><br />
+                                <div class="fv-row">
+                                    <div class="dropzone" id="dropzonejs3">
+                                        <div class="dz-message needsclick">
+                                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                            <div class="ms-4">
+                                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(Model[0].UrlDoc1))
+                            {
+                                <div class="py-2 px-4 col-md-4">
+                                    @{
+                                        var url1 = Model[0].UrlDoc1.Split("/")[Model[0].UrlDoc1.Split("/").Length - 1];
+                                    }
+                                    <label class="control-label fw-bold">Documento 1</label><br />
+                                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDoc1" title="Descargar" role="button">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        @url1
+                                    </a>
+                                </div>
+                            }
+                            if (!string.IsNullOrEmpty(Model[0].UrlDoc2))
+                            {
+                                <div class="py-2 px-4 col-md-4">
+                                    @{
+                                        var url1 = Model[0].UrlDoc2.Split("/")[Model[0].UrlDoc2.Split("/").Length - 1];
+                                    }
+                                    <label class="control-label fw-bold">Documento 2</label><br />
+                                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDoc2" title="Descargar" role="button">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        @url1
+                                    </a>
+                                </div>
+                            }
+                            if (!string.IsNullOrEmpty(Model[0].UrlDoc3))
+                            {
+                                <div class="py-2 px-4 col-md-4">
+                                    @{
+                                        var url1 = Model[0].UrlDoc3.Split("/")[Model[0].UrlDoc3.Split("/").Length - 1];
+                                    }
+                                    <label class="control-label fw-bold">Documento 3</label><br />
+                                    <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url1" href="@ViewBag.UrlDoc3" title="Descargar" role="button">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        @url1
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div>
+                        <br />
+                        @if (!isDetail)
+                        {
+                            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                                        <th>Clave del Certificado</th>
+                                        <th>Tipo de Certificado</th>
+                                        <th>Cantidad Solicitada*</th>
+                                        <th>Cantidad Recibida*</th>
+                                        <th>Folio Inicial*</th>
+                                        <th>Folio Final*</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1701001</td>
+                                        <td>"E" (EXENTO)</td>
+                                        <td class="fv-row"><input type="text" id="ExentosCantidad" name="ExentosCantidad" class="form-control cantidadInput" value="@Model[0].CantidadSC" readonly></td>
+                                        <td class="fv-row"><input type="number" id="ExentosCantidadRecibida" name="ExentosCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioInicial" id="ExentosFolioInicial" class="form-control" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioFinal" id="ExentosFolioFinal" class="form-control" readonly value="0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701002</td>
+                                        <td>"1" (UNO)</td>
+                                        <td class="fv-row"><input type="text" id="UnoCantidad" name="UnoCantidad" class="form-control cantidadInput" value="@Model[1].CantidadSC" readonly></td>
+                                        <td class="fv-row"><input type="number" id="UnoCantidadRecibida" name="UnoCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioInicial" id="UnoFolioInicial" class="form-control" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioFinal" id="UnoFolioFinal" class="form-control" readonly value="0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701003</td>
+                                        <td>"2" (DOS)</td>
+                                        <td class="fv-row"><input type="text" id="DosCantidad" name="DosCantidad" class="form-control cantidadInput" value="@Model[2].CantidadSC" readonly></td>
+                                        <td class="fv-row"><input type="number" id="DosCantidadRecibida" name="DosCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="DosFolioInicial" id="DosFolioInicial" class="form-control" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="DosFolioFinal" id="DosFolioFinal" class="form-control" readonly value="0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701004</td>
+                                        <td>"0" (CERO)</td>
+                                        <td class="fv-row"><input type="text" id="CeroCantidad" name="CeroCantidad" class="form-control cantidadInput" value="@Model[3].CantidadSC" readonly></td>
+                                        <td class="fv-row"><input type="number" id="CeroCantidadRecibida" name="CeroCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioInicial" id="CeroFolioInicial" class="form-control" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioFinal" id="CeroFolioFinal" class="form-control" readonly value="0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701005</td>
+                                        <td>"00" (DOBLE CERO)</td>
+                                        <td class="fv-row"><input type="text" id="DobleCeroCantidad" name="DobleCeroCantidad" class="form-control cantidadInput" readonly value="@Model[4].CantidadSC"></td>
+                                        <td class="fv-row"><input type="number" id="DobleCeroCantidadRecibida" name="DobleCeroCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioInicial" id="DobleCeroFolioInicial" class="form-control DobleCeroInicial" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" id="DobleCeroFolioFinal" readonly class="form-control" value="0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701006</td>
+                                        <td>"CNA" (CONSTANCIAS)</td>
+                                        <td class="fv-row"><input type="text" id="ConstanciaNoAprobadoCantidad" name="ConstanciaNoAprobadoCantidad" class="form-control cantidadInput" value="@Model[5].CantidadSC" readonly></td>
+                                        <td class="fv-row"><input type="number" id="ConstanciaNoAprobadoCantidadRecibida" name="ConstanciaNoAprobadoCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioInicial" id="ConstanciaNoAprobadoFolioInicial" class="form-control" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioFinal" id="ConstanciaNoAprobadoFolioFinal" readonly class="form-control" value="0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1701014</td>
+                                        <td>"T" (TESTIFICACIÓN)</td>
+                                        <td class="fv-row"><input type="text" id="TestificacionCantidad" name="TestificacionCantidad" class="form-control cantidadInput" value="@Model[6].CantidadSC" readonly></td>
+                                        <td class="fv-row"><input type="number" id="TestificacionCantidadRecibida" name="TestificacionCantidadRecibida" class="form-control cantidadInput" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioInicial" id="TestificacionFolioInicial" class="form-control" value="0" min="0" @(
+                                        isDetail ? "readonly" : ""
+                                        )></td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioFinal" id="TestificacionFolioFinal" readonly class="form-control" value="0" min="0"></td>
+                                    </tr>
+                                    @*<tr>
+                                    <td class="fw-semibold fs-6 text-gray-900">Total</td>
+                                    <td><input type="number" id="CantidadSolicitada" readonly class="form-control" value="0"></td>
+                                    <td><input type="number" id="CantidadRecibida" readonly class="form-control" value="0"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>*@
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                                        <th>Clave del Certificado</th>
+                                        <th>Tipo de Certificado</th>
+                                        <th>Cantidad Solicitada*</th>
+                                        <th>Cantidad Recibida*</th>
+                                        <th>Folio Inicial*</th>
+                                        <th>Folio Final*</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                    <tr>
+                                        @{
+                                            var exento = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Exentos);
+                                        }
+                                        <td>1701001</td>
+                                        <td>"E" (EXENTO)</td>
+                                        <td class="fv-row"><input type="text" id="ExentosCantidad" name="ExentosCantidad" class="form-control cantidadInput" value="@(Model[0].CantidadSC)" readonly></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="ExentosCantidadRecibida" name="ExentosCantidadRecibida" class="form-control cantidadInput" value="@exento?.CantidadRecibida ?? 0" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="ExentosFolioInicial" id="ExentosFolioInicial" class="form-control" value="@exento?.FolioInicial ?? 0" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="ExentosFolioFinal" id="ExentosFolioFinal" class="form-control" readonly value="@exento?.FolioFinal ?? 0" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var uno = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Uno);
+                                        }
+                                        <td>1701002</td>
+                                        <td>"1" (UNO)</td>
+                                        <td class="fv-row"><input type="text" id="UnoCantidad" name="UnoCantidad" class="form-control cantidadInput" value="@Model[1].CantidadSC" readonly></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="UnoCantidadRecibida" name="UnoCantidadRecibida" class="form-control cantidadInput" value="@uno.CantidadRecibida" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="UnoFolioInicial" id="UnoFolioInicial" class="form-control" value="@uno?.FolioInicial" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="UnoFolioFinal" id="UnoFolioFinal" class="form-control" readonly value="@uno?.FolioFinal" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var dos = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Dos);
+                                        }
+                                        <td>1701003</td>
+                                        <td>"2" (DOS)</td>
+                                        <td class="fv-row"><input type="text" id="DosCantidad" name="DosCantidad" class="form-control cantidadInput" value="@Model[2].CantidadSC" readonly></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="DosCantidadRecibida" name="DosCantidadRecibida" class="form-control cantidadInput" value="@dos.CantidadRecibida" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="DosFolioInicial" id="DosFolioInicial" class="form-control" value="@dos?.FolioInicial" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="DosFolioFinal" id="DosFolioFinal" class="form-control" readonly value="@dos.FolioFinal" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var cero = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Cero);
+                                        }
+                                        <td>1701004</td>
+                                        <td>"0" (CERO)</td>
+                                        <td class="fv-row"><input type="text" id="CeroCantidad" name="CeroCantidad" class="form-control cantidadInput" value="@Model[3].CantidadSC" readonly></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="CeroCantidadRecibida" name="CeroCantidadRecibida" class="form-control cantidadInput" value="@cero.CantidadRecibida" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="CeroFolioInicial" id="CeroFolioInicial" class="form-control" value="@cero.FolioInicial" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="CeroFolioFinal" id="CeroFolioFinal" class="form-control" readonly value="@cero.FolioFinal" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var doblecero = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.DobleCero);
+                                        }
+                                        <td>1701005</td>
+                                        <td>"00" (DOBLE CERO)</td>
+                                        <td class="fv-row"><input type="text" id="DobleCeroCantidad" name="DobleCeroCantidad" class="form-control cantidadInput" readonly value="@Model[4].CantidadSC"></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="DobleCeroCantidadRecibida" name="DobleCeroCantidadRecibida" class="form-control cantidadInput" value="@doblecero.CantidadRecibida" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="DobleCeroFolioInicial" id="DobleCeroFolioInicial" class="form-control DobleCeroInicial" value="@doblecero.FolioInicial" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" id="DobleCeroFolioFinal" readonly class="form-control" value="@doblecero.FolioFinal" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var cna = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.ConstanciasNoAprobado);
+                                        }
+                                        <td>1701006</td>
+                                        <td>"CNA" (CONSTANCIAS)</td>
+                                        <td class="fv-row"><input type="text" id="ConstanciaNoAprobadoCantidad" name="ConstanciaNoAprobadoCantidad" class="form-control cantidadInput" value="@Model[5].CantidadSC" readonly></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="ConstanciaNoAprobadoCantidadRecibida" name="ConstanciaNoAprobadoCantidadRecibida" class="form-control cantidadInput" value="@cna.CantidadRecibida" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="ConstanciaNoAprobadoFolioInicial" id="ConstanciaNoAprobadoFolioInicial" class="form-control" value="@cna.FolioInicial" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioFinal" id="ConstanciaNoAprobadoFolioFinal" readonly class="form-control" value="@cna.FolioFinal" min="0"></td>
+                                    </tr>
+                                    <tr>
+                                        @{
+                                            var test = ListResult.FirstOrDefault(x => x.IdCatTipoCertificado == TipoCertificado.Testificacion);
+                                        }
+                                        <td>1701014</td>
+                                        <td>"T" (TESTIFICACIÓN)</td>
+                                        <td class="fv-row"><input type="text" id="TestificacionCantidad" name="TestificacionCantidad" class="form-control cantidadInput" value="@Model[6].CantidadSC" readonly></td>
+                                        <td class="fv-row">
+                                            <input type="number" id="TestificacionCantidadRecibida" name="TestificacionCantidadRecibida" class="form-control cantidadInput" value="@test?.CantidadRecibida  ?? 0" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row">
+                                            <input type="number" name="TestificacionFolioInicial" id="TestificacionFolioInicial" class="form-control" value="@test?.FolioInicial ?? 0" min="0" @(isDetail ? "readonly" : "")>
+                                        </td>
+                                        <td class="fv-row"><input type="number" name="TestificacionFolioFinal" id="TestificacionFolioFinal" readonly class="form-control" value="@test?.FolioFinal ?? 0" min="0"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                    <div class="col-xl-4 offset-xl-2">
+                        <div class="d-flex h-100 align-items-center">
+                            <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 px-10">
+                                <div class="mb-7 text-center">
+                                    <h1 class="text-dark mb-5 fw-bolder">Total Cantidad Solicitada</h1>
+                                    <div class="text-center">
+                                        <span class="fs-3x fw-bold text-primary" id="CantidadSolicitadaCol" name="CantidadSolicitadaCol">@(icount == 7 ? Model[7].CantidadTotal : Model[icount].CantidadTotal)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="d-flex h-100 align-items-center">
+                            <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 px-10">
+                                <div class="mb-7 text-center">
+                                    <h1 class="text-dark mb-5 fw-bolder">Total Cantidad Recibida</h1>
+                                    <div class="text-center">
+                                        <span class="fs-3x fw-bold text-primary" id="CantidadRecibidaCol" name="CantidadRecibidaCol">@ViewBag.TotalRecibido</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </form>
+        </div>
+        <!--end::LIst widget 1-->
+    </div>
+    <!--end::Col-->
+</div>
+
+@section Scripts{
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/js/IngresoFormaValorada/smadot.ingresos.js" asp-append-version="true"></script>
+}

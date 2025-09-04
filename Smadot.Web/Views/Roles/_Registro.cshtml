@@ -1,0 +1,92 @@
+﻿@model List<Smadot.Models.Entities.Roles.Response.RolesResponse>
+@{
+    var cero = 0;
+    var verdadero = Smadot.Models.Dicts.RolesDic.AccesoTotalVerificentro;
+}
+
+@if (Model.Count == cero)
+{
+    <form role="form" id="form_Roles" class="clearfix">
+        <div class="row mb-5">
+            <div class="col-md-5">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="NombreRol">Nombre de Rol: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="text" placeholder="Ingresa el Nombre del Rol" id="NombreRol" name="NombreRol" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" align="center">
+                <div class="form-group fv-row">
+                <label class="form-label" for="AccesoTotal">Acceso Total a Verificentros: &nbsp;<strong class="obligatorio">*</strong> </label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <div class="formform-check form-switch form-check-custom form-check-success form-check-solid">
+                                <input class="form-check-input" type="checkbox" id="AccesoTotalVerificentro" name="AccesoTotalVerificentro">
+                        </div>
+                    </label>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <form role="form" id="form_Roles" class="clearfix">
+        <div class="row mb-5">
+            <div class="col-md-5">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="NombreRol">Nombre de Rol: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" value="@Model[0].Nombre" type="text" placeholder="Ingresa el Nombre del Rol" id="NombreRol" name="NombreRol" />
+                    </div>
+                </div>
+            </div>
+
+            @if (Model[0].AccesoTotalVerificentros == verdadero)
+            {
+                <div class="col-md-3" align="center">
+                    <div class="form-group fv-row">
+                        <label class="form-label" for="AccesoTotal">Acceso Total a Verificentros: &nbsp;<strong class="obligatorio">*</strong> </label>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <div class="formform-check form-switch form-check-custom form-check-success form-check-solid">
+                                    <input class="form-check-input" checked type="checkbox" id="AccesoTotalVerificentro" name="AccesoTotalVerificentro">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-3" align="center">
+                    <div class="form-group fv-row">
+                        <label class="form-label" for="AccesoTotal">Acceso Total a Verificentros: &nbsp;<strong class="obligatorio">*</strong> </label>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <div class="formform-check form-switch form-check-custom form-check-success form-check-solid">
+                                    <input class="form-check-input" type="checkbox" id="AccesoTotalVerificentro" name="AccesoTotalVerificentro">
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row mb-5" hidden>
+            <div class="col-md-5">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="IdRol">Id: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" value="@Model[0].Id" type="text" id="IdRol" name="IdRol" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}

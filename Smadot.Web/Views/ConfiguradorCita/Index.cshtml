@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Configuración de Horarios de Citas";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" />
+    <link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <style>
+        .form-check-secondary.form-check-custom.form-check-solid > .form-check-input:checked {
+            background-color: var(--kt-primary-active) !important;
+        }
+        /*  .table-responsive > table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+                        table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+                            top: 1.3rem;
+                            left: 95px;
+                            height: 1.35rem;
+                            width: 1.35rem;
+                            line-height: 1.5;
+                            text-indent: -999px !important;
+                            margin-top: -0.675rem;
+                            margin-right: 0.675rem;
+                            display: inline-block;
+                            position: relative;
+                            font-size: 1.05rem;
+                            border: 0;
+                            box-shadow: none;
+                            mask-size: 85%;
+                            -webkit-mask-size: 85%;
+                            content: ".";
+                        }*/
+    </style>
+
+}
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Trámites</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Consultas </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a asp-action="Index" class="text-muted text-hover-primary">Directorio de Verificentros </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@section toolbar{
+    <a class="btn btn-primary" asp-controller="DirectorioCentrosVerificacion" asp-action="CargarHorarios" asp-route-id="@ViewBag.IdCVV">
+        <span class="menu-title">Cargar Horarios</span>
+    </a>
+  
+}
+
+<div class="row">
+    
+    <input id="IdCVV" value="@ViewBag.IdCVV" type="hidden" />
+    <input id="Nombre" value="@ViewBag.Nombre" type="hidden" />
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            
+            @*<div class="card-header pt-1">
+            <div class="col-md-4">
+            <div class="form-group fv-row">
+            <label class="form-label" for="almacenGrid">Almac&eacute;n</label>
+            <select class="form-control form-control-solid form-select" data-control="select2" id="almacenGrid"
+            asp-items="(List<SelectListItem>)ViewBag.Almacenes"><option>Todos</option></select>
+            </div>
+            </div>
+            </div>*@
+            <!--begin::Body-->
+            <div class="card-body pt-5">
+                <div class="my-5">
+                    <div class="d-flex align-items-center position-relative my-1 justify-content">
+                        <h4>@ViewBag.Nombre</h4>
+                    </div>
+                    
+                    <div class="d-flex align-items-center position-relative my-1 justify-content-end">
+                        
+                        <Label class="justify-content-center align-items-center mb-6">Buscar: &nbsp;</Label><input type="text" data-kt-filter="search"
+                                                                                                                   class="form-control form-control-sm w-250px mb-6" placeholder="Buscar" />
+                    </div>
+                    
+                    <table class="table table-striped border rounded gy-5 gs-7 w-100" id="kt_datatable">
+                    </table>
+
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::LIst widget 1-->
+        </div>
+        <!--end::Col-->
+    </div>
+</div>
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="~/js/ConfiguradorCita/smadot.index.js" asp-append-version="true"></script>
+}

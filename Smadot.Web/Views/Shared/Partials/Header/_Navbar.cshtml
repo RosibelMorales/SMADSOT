@@ -1,0 +1,82 @@
+﻿<!--begin::Navbar-->
+<div class="app-navbar flex-shrink-0">
+	<!--begin::Search-->
+	<div class="app-navbar-item align-items-stretch ms-1 ms-lg-3">
+		<!--layout-partial:partials/search/_dropdown.html-->
+	</div>
+	<!--end::Search-->
+
+
+	<!--begin::Notifications-->
+	<div class="app-navbar-item ms-1 ms-lg-3">
+		<!--begin::Menu- wrapper-->
+		<div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+
+			<a href="#"><span class="las la-question-circle fs-2"></span></a>
+
+		</div>
+		<!--end::Menu wrapper-->
+	</div>
+	<div class="app-navbar-item ms-1 ms-lg-3">
+		<!--begin::Menu- wrapper-->
+		<div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+
+			<span class="svg-icon svg-icon-1">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<path d="M17,12 L18.5,12 C19.3284271,12 20,12.6715729 20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 C4,12.6715729 4.67157288,12 5.5,12 L7,12 L7.5582739,6.97553494 C7.80974924,4.71225688 9.72279394,3 12,3 C14.2772061,3 16.1902508,4.71225688 16.4417261,6.97553494 L17,12 Z" fill="currentColor" />
+						<rect fill="currentColor" opacity="0.3" x="10" y="16" width="4" height="4" rx="2" />
+					</g>
+				</svg>
+			</span>
+
+			<span id="alert-pulse-ring" class="pulse-ring ring-alert" style="border-color: var(--kt-primary);"></span>
+		</div>
+		<partial name="~/Views/Shared/Partials/Header/Menu/_NotificationsMenu.cshtml" />
+		<!--end::Menu wrapper-->
+	</div>
+	<!--end::Notifications-->
+	
+    <!--begin::CVV Buscador-->
+    <div class="app-navbar-item ms-1 ms-md-3">
+        <!--begin::Menu wrapper-->
+		<div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" id="toogle_panel_button">
+            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+            <span class="svg-icon svg-icon-2 svg-icon-md-1">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
+                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor"></rect>
+                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor"></rect>
+                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor"></rect>
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </div>
+    </div>
+	<!--end::CVV Buscador-->
+	<!--begin::User menu-->
+	<div class="app-navbar-item ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
+		<!--begin::Menu wrapper-->
+		<div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+			<img src="~/assets/media/avatars/blank.png" alt="user" />
+		</div>
+		<partial name="~/Views/Shared/Partials/Header/Menu/_UserAccountMenu.cshtml" />
+		<!--end::Menu wrapper-->
+	</div>
+	<!--end::User menu-->
+	<!--begin::Header menu toggle-->
+	<div class="app-navbar-item d-lg-none ms-2 me-n3" title="Show header menu">
+		<div class="btn btn-icon btn-active-color-primary w-35px h-35px" id="kt_app_header_menu_toggle">
+			<!--begin::Svg Icon | path: icons/duotune/text/txt001.svg-->
+			<span class="svg-icon svg-icon-1">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M13 11H3C2.4 11 2 10.6 2 10V9C2 8.4 2.4 8 3 8H13C13.6 8 14 8.4 14 9V10C14 10.6 13.6 11 13 11ZM22 5V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4V5C2 5.6 2.4 6 3 6H21C21.6 6 22 5.6 22 5Z" fill="currentColor" />
+					<path opacity="0.3" d="M21 16H3C2.4 16 2 15.6 2 15V14C2 13.4 2.4 13 3 13H21C21.6 13 22 13.4 22 14V15C22 15.6 21.6 16 21 16ZM14 20V19C14 18.4 13.6 18 13 18H3C2.4 18 2 18.4 2 19V20C2 20.6 2.4 21 3 21H13C13.6 21 14 20.6 14 20Z" fill="currentColor" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+	</div>
+	<!--end::Header menu toggle-->
+</div>
+<!--end::Navbar-->

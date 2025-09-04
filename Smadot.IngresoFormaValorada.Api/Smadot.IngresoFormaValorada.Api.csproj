@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>c1d72af2-38b9-49ec-a957-28cc44d8b8c1</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Smadot.IngresoFormaValorada.Model\Smadot.IngresoFormaValorada.Model.csproj" />
+		<ProjectReference Include="..\Smadot.Models\Smadot.Models.csproj" />
+		<ProjectReference Include="..\Smadot.SeguimientoCVV.Model\Smadot.SeguimientoCVV.Model.csproj" />
+		<ProjectReference Include="..\Smadsot.Historico.Models\Smadsot.Historico.Models.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<OpenApiReference Include="OpenApis\IngresoFVApi.json" CodeGenerator="NSwagCSharp" Namespace="Smadsot.Api" ClassName="IngresoFVApi">
+			<SourceUri>http://40.124.140.165:7126/swagger/v1/swagger.json</SourceUri>
+		</OpenApiReference>
+	</ItemGroup>
+</Project>

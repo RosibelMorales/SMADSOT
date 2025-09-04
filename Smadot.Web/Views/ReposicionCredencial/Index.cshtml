@@ -1,0 +1,61 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    ViewBag.Title = "Reposición de Credenciales";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <style>
+        .fake-link {
+            cursor: pointer;
+        }
+        .fake-link:hover {
+            color:var(--bs-link-hover-color) !important;
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+@section toolbar{
+    @if (UserResolver.HasPermission(MenuReposicionCredenciales.Registrar))
+    {
+        <a class="btn btn-sm fw-bold btn-primary" id="btnRegistrar">
+            <span class="fa fa-plus"></span>&nbsp; Registrar
+        </a>
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-flush h-lg-100">
+            <div class="card-body pt-5">
+                <div class="bottom-buffer">
+                    <div class="datatable datatable-bordered datatable-head-custom">
+                        <table class="table table-striped gx-7" id="kt_datatable"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+<partial name="~/Views/Shared/_ModalNotificacion2.cshtml" model="string.Empty" />
+
+@section Scripts{
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/js/ReposicionCredencial/smadot.index.js" asp-append-version="true"></script>
+}

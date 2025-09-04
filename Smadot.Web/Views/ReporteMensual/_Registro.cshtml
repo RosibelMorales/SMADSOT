@@ -1,0 +1,526 @@
+﻿@model List<Smadot.Models.Entities.ReporteMensual.Response.ReporteMensualResponse>
+@{
+    ViewData["Title"] = "Registro de reporte";
+    //Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    var cero = 0;
+}
+
+<br />
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/select2.css" />
+    <script src="js/select2.js"></script>
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+
+@if (Model.Count == cero)
+{
+
+    <form role="form" id="form_registroReporteMensual" class="clearfix">
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="NumeroReporte">Numero de reporte: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Numero de reporte"
+                            id="NumeroReporteMensual" name="NumeroReporte" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="ServicioTransportePublico">Servicio de transporte público: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number"
+                            placeholder="Servicio de transporte público" id="ServicioTransportePublico"
+                            name="ServicioTransportePublico" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="ServicioTransporteMercantil">Servicio de transporte mercantil:
+                        &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number"
+                            placeholder="Servicio de transporte mercantil" id="ServicioTransporteMercantil"
+                            name="ServicioTransporteMercantil" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasRealizas">Pruebas realizadas: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas realizadas"
+                            id="PruebasRealizas" name="PruebasRealizas" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasAprobadas">Pruebas aprobadas: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas aprobadas"
+                            id="PruebasAprobadas" name="PruebasAprobadas" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasReprobadas">Pruebas reprobadas: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas reprobadas"
+                            id="PruebasReprobadas" name="PruebasReprobadas" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Entregados">Entregados: &nbsp;<strong class="obligatorio">*</strong>
+                    </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Entregados"
+                            id="Entregados" name="Entregados" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Cancelados">Cancelados: &nbsp;<strong class="obligatorio">*</strong>
+                    </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Cancelados"
+                            id="Cancelados" name="Cancelados" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="SinUsar">Sin usar: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Sin usar" id="SinUsar"
+                            name="SinUsar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="py-2 px-4 col-md-4">
+                <label class="form-label">Entrega</label><br />
+                <div class="fv-row">
+                    <div class="dropzone" id="dropzonejs">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-2 px-4 col-md-4">
+                <label class="form-label">Excel</label><br />
+                <div class="fv-row">
+                    <div class="dropzone" id="dropzonejs2">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <br />
+            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-900 border-gray-200 text-center">
+                        <th colspan="5">Folios usados en el mes actual</th>
+                    </tr>
+                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                        <th>Clave del Certificado</th>
+                        <th>Tipo de Certificado</th>
+                        <th>Cantidad*</th>
+                        <th>Folio Inicial*</th>
+                        <th>Folio Final*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1701001</td>
+                        <td>"E" (EXENTO)</td>
+                        <td class="fv-row"><input type="number" id="ExentosCantidad" name="ExentosCantidad"
+                                class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="ExentosFolioInicial" class="form-control" value="0"
+                                min="0"></td>
+                        <td class="fv-row"><input type="number" name="ExentosFolioFinal" class="form-control" value="0"
+                                min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701002</td>
+                        <td>"1" (UNO)</td>
+                        <td class="fv-row">
+                            <input type="number" id="UnoCantidad" name="UnoCantidad"
+                                   class="form-control cantidadInput" value="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="UnoFolioInicial" class="form-control" value="0"
+                                   min="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="UnoFolioFinal" class="form-control" value="0" min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1701003</td>
+                        <td>"2" (DOS)</td>
+                        <td class="fv-row">
+                            <input type="number" id="DosCantidad" name="DosCantidad"
+                                   class="form-control cantidadInput" value="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="DosFolioInicial" class="form-control" value="0"
+                                   min="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="DosFolioFinal" class="form-control" value="0" min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1701004</td>
+                        <td>"0" (CERO)</td>
+                        <td class="fv-row">
+                            <input type="number" id="CeroCantidad" name="CeroCantidad"
+                                   class="form-control cantidadInput" value="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="CeroFolioInicial" class="form-control" value="0"
+                                   min="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="CeroFolioFinal" class="form-control" value="0"
+                                   min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1701005</td>
+                        <td>"00" (DOBLE CERO)</td>
+                        <td class="fv-row"><input type="number" id="DobleCeroCantidad" name="DobleCeroCantidad"
+                                class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="DobleCeroFolioInicial" class="form-control" value="0"
+                                min="0"></td>
+                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" class="form-control" value="0"
+                                min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701006</td>
+                        <td>"CNA" (CONSTANCIAS)</td>
+                        <td class="fv-row"><input type="number" id="ConstanciaNoAprobadoCantidad"
+                                name="ConstanciaNoAprobadoCantidad" class="form-control cantidadInput" value="0"></td>
+                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioInicial" class="form-control"
+                                value="0" min="0"></td>
+                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioFinal" class="form-control"
+                                value="0" min="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-4 offset-xl-4">
+            <div class="d-flex h-100 align-items-center">
+                <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 px-10">
+                    <div class="mb-7 text-center">
+                        <h1 class="text-dark mb-5 fw-bolder">Total Cantidad</h1>
+                        <div class="text-center">
+                            <span class="fs-3x fw-bold text-primary" id="CantidadCol" name="CantidadCol">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="clearfix">
+            <div class="pull-left text-muted text-vertical-align-button">
+                * Campos obligatorios
+            </div>
+        </div>
+    </form>
+
+}
+else
+{
+    <form role="form" id="form_registroReporteMensual" class="clearfix">
+        <div class="row mb-5">
+            <div class="col-md-4" hidden>
+                <div class="form-group fv-row">
+                    <label class="form-label" for="IDReporte">ID</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Id Reporte" id="IDReporte"
+                            name="IDReporte" value="@(Model[0].IdReporte)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="NumeroReporte">Numero de reporte </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid"  placeholder="Numero de reporte" value='@(Model[0]?.NumeroReporte?.ToString()??"")'
+                            id="NumeroReporte" name="NumeroReporte">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="ServicioTransportePublico">Servicio de transporte público: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number"
+                            placeholder="Servicio de transporte público" id="ServicioTransportePublico"
+                            name="ServicioTransportePublico" value="@Model[0].ServicioTransportePublico" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="ServicioTransporteMercantil">Servicio de transporte mercantil:
+                        &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number"
+                            placeholder="Servicio de transporte mercantil" id="ServicioTransporteMercantil"
+                            name="ServicioTransporteMercantil" value="@Model[0].ServicioTransporteMercantil" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasRealizas">Pruebas realizadas: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas realizadas"
+                            id="PruebasRealizas" name="PruebasRealizas" value="@Model[0].PruebasRealizadas" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasAprobadas">Pruebas aprobadas: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas aprobadas"
+                            id="PruebasAprobadas" name="PruebasAprobadas" value="@Model[0].PruebasAprobadas" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasReprobadas">Pruebas reprobadas: &nbsp;<strong
+                            class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas reprobadas"
+                            id="PruebasReprobadas" name="PruebasReprobadas" value="@Model[0].PruebasReprobadas" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Entregados">Entregados: &nbsp;<strong class="obligatorio">*</strong>
+                    </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Entregados"
+                            id="Entregados" name="Entregados" value="@Model[0].Entregados" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Cancelados">Cancelados: &nbsp;<strong class="obligatorio">*</strong>
+                    </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Cancelados"
+                            id="Cancelados" name="Cancelados" value="@Model[0].Cancelados" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="SinUsar">Sin usar: &nbsp;<strong class="obligatorio">*</strong> </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Sin usar" id="SinUsar"
+                            name="SinUsar" value="@Model[0].SinUsar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex">
+            <div class="py-2 px-4 col-md-4">
+                <label class="form-label">Entrega</label><br />
+                <div class="fv-row">
+                    <div class="dropzone" id="dropzonejs">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-2 px-4 col-md-4">
+                <label class="form-label">Excel</label><br />
+                <div class="fv-row">
+                    <div class="dropzone" id="dropzonejs2">
+                        <div class="dz-message needsclick">
+                            <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                            <div class="ms-4">
+                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+                                    cargarlos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <br />
+            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                        <th>Clave del Certificado</th>
+                        <th>Tipo de Certificado</th>
+                        <th>Cantidad*</th>
+                        <th>Folio Inicial*</th>
+                        <th>Folio Final*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1701001</td>
+                        <td>"E" (EXENTO)</td>
+                        <td class="fv-row"><input type="number" id="ExentosCantidad" name="ExentosCantidad"
+                                class="form-control cantidadInput" value="@Model[6].Cantidad"></td>
+                        <td class="fv-row"><input type="number" name="ExentosFolioInicial" class="form-control"
+                                value="@Model[6].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" name="ExentosFolioFinal" class="form-control"
+                                value="@Model[6].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701002</td>
+                        <td>"1" (UNO)</td>
+                        <td class="fv-row"><input type="number" id="UnoCantidad" name="UnoCantidad"
+                                class="form-control cantidadInput" value="@Model[3].Cantidad"></td>
+                        <td class="fv-row"><input type="number" name="UnoFolioInicial" class="form-control"
+                                value="@Model[3].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" name="UnoFolioFinal" class="form-control"
+                                value="@Model[3].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701003</td>
+                        <td>"2" (DOS)</td>
+                        <td class="fv-row"><input type="number" id="DosCantidad" name="DosCantidad"
+                                class="form-control cantidadInput" value="@Model[4].Cantidad"></td>
+                        <td class="fv-row"><input type="number" name="DosFolioInicial" class="form-control"
+                                value="@Model[4].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" name="DosFolioFinal" class="form-control"
+                                value="@Model[4].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701004</td>
+                        <td>"0" (CERO)</td>
+                        <td class="fv-row">
+                            <input type="number" id="CeroCantidad" name="CeroCantidad"
+                                   class="form-control cantidadInput" value="@Model[2].Cantidad">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="CeroFolioInicial" class="form-control"
+                                   value="@Model[2].FolioInicial" min="0">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" name="CeroFolioFinal" class="form-control"
+                                   value="@Model[2].FolioFinal" min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1701005</td>
+                        <td>"00" (DOBLE CERO)</td>
+                        <td class="fv-row"><input type="number" id="DobleCeroCantidad" name="DobleCeroCantidad"
+                                class="form-control cantidadInput" value="@Model[1].Cantidad"></td>
+                        <td class="fv-row"><input type="number" name="DobleCeroFolioInicial" class="form-control"
+                                value="@Model[1].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" name="DobleCeroFolioFinal" class="form-control"
+                                value="@Model[1].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701006</td>
+                        <td>"CNA" (CONSTANCIAS)</td>
+                        <td class="fv-row"><input type="number" id="ConstanciaNoAprobadoCantidad"
+                                name="ConstanciaNoAprobadoCantidad" class="form-control cantidadInput"
+                                value="@Model[5].Cantidad"></td>
+                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioInicial" class="form-control"
+                                value="@Model[5].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" name="ConstanciaNoAprobadoFolioFinal" class="form-control"
+                                value="@Model[5].FolioFinal" min="0"></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-4 offset-xl-4">
+            <div class="d-flex h-100 align-items-center">
+                <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 px-10">
+                    <div class="mb-7 text-center">
+                        <h1 class="text-dark mb-5 fw-bolder">Total Cantidad</h1>
+                        <div class="text-center">
+                            <span class="fs-3x fw-bold text-primary" id="CantidadCol" name="CantidadCol">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="clearfix">
+            <div class="pull-left text-muted text-vertical-align-button">
+                * Campos obligatorios
+            </div>
+        </div>
+    </form>
+
+
+}

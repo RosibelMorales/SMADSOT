@@ -1,0 +1,22 @@
+@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.FoliosUsadosEnVentanilla.Response.FoliosUsadosEnVentanillaResponse
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+        @if (UserResolver.HasPermission(MenuFoliosUsadosVentanilla.Detalle))
+        {
+            <li>
+                <a class="btnDetalle" data-id="@Model.IdFormaValorada">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li> 
+        }
+    </ul>
+</div>

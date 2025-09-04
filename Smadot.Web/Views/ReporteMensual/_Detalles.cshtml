@@ -1,0 +1,307 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model List<Smadot.Models.Entities.ReporteMensual.Response.ReporteMensualResponse>
+@{
+    ViewData["Title"] = "Registro de reporte";
+    //Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    var Solicitud = Smadot.Models.Dicts.ReporteMensualDic.Solicitud;
+    var Modificar = Smadot.Models.Dicts.ReporteMensualDic.Modificar;
+}
+
+<br />
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/select2.css" />
+    <script src="js/select2.js"></script>
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+
+@section toolbar{
+    <button class="btn btn-sm fw-bold btn-primary" type="button" id="btnRegistro">Aceptar</button>
+    <button class="btn btn-sm fw-bold btn-primary" type="button" id="btnRegistro">Denegar</button>
+}
+
+@if (Model[0].IdCatEstatusReporte == Solicitud)
+{
+    <div class="row mb-5">
+        <div class="col-md-12" align="right">
+            @if (UserResolver.HasPermission(MenuReporteMensual.ValidadoDVRF))
+            {
+                <button class="btn btn-sm fw-bold btn-primary" type="button" id="btnAceptarSolicitud">Aceptar</button>
+            }
+            @if (UserResolver.HasPermission(MenuReporteMensual.RechazadoDVRF))
+            {
+                <button class="btn btn-sm fw-bold btn-secondary" type="button" id="btnDenegarSolicitud">Denegar</button>
+            }
+        </div>
+    </div>
+}
+@if (Model[0].IdCatEstatusReporte == Modificar)
+{
+    <div class="row mb-5">
+        <div class="col-md-12" align="right">
+            @if (UserResolver.HasPermission(MenuReporteMensual.PermiteModificar))
+            {
+                <button class="btn btn-sm fw-bold btn-primary" type="button" id="btnAceptarModificar">Aceptar</button>
+            }
+            @if (UserResolver.HasPermission(MenuReporteMensual.RechazaModificar))
+            {
+                <button class="btn btn-sm fw-bold btn-secondary" type="button" id="btnDenegarModificar">Denegar</button>
+            }
+        </div>
+    </div>
+}
+
+
+
+<form role="form" id="form_detalleReporteMensual" class="clearfix">
+        @*FILA*@
+        <div class="row mb-5">
+            <div class="col-md-4 " hidden>
+                    <label class="form-label" for="IdReporte">ID</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="text" id="ID" name="ID" readonly value="@Model[0].IdReporte" />
+                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="NumeroReporte">Numero de reporte</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Numero de reporte" id="NumeroReporte" name="NumeroReporte" readonly value="@Model[0].NumeroReporte" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                <label class="form-label" for="NombreUsuario">Usuario registró</label>
+                    <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" placeholder="Numero de reporte" id="NombreUsuario" name="NombreUsuario" readonly value="@Model[0].NombreUsuario" />
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-4">
+            <div class="form-group fv-row">
+                <label class="form-label" for="FechaModificacionReporte">Última modificación</label>
+                <div class="position-relative" style="width: 100% !important">
+                    <input class="form-control form-control-solid" type="text" placeholder="Numero de reporte" id="FechaModificacionReporte" name="FechaModificacionReporte" readonly value="@Model[0].FechaModificacionReporte" />
+                </div>
+            </div>
+        </div>
+        </div>
+        @*FILA*@
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Estatus">Estatus</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="text" placeholder="Estatus" id="Estatus" name="Estatus" readonly value="@Model[0].NombreCatEstatusReporte" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasRealizas">Pruebas realizadas</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas realizadas" id="PruebasRealizas" name="PruebasRealizas" readonly value="@Model[0].PruebasRealizadas" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasAprobadas">Pruebas aprobadas</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas aprobadas" id="PruebasAprobadas" name="PruebasAprobadas" readonly value="@Model[0].PruebasAprobadas" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*FILA*@
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="PruebasReprobadas">Pruebas reprobadas</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Pruebas reprobadas" id="PruebasReprobadas" name="PruebasReprobadas" readonly value="@Model[0].PruebasReprobadas" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Entregados">Entregados </label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Entregados" id="Entregados" name="Entregados" readonly value="@Model[0].Entregados" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="Cancelados">Cancelados</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Cancelados" id="Cancelados" name="Cancelados" readonly value="@Model[0].Cancelados" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*FILA*@
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="SinUsar">Sin usar</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Sin usar" id="SinUsar" name="SinUsar" readonly value="@Model[0].SinUsar" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="ServicioTransportePublico">Servicio de transporte público</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Servicio de transporte público" readonly id="ServicioTransportePublico" name="ServicioTransportePublico" value="@Model[0].ServicioTransportePublico" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group fv-row">
+                    <label class="form-label" for="ServicioTransporteMercantil">Servicio de transporte mercantil</label>
+                    <div class="position-relative" style="width: 100% !important">
+                        <input class="form-control form-control-solid" type="number" placeholder="Servicio de transporte mercantil" readonly id="ServicioTransporteMercantil" name="ServicioTransporteMercantil" value="@Model[0].ServicioTransporteMercantil" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*FILA*@
+        <div class="row mb-5">
+            <div class="col-md-3">
+                @if (Model[0].UrlExcel != null)
+                { 
+                    var url2 = Model[0].UrlExcel.Split("/")[Model[0].UrlExcel.Split("/").Length - 1];
+                    <label class="control-label fw-bold">Documento Excel</label>
+                    <br />
+                    @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2" data-url="@(Model[0].NumeroReporte+"/"+url2)" href="@Model[0].UrlExcel" download role="button">*@
+                <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@ViewBag.UrlExcel" title="Descargar" role="button">
+                        <span class="svg-icon svg-icon-1">
+                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                </g>
+                            </svg><!--end::Svg Icon-->
+                        </span>
+                        @url2
+                    </a>
+                }
+            </div>
+
+            <div class="col-md-3">
+                @if (Model[0].UrlEntrega != null)
+                {
+                    var url2 = Model[0].UrlEntrega.Split("/")[Model[0].UrlEntrega.Split("/").Length - 1];
+                    <label class="control-label fw-bold">Documento Entrega</label>
+                    <br />
+                    @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model[0].NumeroReporte+"/"+url2)" role="button">*@
+                <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@ViewBag.UrlFactura" title="Descargar" role="button">
+                        <span class="svg-icon svg-icon-1">
+                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                </g>
+                            </svg><!--end::Svg Icon-->
+                        </span>
+                        @url2
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div>
+            <br />
+            <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+                        <th>Clave del Certificado</th>
+                        <th>Tipo de Certificado</th>
+                        <th>Cantidad*</th>
+                        <th>Folio Inicial*</th>
+                        <th>Folio Final*</th>
+                        @*<th>Clave del Certificado</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1701001</td>
+                        <td>"E" (EXENTO)</td>
+                        <td class="fv-row"><input type="number" readonly id="ExentosCantidad" name="ExentosCantidad" class="form-control cantidadInput" value="@Model[6].Cantidad"></td>
+                        <td class="fv-row"><input type="number" readonly name="ExentosFolioInicial" class="form-control" value="@Model[6].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" readonly name="ExentosFolioFinal" class="form-control" value="@Model[6].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701002</td>
+                        <td>"1" (UNO)</td>
+                        <td class="fv-row"><input type="number" readonly id="UnoCantidad" name="UnoCantidad" class="form-control cantidadInput" value="@Model[3].Cantidad"></td>
+                        <td class="fv-row"><input type="number" readonly name="UnoFolioInicial" class="form-control" value="@Model[3].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" readonly name="UnoFolioFinal" class="form-control" value="@Model[3].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701003</td>
+                        <td>"2" (DOS)</td>
+                        <td class="fv-row"><input type="number" readonly id="DosCantidad" name="DosCantidad" class="form-control cantidadInput" value="@Model[4].Cantidad"></td>
+                        <td class="fv-row"><input type="number" readonly name="DosFolioInicial" class="form-control" value="@Model[4].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" readonly name="DosFolioFinal" class="form-control" value="@Model[4].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701004</td>
+                        <td>"0" (CERO)</td>
+                        <td class="fv-row"><input type="number" readonly id="CeroCantidad" name="CeroCantidad" class="form-control cantidadInput" value="@Model[2].Cantidad"></td>
+                        <td class="fv-row"><input type="number" readonly name="CeroFolioInicial" class="form-control" value="@Model[2].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" readonly name="CeroFolioFinal" class="form-control" value="@Model[2].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701005</td>
+                        <td>Doble Cero "00"</td>
+                        <td class="fv-row"><input type="number" readonly id="DobleCeroCantidad" name="DobleCeroCantidad" class="form-control cantidadInput" value="@Model[1].Cantidad"></td>
+                        <td class="fv-row"><input type="number" readonly name="DobleCeroFolioInicial" class="form-control" value="@Model[1].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" readonly name="DobleCeroFolioFinal" class="form-control" value="@Model[1].FolioFinal" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>1701006</td>
+                        <td>"CNA" (CONSTANCIAS)</td>
+                        <td class="fv-row"><input type="number" readonly id="ConstanciaNoAprobadoCantidad" name="ConstanciaNoAprobadoCantidad" class="form-control cantidadInput" value="@Model[5].Cantidad"></td>
+                        <td class="fv-row"><input type="number" readonly name="ConstanciaNoAprobadoFolioInicial" class="form-control" value="@Model[5].FolioInicial" min="0"></td>
+                        <td class="fv-row"><input type="number" readonly name="ConstanciaNoAprobadoFolioFinal" class="form-control" value="@Model[5].FolioFinal" min="0"></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-4 offset-xl-4">
+            <div class="d-flex h-100 align-items-center">
+                <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 px-10">
+                    <div class="mb-7 text-center">
+                        <h1 class="text-dark mb-5 fw-bolder">Total Cantidad</h1>
+                        <div class="text-center">
+                            <span class="fs-3x fw-bold text-primary" id="CantidadCol" name="CantidadCol">@Model[1].Total</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        <div class="clearfix">
+            <div class="pull-left text-muted text-vertical-align-button">
+            </div>
+        </div>
+</form>
+

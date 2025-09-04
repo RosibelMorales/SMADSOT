@@ -1,0 +1,35 @@
+﻿@model string
+@{
+    ViewBag.Title = "Alertas";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/assets/plugins/custom/json-viewer/jquery.json-viewer.css" type="text/css" />
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Administración CVV </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active"><a asp-controller="Alertas" asp-action="Index">@ViewBag.Title</a></li>
+}
+
+@section toolbar{
+    }
+
+<input value="@Model" id="data" hidden />
+<div class="card shadow-sm mb-5">
+    <div class="card-body">
+        <h4>Información detallada</h4>
+        <pre id="json-viewer"></pre>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/plugins/custom/json-viewer/jquery.json-viewer.js"></script>
+    <script asp-append-version="true" src="~/js/Alertas/smadot.Alertas.detalle.js"></script>
+}

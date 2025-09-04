@@ -1,0 +1,16 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Roles.Response.RolesResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    <div class="btn-group dropup drop-up dropdown">
+        @if (UserResolver.HasPermission(MenuRoles.Editar))
+        {
+            <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnEditar" data-id="@Model.Id" title="Editar">
+                <label class="dropdown-item">
+                    <i class="bi bi-pencil-square"></i>
+                </label>
+            </a>
+        }
+    </div>
+</div>

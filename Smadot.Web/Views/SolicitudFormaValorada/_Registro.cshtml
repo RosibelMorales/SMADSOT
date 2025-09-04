@@ -1,0 +1,56 @@
+﻿@model List<Smadot.Models.Entities.SolicitudFormaValorada.Response.SolicitudFormaValoradaResponse>
+@{
+	var c = 0;
+}
+<div class="row mb-5">
+	<form role="form" id="form_registroSolicitudFormaValorada" class="clearfix">
+		@if (Model.FirstOrDefault().IdSolicitudFV > 0)
+		{
+			<input type="hidden" asp-for="@Model.FirstOrDefault().IdSolicitudFV" />
+		}
+		<div class="row mb-5">
+			<div class="col-md-6">
+				<div class="form-group fv-row">
+					<label class="form-label" for="FechaSolicitud">Fecha de Solicitud: &nbsp;<strong
+							class="obligatorio">*</strong></label>
+					<div class="position-relative" style="width: 50% !important">
+						<input class="form-control " id="FechaSolicitud" name="FechaSolicitud"
+							value="@Model[0].FechaSolicitudFV.ToString("dd/MM/yyyy")" />
+						<div class="position-absolute translate-middle-y top-50 end-0 me-3">
+							<i class="fa-solid fa-calendar-days"
+								onclick="document.getElementById('FechaSolicitud').focus(); return false;"></i>
+						</div>
+					</div>
+					@*<input type="date" asp-for="FechaSolicitud" class="form-control">*@
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group fv-row">
+					<label class="form-label" asp-for="@Model[c].IdAlmacenFV">Almacén &nbsp;<strong
+							class="obligatorio">*</strong></label>
+					@if (@Model.FirstOrDefault()?.IdSolicitudFV == 0)
+					{
+						<select class="form-control form-select" data-control="select2" asp-for="@Model[c].IdAlmacenFV"
+							asp-items="(List<SelectListItem>)ViewBag.Almacenes"></select>
+					}
+					else
+					{
+						<select class="form-control form-control-solid form-select" data-control="select2"
+							asp-for="@Model[c].IdAlmacenFV" disabled
+							asp-items="(List<SelectListItem>)ViewBag.Almacenes"></select>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 mb-5" id="table-certificados">
+			<partial name="_tableCertificados" model="Model" />
+		</div>
+		<br />
+		<hr />
+		<div class="clearfix">
+			<div class="pull-left text-muted text-vertical-align-button">
+				* Campos obligatorios
+			</div>
+		</div>
+	</form>
+</div>

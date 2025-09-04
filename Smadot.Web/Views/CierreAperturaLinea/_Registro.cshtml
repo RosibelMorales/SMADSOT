@@ -1,0 +1,93 @@
+﻿@model Smadot.Models.Entities.SeguimientoCVV.Response.SeguimientoCVVResponse
+
+@{
+	ViewData["Title"] = "Líneas";
+}
+
+<br />
+
+@section styles {
+	<link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/select2.css" />
+	<script src="js/select2.js"></script>
+	<style>
+		input:read-only {
+			pointer-events: none;
+			background: var(--kt-input-disabled-bg);
+		}
+	</style>
+}
+
+
+<form role="form" id="form_registroCierreAperturaLinea" class="clearfix">
+	<section>
+		<div class="row mb-5">
+			<div class="col-md-4">
+				<div class="form-group fv-row">
+					<label class="form-label" for="NotaLineaMotivo">Nombre de linea: &nbsp;<strong
+							class="obligatorio">*</strong></label>
+					<div class="position-relative" style="width: 100% !important;">
+
+						<input class="form-control form-control-sm " placeholder="Ingresa el nombre de linea"
+							id="NombreLinea" name="NombreLinea" />
+
+					</div>
+					@*<input type="date" asp-for="FechaSolicitud" class="form-control">*@
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group fv-row">
+					<label class="form-label" for="Motivo">Motivo &nbsp;<strong class="obligatorio">*</strong></label>
+					<select class="form-control form-control-sm form-select" data-control="select2"
+						asp-items="(List<SelectListItem>)ViewBag.Motivos" name="motivoGrid" id="motivoGrid">
+					</select>
+
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group fv-row">
+					<label class="form-label" for="claveLinea">Clave: &nbsp;<strong
+							class="obligatorio">*</strong></label>
+					<input class="form-control form-control-sm " placeholder="Ingresa la clave" id="claveLinea"
+						   name="claveLinea" maxlength="3" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-5">
+			<div class="col-md-12">
+				<div class="form-group fv-row">
+					<label class="form-label" for="NotaLineaMotivo"><b>Nota: &nbsp;<strong
+								class="obligatorio">*</strong></b></label>
+					<div class="position-relative" style="width: 100% !important">
+						<textarea class="form-control form-control-sm" rows="4" placeholder="Ingresa la nota"
+							id="NotasMotivo" name="NotasMotivo"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="py-2 px-4 col-md-4">
+			<label class="form-label">Subir documento &nbsp;<strong class="obligatorio">*</strong></label><br />
+			<div class="fv-row">
+				<div class="dropzone" id="dropzonejs">
+					<div class="dz-message needsclick">
+						<i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+						<div class="ms-4">
+							<h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para
+								cargarlos.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr />
+		<div class="clearfix">
+			<div class="pull-left text-muted text-vertical-align-button">
+				* Campos obligatorios
+			</div>
+		</div>
+	</section>
+</form>

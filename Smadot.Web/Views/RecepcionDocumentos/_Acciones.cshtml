@@ -1,0 +1,66 @@
+﻿@model Smadot.Models.Entities.RecepcionDocumentos.Response.RecepcionDocumentosResponseData.RecepcionDocumentosGridResponse
+@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@if (UserResolver.HasPermission(MenuRecepcionDocumentos.PermisoMenuPadre))
+{
+    <div class="btn-group dropup drop-up dropdown">
+        <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+            <i class="bi bi-three-dots"></i>
+        </a>
+        <ul class="dropdown-menu">
+            <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+            @if (Model.IdRecepcionDocumento == null)
+            {
+
+                @if (UserResolver.HasPermission(MenuRecepcionDocumentos.RegistroRecepcionDocs))
+                {
+                    <li class="btnEstatus">
+                        <a asp-controller="RecepcionDocumentos" asp-action="Documentos" asp-route-id="@Model.IdCita">
+                            <label class="dropdown-item">
+                                <span class="navi-icon"><i class="bi bi-archive"></i></span>
+                                <span class="navi-text">Recepción de documentos</span>
+                            </label>
+                        </a>
+                    </li>
+
+                }
+                @if (UserResolver.HasPermission(MenuRecepcionDocumentos.ReagendarCita))
+                {
+                    <li class="btnDetalle">
+                        <a asp-controller="RecepcionDocumentos" asp-action="ReagendarCita" asp-route-id="@Model.IdCita">
+                            <label class="dropdown-item">
+                                <span class="navi-icon"><i class="bi bi-calendar-event"></i></span>
+                                <span class="navi-text">Reagendar Cita</span>
+                            </label>
+                        </a>
+                    </li>
+                }
+            }
+            @if (UserResolver.HasPermission(MenuRecepcionDocumentos.CambiarLinea) && Model.IdRecepcionDocumento != null)
+            {
+                <li>
+                    <a class="btnCambiarLinea" data-id="@Model.IdVerificacion">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-distribute-horizontal"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Cambiar Línea</span>
+                        </label>
+                    </a>
+                </li>
+
+            }
+            @*@if (UserResolver.HasPermission(MenuRecepcionDocumentos.CalcularResultados) && Model.IdVerificacion != null && Model.IdResultadosVerificacion != null 
+            && ((Model.EstatusPrueba ?? 0) == EstatusVerificacion.VerificacionFinalizada 
+            || (Model.EstatusPrueba ?? 0) == EstatusVerificacion.VerificacionAbortada) && Model.EstatusPrueba != EstatusVerificacion.FolioImpreso)
+            {
+                <li>
+                    <a class="btnCalcular" data-id="@Model.IdVerificacion" data-placa="@Model.Placa" data-serie="@Model.Serie">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-clipboard2-check"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Calcular Resultados Línea</span>
+                        </label>
+                    </a>
+                </li>
+            }*@
+        </ul>
+    </div>
+}

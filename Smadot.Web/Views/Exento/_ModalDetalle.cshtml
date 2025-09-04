@@ -1,0 +1,216 @@
+﻿@using Smadot.Models.Dicts
+@using Smadot.Utilities.FileStorage
+@model Smadot.Models.Entities.Exento.Response.ExentoResponse
+
+<div class="row mb-5">
+    <div class="col-md-3">
+        <label name="marca">Marca: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Marca" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="submarca">Submarca: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Submarca" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="modelo">Modelo: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Modelo" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="placa">Placa: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Placa" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-3">
+        <label name="serie">Serie: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Serie" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="resultadoPrueba">Resultado de Prueba: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            @*<input class="form-control" value="@Model.ResultadoPrueba" type="text" disabled />*@
+            <input class="form-control" value="APROBADO" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="TipoCertificado">Tipo de Certificado: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            @*<input class="form-control" value="@Model.IdCatTipoCertificado" type="text" disabled />*@
+            <input class="form-control" value="@Html.Raw("&ldquo;E&rdquo; (EXENTO)")" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="combustible">Combustible: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Combustible" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-3">
+        <label name="vigencia">Vigencia: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Vigencia.ToString("dd/MM/yyyy")" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="fechaFactura">Fecha Carta Factura: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.FechaCartaFactura.ToString("dd/MM/yyyy")" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label name="propietario">Propietario: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.Propietario" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-3">
+        <label name="tarjetaCirculacion">Número tarjeta circulación: &nbsp;<strong
+                class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.NumTarjetaCirculacion" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="ultimoFolio">Último folio: </label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.UltimoFolio" type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="vigenciaHolo">Vigencia Holo Anterior: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control"
+                value="@(Model.VigenciaHoloAnterior.HasValue ? Model.VigenciaHoloAnterior.Value.ToString("dd/MM/yyyy") : "")"
+                type="text" disabled />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label name="numeroReferencia">Número de Referencia: &nbsp;<strong class="obligatorio">*</strong></label>
+        <div class="position-relative">
+            <input class="form-control" value="@Model.NumeroReferencia" type="text" disabled />
+        </div>
+    </div>
+</div>
+<hr />
+<div class="d-flex">
+    <div class="py-2 px-4 col-md-3">
+        @if (Model.UrlDoc1 != null)
+        {
+            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+            download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc1))"
+            href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc1)" title="Descargar"
+            role="button">
+                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                     height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                              fill="#000000" />
+                        </g>
+                    </svg>
+                </span>
+                Identificación Oficial
+            </a>
+        }
+    </div>
+    <div class="py-2 px-4 col-md-3">
+        @if (Model.UrlDoc2 != null)
+        {
+            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+            download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc2))"
+            href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc2)" title="Descargar"
+            role="button">
+                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                     height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                              fill="#000000" />
+                        </g>
+                    </svg>
+                </span>
+                Tarjeta de Circulación
+            </a>
+        }
+    </div>
+    <div class="py-2 px-4 col-md-3">
+        @if (Model.UrlDoc3 != null)
+        {
+            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+           download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc3))"
+           href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc3)" title="Descargar"
+           role="button">
+                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                     height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                              fill="#000000" />
+                        </g>
+                    </svg>
+                </span>
+                Factura
+            </a>
+        }
+    </div>
+    <div class="py-2 px-4 col-md-3">
+        @if (Model.UrlDoc4 != null)
+        {
+            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+           download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc4))"
+           href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc4)" title="Descargar"
+           role="button">
+                <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                     height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                              fill="#000000" />
+                        </g>
+                    </svg>
+                </span>
+                Comprobante de Pago
+            </a>
+        }
+    </div>
+</div>
+<hr />
+@if ((Model.Combustible ?? "").Equals(TipoCombustible.DictTipoCombustible[TipoCombustible.Hibridos]))
+{
+    <div class="py-2 px-4 col-md-12">
+        <div class="d-flex flex-column flex-md-row-auto mb-md-0 align-self-end pb-4">
+            <div class="d-flex flex-column-auto align-self-end">
+                <a class="btn btn-sm fw-bold btn-primary" id="btn-registrar-ref" data-id="@Model.Id">Registrar Refrendo</a>
+            </div>
+        </div>
+        <div id="container-refrendos">
+            <partial name="~/Views/Refrendo/_refrendos.cshtml" model="@ViewBag.ListaRefrendos" />
+        </div>
+    </div>
+}

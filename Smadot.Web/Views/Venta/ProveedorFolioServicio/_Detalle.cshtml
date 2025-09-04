@@ -1,0 +1,81 @@
+﻿@using static Smadot.Models.Entities.ProveedorFolioServicio.Response.ProveedorFolioServicioResponseData
+@model ProveedorFolioServicioResponse;
+
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Folio: &nbsp;<strong class="obligatorio">*</strong></label>
+            <input type="text" asp-for="FolioOS" class="form-control" placeholder="Folio" disabled>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Empresa: &nbsp;<strong class="obligatorio">*</strong></label>
+            <input type="text" asp-for="ProveedorEmpresa" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Fecha Registro: &nbsp;<strong class="obligatorio">*</strong></label>
+            <input type="text" asp-for="FechaRegistro" class="form-control" disabled>
+            </div>
+        </div>
+    </div>
+
+<div class="row mb-5">
+    @if(Model.EsLaboratorio == true)
+    {
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Laboratorio: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="Proveedor" class="form-control" placeholder="Folio" disabled>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Proveedor: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" asp-for="Proveedor" class="form-control" placeholder="Folio" disabled>
+            </div>
+        </div>
+    }
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="name">Motivo: &nbsp;<strong class="obligatorio">*</strong></label>
+            <input type="text" asp-for="Motivo" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="name">Equipo: &nbsp;<strong class="obligatorio">*</strong></label>
+            <input type="text" asp-for="Equipo" class="form-control" disabled>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="name">Estatus del Folio: &nbsp;<strong class="obligatorio">*</strong></label>
+            <input type="text" value="@(Model.EstatusFolio == true ? "En Uso" : "Disponible")" class="form-control" placeholder="Folio" disabled>
+        </div>
+    </div>
+</div>
+
+    @*<div class="row mb-5">
+    <div class="col-md-4">
+    <div class="form-group">
+    <label for="name">Dirección: &nbsp;<strong class="obligatorio">*</strong></label>
+    <input type="text" asp-for="Direccion" class="form-control" placeholder="Dirección">
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="form-group">
+    <label for="name">Empresa: &nbsp;<strong class="obligatorio">*</strong></label>
+    <input type="text" asp-for="Empresa" class="form-control" placeholder="Empresa">
+    </div>
+    </div>
+    </div>*@
+

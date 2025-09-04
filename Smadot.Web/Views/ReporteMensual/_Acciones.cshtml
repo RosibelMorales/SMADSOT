@@ -1,0 +1,46 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.ReporteMensual.Response.ReporteMensualResponse
+@{
+    var PermiteModificar = Smadot.Models.Dicts.CatEstatusReporteDic.PermiteModificar;
+    var RechazadoDVRF = Smadot.Models.Dicts.CatEstatusReporteDic.RechazadoDVRF;
+    var EnviadoDVRF = Smadot.Models.Dicts.CatEstatusReporteDic.EnviadoDVRF;
+}
+
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+        @if (UserResolver.HasPermission(MenuReporteMensual.Detalle))
+        {
+            <li class="btnDetail" data-id="@Model.IdReporte">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-search"></i></span>
+                    <span class="navi-text">Detalle</span>
+                </label>
+            </li>
+        }
+        @if (Model.IdCatEstatusReporte == PermiteModificar && UserResolver.HasPermission(MenuReporteMensual.Editar))
+        {
+            <li class="btnEditar" data-id="@Model.IdReporte">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-pencil-square"></i></span>
+                    <span class="navi-text">Editar</span>
+                </label>
+            </li>
+        }
+
+        @if ((Model.IdCatEstatusReporte == RechazadoDVRF || Model.IdCatEstatusReporte == EnviadoDVRF) && UserResolver.HasPermission(MenuReporteMensual.Editar))
+        {
+            <li class="btnSolitarModificar" data-id="@Model.IdReporte">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-x-circle"></i></span>
+                    <span class="navi-text">Solicitar Modificar</span>
+                </label>
+            </li>
+        }
+
+    </ul>
+</div>

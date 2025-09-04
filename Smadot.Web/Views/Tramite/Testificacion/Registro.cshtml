@@ -1,0 +1,232 @@
+﻿@model Smadot.Models.Entities.Testificacion.Request.TestificacionApiRequest
+
+@{
+    ViewData["Title"] = "Registrar Testificación";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">Trámites</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">Certificados</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <a asp-controller="Testificacion" asp-action="Index" class="text-muted text-hover-primary">Testificación</a>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">Registrar Testificación</li>
+}
+
+@section toolbar{
+}
+
+
+<div class="card shadow-sm mb-5">
+    <div class="card-header">
+        <h3 class="card-title">Registrar Testificación</h3>
+        <div class="card-toolbar"></div>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12">
+            <div class="panel-body">
+                <form role="form" id="form_registro" class="clearfix">
+                    <div class="row align-items-end mb-5 mt-5">
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Placa: &nbsp;<strong class="obligatorio">*</strong></label>
+                            <input type="text" asp-for="Placa" class="form-control" placeholder="Placa">
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Serie: &nbsp;<strong class="obligatorio">*</strong></label>
+                            <input type="text" asp-for="Serie" placeholder="Serie" class="form-control">
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Marca: &nbsp;<strong class="obligatorio">*</strong></label>
+                            <input type="text" asp-for="Marca" placeholder="Marca" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-end mb-5 mt-5">
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Submarca: &nbsp;<strong class="obligatorio">*</strong></label>
+                            <input type="text" asp-for="Submarca" placeholder="Submarca" class="form-control">
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Año Modelo: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <input type="number" asp-for="Modelo" class="form-control" placeholder="0000">
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Tipo de Combustible: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <select class="form-control form-select" data-control="select2" asp-for="IdTipoCombustible"
+                                asp-items="(List<SelectListItem>)ViewBag.Combustible">
+                                <option value="">Seleccione...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row align-items-end mb-5 mt-5">
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Tipo de Certificado: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <select class="form-control form-control-solid form-select-solid" data-control="select2" disabled
+                                asp-for="IdCatTipoCertificado" asp-items="(List<SelectListItem>)ViewBag.Certificados">
+                                
+                            </select>
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Nombre del Propietario: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <input type="text" asp-for="NombrePropietario" class="form-control"
+                                placeholder="Nombre propietario">
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">No. de Tarjeta de Circulación: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <input type="number" asp-for="TarjetaCirculacion" placeholder="000000000"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-end mb-5 mt-5">
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Estado de Procedencia del Vehículo: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <select class="form-control form-select" data-control="select2" asp-for="EntidadProcedencia"
+                                asp-items="(List<SelectListItem>)ViewBag.Estados">
+                                <option value="">Seleccione...</option>
+                            </select>
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <div class="form-group input-group-sm input-group-sm">
+                                <label for="FechaEmisionRef">Fecha Emisión Referencia: </label>
+                                <div class="position-relative">
+                                    <input class="form-control form-control-sm" asp-for="FechaEmisionReferencia"
+                                        type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <div class="form-group input-group-sm input-group-sm">
+                                <label for="FechaPago">Fecha Pago: </label>
+                                <div class="position-relative">
+                                    <input class="form-control form-control-sm" asp-for="FechaPago" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row align-items-end mb-5 mt-5">
+                        <div class="form-group input-group-sm col-md-4">
+                            <div class="form-group input-group-sm input-group-sm">
+                                <label for="VigenciaOrigen">Vigencia Certificado de Origen: </label>
+                                <div class="position-relative">
+                                    <input class="form-control form-control-sm" asp-for="VigenciaOrigen" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Número de Referencia: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <input type="text" asp-for="NumeroReferencia" class="form-control">
+                        </div>
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">Folio Certificado de Origen: &nbsp;<strong
+                                    class="obligatorio">*</strong></label>
+                            <input type="text" id="FolioAsignado" name="FolioAsignado" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row align-items-end mb-5 mt-5">
+                        <div class="form-group input-group-sm col-md-4">
+                            <label class="control-label">
+                                Persona que realiza trámite: &nbsp;<strong class="obligatorio">*</strong>
+                            </label>
+                            <input type="text" asp-for="PersonaTramite" class="form-control">
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="form-group input-group-sm input-group-sm col-md-12">
+                        <h4>Documentación</h4>
+                    </div>
+                </div>
+                <div class="d-flex mb-5">
+                    <div class="py-2 px-4 col-md-3">
+                        <label class="form-label">Identificación Oficial</label><br />
+                        <div class="fv-row">
+                            <div class="dropzone" id="dropzonejs1">
+                                <div class="dz-message needsclick">
+                                    <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                    <div class="ms-4">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic
+                                            para cargarlos.</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="py-2 px-4 col-md-3">
+                        <label class="form-label">Tarjeta de Circulación</label><br />
+                        <div class="fv-row">
+                            <div class="dropzone" id="dropzonejs2">
+                                <div class="dz-message needsclick">
+                                    <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                    <div class="ms-4">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic
+                                            para cargarlos.</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="py-2 px-4 col-md-3">
+                        <label class="form-label">Certificado Vigente</label><br />
+                        <div class="fv-row">
+                            <div class="dropzone" id="dropzonejs3">
+                                <div class="dz-message needsclick">
+                                    <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                    <div class="ms-4">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic
+                                            para cargarlos.</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <a class="btn btn-secondary btn-sm pull-right" id="btnCancelarFolio" asp-action="Index"
+            asp-controller="Testificacion">Cancelar</a> &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary btn-sm pull-right" type="button" id="btnGuardarTestificacion">Guardar</button>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/plugins/Bootstrap.min.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    @*
+<script asp-append-version="true" src="~/js/FoliosCancelados/smadot.folioscancelados.registro.js"></script>*@
+    <script asp-append-version="true" src="~/js/Tramite/Testificacion/registro.js"
+        asp-append-version="true"></script>
+}

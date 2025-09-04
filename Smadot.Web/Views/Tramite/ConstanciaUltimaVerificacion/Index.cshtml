@@ -1,0 +1,66 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    ViewBag.Title = "Constancias de Última Verificación";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <style>
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Trámites</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Constancias</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+@section toolbar{
+    @if (UserResolver.HasPermission(MenuConstanciasUltimaVerificacion.Registrar))
+    {
+        <a class="btn btn-sm fw-bold btn-primary" asp-controller="ConstanciaUltimaVerificacion" asp-action="Edit">
+            <span class="fa fa-plus"></span>&nbsp; Registrar Constancia
+        </a>
+    }
+}
+
+<div class="row">
+    <!--begin::Col-->
+    <div class="col-md-12">
+        <!--begin::List widget 1-->
+        <div class="card card-flush h-lg-100">
+            <div id="qrcode" class="d-none"></div>
+            <div class="card-body pt-5">
+                <div class="bottom-buffer">
+                    <div class="datatable datatable-bordered datatable-head-custom">
+                        <table class="table table-striped gx-7" id="kt_datatable"></table>
+                    </div>
+                </div>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::LIst widget 1-->
+    </div>
+    <!--end::Col-->
+</div>
+
+@section Scripts{
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/QRcodejs/qrcode.min.js"></script>
+    <script src="~/js/Tramite/ConstanciaUltimaVerificacion/smadot.index.js" asp-append-version="true"></script>
+}

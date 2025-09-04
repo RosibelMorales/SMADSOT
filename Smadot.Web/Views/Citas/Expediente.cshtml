@@ -1,0 +1,1069 @@
+﻿@using Smadot.Models.Dicts.ProveedorDicts
+@using Smadot.Models.Entities.PortalCita.Response
+@model Smadot.Models.DataBase.vVerificacionExpediente
+@{
+    //ViewBag.Title = "Acreditación de Técnicos Verificadores";
+    ViewBag.Title = "Expediente de Verificación";
+    if (ViewBag.esPublico != null)
+    {
+        Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    }
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+}
+
+@* @section breadcrumb{
+<li class="breadcrumb-item">
+<a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+</li>
+<li class="breadcrumb-item">
+<span class="bullet bg-gray-400 w-5px h-2px"></span>
+</li>
+<li class="breadcrumb-item">
+<a href="#" class="text-muted text-hover-primary">Configuración</a>
+</li>
+<li class="breadcrumb-item">
+<span class="bullet bg-gray-400 w-5px h-2px"></span>
+</li>
+<li class="active">@ViewData["Title"]</li>
+} *@
+<div class="card">
+    <!--begin::Body-->
+    <div class="card-body p-lg-10">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-xl-row flex-sm-row-auto">
+            <!--begin::Sidebar-->
+            <div class="me-lg-3 me-sm-0 me-md-0 h-lg-100 min-w-lg-300px w-lg-25 w-sm-100 w-md-100">
+                <!--begin::Invoice 2 sidebar-->
+                <div
+                    class="d-print-none border border-dashed border-gray-300 card-rounded p-6 bg-lighten h-100 mb-3 mb-md-3 mb-sm-3 mb-lg-0">
+                    <!--begin::Labels-->
+                    <div class="mb-8">
+                        @if (Model.RESULTADO == Resultados.Escapado)
+                        {
+                                <div class="mb-3">
+                                    <span class="badge badge-light-warning me-2 fs-3">Prueba
+                                @Resultados.DictResultados[Model.RESULTADO??0]</span>
+                                    <div class="fw-semibold text-gray-700 fs-4 pt-3">Advertencia:
+                                        El auto no ha concluido la verificación.
+                                    </div>
+                                </div>
+                        }else if (Model.RESULTADO != Resultados.Rechazo)
+                        {
+
+
+
+                            <span class="badge badge-light-success me-2 fs-3">Aprobado
+                                @Resultados.DictResultados[Model.RESULTADO??0]</span>
+                        }
+                        else
+                        {
+
+
+                            if (Model.C_RECHAZO == CausaRechazo.OBD)
+                            {
+
+                                <div class="mb-3">
+                                    <span class="badge badge-light-danger fs-3"> No aprobado
+                                    </span>
+                                    <div class="fw-semibold text-gray-700 fs-4 pt-3">Causa Rechazo:
+                                        @OBD.DictOBD[Model.C_RECHAZO_OBD??0]
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="mb-3">
+                                    <span class="badge badge-light-danger fs-3"> No aprobado
+                                    </span>
+                                    <div class="fw-semibold text-gray-700 fs-4 pt-3">Causa Rechazo:
+                                        @CausaRechazo.DictClaveRechazo[Model.C_RECHAZO ?? 0]
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+
+                    </div>
+                    <!--end::Labels-->
+                    <!--begin::Title-->
+                    <h6 class="mb-6 fw-bolder text-gray-600 text-hover-primary">Datos del Vehículo</h6>
+                    <!--end::Title-->
+                    <!--begin::Item-->
+                    <div class="row">
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Propietario:</div>
+                        <div class="fw-bold text-gray-800 fs-6">@Model.Propietario</div>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Placa:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.Placa
+                        </div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">VIN:</div>
+                        <div class="fw-bold text-gray-800 fs-6">
+                            @Model.Serie
+                        </div>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Marca</div>
+                        <div class="fw-bold fs-6 text-gray-800">
+                            @Model.Marca
+                            @*<a href="#" class="link-primary ps-1">dsdsds</a>*@
+                        </div>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Submarca:</div>
+                        <div class="fw-bold text-gray-800 fs-6">@Model.Modelo</div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Motivo Verificación:</div>
+                        <div class="fw-bold text-gray-800 fs-6">@Model.MotivoVerificacion</div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Tipo Servicio:</div>
+                        <div class="fw-bold text-gray-800 fs-6">@Model.TipoServicio</div>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Línea:</div>
+                        <div class="fw-bold text-gray-800 fs-6">@Model.Clave</div>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Año Modelo:</div>
+                        <div class="fw-bold text-gray-800 fs-6">@Model.Anio</div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Fecha:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.Fecha.ToString("d")
+                        </div>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Vigencia:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.Vigencia.ToString("d")
+                        </div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Núm. Técnico:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.NumeroTrabajador
+                        </div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Folio Asignado:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.Folio
+                        </div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Inicio de Verificación:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.InicioPruebas
+                        </div>
+                    </div>
+                    <div class="mb-3 col-4 col-lg-12">
+                        <div class="fw-semibold text-gray-600 fs-7">Finalización de Verificación:</div>
+                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center">
+                            @Model.FinalizacionPruebas
+                        </div>
+                    </div>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <!--end::Invoice 2 sidebar-->
+            </div>
+            <!--end::Sidebar-->
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid  mb-0 mb-xl-0">
+                <!--begin::Invoice 2 content-->
+
+                    <div class="card card-bordered rounded h-100 ">
+                        <div class="card-header card-header-stretch">
+                            <h3 class="card-title">Expendiente </h3>
+                            <div class="card-toolbar">
+                                <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab"
+                                            href="#kt_tab_pane_7">Inspección Visual</a>
+                                    </li>
+                                    @if ((Model.PruebaObd ?? false) || (Model.PruebaEmisiones ?? false))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_8">Emisiones/OBD</a>
+                                        </li>
+                                    }
+                                    @if (Model.PruebaOpacidad ?? false)
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">Opacidad</a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.esPublico == null)
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">Evidencias</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="kt_tab_pane_7" role="tabpanel">
+                                    <div class="row mb-7">
+                                        <!--begin::Label-->
+                                            <div class="col-lg-12 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-3 fw-semibold text-muted">
+                                                        Número de Escapes
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.NumeroEscapes ?? 0
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @if (Model.FugasSistemaEscape != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 col-sm-6 fw-semibold ">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Fugas en sistema de escape
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.FugasSistemaEscape ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.GobernadorBuenEstado != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 col-sm-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Gobernador en buen estado
+                                                    </label>
+                                                    <div class="col-lg-2">@Html.Raw( 
+                                                        Model.GobernadorBuenEstado ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" : "<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.PortafiltroAire != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Portafiltro de aire
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.PortafiltroAire ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.FiltroAire != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Filtro de aire.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.FiltroAire ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.TaponDispositivoAceite != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Tapón del dispositivo de aceite.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.TaponDispositivoAceite ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.TaponCombustible != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Tapón de combustible.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.TaponCombustible ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.Bayoneta != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Bayoneta de medición del nivel de aceite en el cárter.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.Bayoneta ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.FugaAceiteMotor != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Fuga de fluidos en aceite del motor
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.FugaAceiteMotor ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.FugaAceiteTransmision != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Fuga de fluidos en aceite de transmisión
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                       @Html.Raw(
+                                                        Model.FugaAceiteTransmision ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.FugaLiquidoRefrigerante != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Fuga de fluidos en líquido refrigerante.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                       @Html.Raw(
+                                                        Model.FugaLiquidoRefrigerante ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.DibujoNeumaticos != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Dibujo de Neumáticos en toda la banda de rodadura
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.DibujoNeumaticos ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.DesperfectosNeumaticos != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Desperfectos en Neumáticos
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.DesperfectosNeumaticos ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.DimensionesNeumaticoIncorrectas != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Dimensiones del neumático incorrectas /diferente tipo de neumático
+                                                        en un mismo eje.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.DimensionesNeumaticoIncorrectas ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.ControlEmisionDesconectados != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Componente de control de emisiones del automóvil desconectados
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.ControlEmisionDesconectados ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.ControlEmisionAlterados != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Componente de control de emisiones del automóvil alterados.
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.ControlEmisionAlterados ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (Model.PlacasCorrespondientes != null)
+                                        {
+                                            <div class="col-sm-6 col-lg-6 col-6 fw-semibold">
+                                                <div class="row mb-7">
+                                                    <label class="col-lg-10 fw-semibold text-muted">
+                                                        Placas delantera y trasera correspondientes al registro de la cita
+                                                    </label>
+                                                    <div class="col-lg-2">
+                                                        @Html.Raw(
+                                                        Model.PlacasCorrespondientes ?? false ? "<i class=\"fs-2qx las la-check-circle text-success\"></i>" :"<i class=\"fs-2qx las la-times-circle text-danger\"></i>"
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel">
+                                    @if(Convert.ToBoolean(Model.OBD) == true){
+
+                                    
+                                    @if (Model.PruebaObd ?? false)
+                                    {
+                                        <div class="fw-bold fs-3 text-gray-800 mb-8">OBD</div>
+                                        <div class="row g-5 mb-11">
+                                            <!--end::Col-->
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Tipo SBD (Sistema de
+                                                    Diagnóstico Abordo):</div>
+                                                <!--end::Label-->
+                                                <!--end::Col-->
+                                                <div class="fw-bold fs-6 text-gray-800">@Model.OBD_TIPO_SDB</div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--end::Col-->
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Señal Luz mil:</div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@Model.OBD_MIL</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Convertidor Catalítico:
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@Model.OBD_CATAL</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">
+                                                    Sistema de Combustible:
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@Model.OBD_COMBU</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--end::Col-->
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Ignición en Cilindros:
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Col-->
+                                                <div class="fw-bold fs-6 text-gray-800">@Model.OBD_CILIN</div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--end::Col-->
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Componente Integrales:
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@Model.OBD_INTEG</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-3 col-6">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Sensores de Oxígeno:</div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@Model.OBD_OXIGE</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="fw-bold fs-3 text-gray-800 mb-8">Emisiones (No se obtuvo conexión con el dispositivo OBD)</div>
+                                        <div class="fw-bold fs-6 text-gray-800 mb-8">Protocolo
+                                            @Protocolos.DictProtocolo[Model.PROTOCOLO]</div>
+                                    }
+                                    }
+                                    <div class="row g-5 mb-11">
+                                        <!--end::Col-->
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-6 text-gray-600 mb-3">Protocolo:</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-6 text-gray-600 mb-3">@(Protocolos.DictProtocolo[Model.PROTOCOLO])</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-6 text-gray-600 mb-3"></div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-6 text-gray-600 mb-1">Emisiones</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-6 text-gray-600 mb-1">PAS5024</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-6 text-gray-600 mb-1">PAS2540</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">LAMBDA</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.LAMDA_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.LAMDA_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">HC PPM</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.HC_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.HC_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">CO %</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.CO_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.CO_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">CO2 %</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.CO2_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.CO2_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">CO + CO2 %</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.COCO2_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.COCO2_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">O2 %</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.O2_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.O2_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">NOX PPM</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.NO_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.NO_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">RPM</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.RPM_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.RPM_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">KM*H</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.KPH_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.KPH_2540??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-semibold fs-7 text-gray-700 mb-1">HP</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.THP_5024??0)</div>
+                                        </div>
+                                        <div class="col-sm-4 col-4">
+                                            <div class="fw-bold fs-8 text-gray-800">@(Model.THP_5024??0)</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="kt_tab_pane_9" role="tabpanel">
+                                    @if (Model.PruebaOpacidad ?? false)
+                                    {
+                                        <div class="fw-bold fs-3 text-gray-800 mb-8">Opacidad</div>
+                                        <div class="row g-5 mb-11">
+                                            <!--end::Col-->
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Promedio de opacidad
+                                                    registrada (Diésel):</div>
+                                                <!--end::Label-->
+                                                <!--end::Col-->
+                                                <div class="fw-bold fs-6 text-gray-800">@(Model.OPACIDADP??0)</div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--end::Col-->
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">
+                                                    Promedio del coeficiente de absorción de luz
+                                                    (Diésel):
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@(Model.OPACIDADK??0)</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Promedio de Temperatura del
+                                                    motor (Diésel):</div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@(Model.TEMP_MOT)°</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--end::Col-->
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">RPM’s a corte de gobernador
+                                                    (Diésel):</div>
+                                                <!--end::Label-->
+                                                <!--end::Col-->
+                                                <div class="fw-bold fs-6 text-gray-800">@(Model.VEL_GOB??0)</div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--end::Col-->
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Promedio de RPM’s ralentí
+                                                    (Diésel):</div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@(Model.POTMIN_RPM??0)</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Promedio de RPM’s a máximos
+                                                    (Diésel):</div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@(Model.POTMAX_RPM)</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">
+                                                    Promedio de temperatura del aceite del
+                                                    motor del vehículo (Diésel): :
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@(Model.TEMP_GAS??0)°</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <!--end::Label-->
+                                                <div class="fw-semibold fs-7 text-gray-600 mb-1">
+                                                    Promedio de temperatura de la cámara de
+                                                    gas del opacímetro (Diésel): 
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--end::Info-->
+                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                    <span class="pe-2">@(Model.TEMP_CAM??0)°</span>
+
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+
+                                    }
+                                </div>
+
+                                @if (((List<ListDocumentos>)ViewBag.ListaPdf != null && ((List<ListDocumentos>)ViewBag.ListaPdf).Count > 0) || ((ViewBag.ListaImagen as List<ListDocumentos>)
+                                    != null && ViewBag.ListaImagen.Count > 0))
+                                {
+                                <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
+                                    <div class="row g-6 g-xl-9">
+
+                                        @if (ViewBag.ListaPdf.Count > 0 && (List<ListDocumentos>)ViewBag.ListaPdf !=
+                                        null)
+                                        {
+                                            <div class="mx-5 row g-6 g-xl-9">
+                                                @foreach (var item in (List<ListDocumentos>)ViewBag.ListaPdf)
+                                                {
+                                                    <div class="py-2 px-4 col-md-3">
+                                                        <label class="control-label fw-bold mb-2 w-100">@item.DocName</label>
+                                                        @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 w-100"
+                                                download="@item.docName" href="@item.base64" title="Descargar"
+                                                role="button">*@
+                                                        <a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc"
+                                                            data-url="@(item.UrlName)">
+                                                            <span class="svg-icon svg-icon-1 w-100">
+                                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none"
+                                                                        fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path
+                                                                            d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                                                            fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                                        <path
+                                                                            d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                                                            fill="#000000" />
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                            <br>
+                                                            @item.DocName
+                                                        </a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                        <!--begin::Col-->
+                                        @* @if (!string.IsNullOrEmpty(Model.URLFotoTecnico))
+                                        {
+                                            <div class="col-md-6 col-sm-6 col-lg-6 col-6 col-xl-6">
+                                                <!--begin::Card-->
+                                                <div class="card h-300 ">
+                                                    <!--begin::Card body-->
+                                                    <div
+                                                        class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                                        <!--begin::Name-->
+                                                        <a href="javascript:void(0)"
+                                                            class="text-gray-800 text-hover-primary d-flex flex-column imageUser"
+                                                            data-id="@Model.URLFotoTecnico"
+                                                            data-nombre="Foto Técnico Verificador">
+                                                            <!--begin::Image-->
+                                                            <div class="symbol symbol-200px mb-5">
+                                                                <img src="@Model.URLFotoTecnico" class="theme-light-show"
+                                                                    alt="">
+
+                                                            </div>
+                                                            <!--end::Image-->
+                                                            <!--begin::Title-->
+                                                            <div class="fs-5 fw-bold mb-2">
+                                                                Foto Técnico Verificador
+                                                            </div>
+                                                            <!--end::Title-->
+                                                        </a>
+                                                        <!--end::Name-->
+                                                        <!--begin::Description-->
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <!--end::Card body-->
+                                                </div>
+                                                <!--end::Card-->
+                                            </div>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.URLPlacaDelantera))
+                                        {
+                                            <div class="col-md-6 col-sm-6 col-lg-6 col-6 col-xl-6">
+                                                <div class="card h-300 ">
+                                                    <!--begin::Card body-->
+                                                    <div
+                                                        class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                                        <!--begin::Name-->
+                                                        <a href="javascript:void(0)"
+                                                            class="text-gray-800 text-hover-primary d-flex flex-column imageUser"
+                                                            data-id="@Model.URLPlacaDelantera"
+                                                            data-nombre="Foto Placa Delantera">
+                                                            <!--begin::Image-->
+                                                            <div class="symbol symbol-200px mb-5">
+                                                                <img src="@Model.URLPlacaDelantera" class="theme-light-show"
+                                                                    alt="">
+
+                                                            </div>
+                                                            <!--end::Image-->
+                                                            <!--begin::Title-->
+                                                            <div class="fs-5 fw-bold mb-2">
+                                                                Foto Placa Delantera
+                                                            </div>
+                                                            <!--end::Title-->
+                                                        </a>
+                                                        <!--end::Name-->
+                                                        <!--begin::Description-->
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <!--end::Card body-->
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.URLPlacaTrasera))
+                                        {
+                                            <div class="col-md-6 col-sm-6 col-lg-6 col-6 col-xl-6">
+                                                <div class="card h-300 ">
+                                                    <!--begin::Card body-->
+                                                    <div
+                                                        class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                                        <!--begin::Name-->
+                                                        <a href="javascript:void(0)"
+                                                            class="text-gray-800 text-hover-primary d-flex flex-column imageUser"
+                                                            data-id="@Model.URLPlacaTrasera"
+                                                            data-nombre="Foto Placa Trasera">
+                                                            <!--begin::Image-->
+                                                            <div class="symbol symbol-200px mb-5">
+                                                                <img src="@Model.URLPlacaTrasera" class="theme-light-show"
+                                                                    alt="">
+
+                                                            </div>
+                                                            <!--end::Image-->
+                                                            <!--begin::Title-->
+                                                            <div class="fs-5 fw-bold mb-2">
+                                                                Foto Placa Trasera
+                                                            </div>
+                                                            <!--end::Title-->
+                                                        </a>
+                                                        <!--end::Name-->
+                                                        <!--begin::Description-->
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <!--end::Card body-->
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.URLPlacaCamara))
+                                        {
+                                            <div class="col-md-6 col-sm-6 col-lg-6 col-6 col-xl-6">
+                                                <div class="card h-300 ">
+                                                    <!--begin::Card body-->
+                                                    <div
+                                                        class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                                        <!--begin::Name-->
+                                                        <a href="javascript:void(0)"
+                                                            class="text-gray-800 text-hover-primary d-flex flex-column imageUser"
+                                                            data-id="@Model.URLPlacaCamara" data-nombre="Foto Cámara Línea">
+                                                            <!--begin::Image-->
+                                                            <div class="symbol symbol-200px mb-5">
+                                                                <img src="@Model.URLPlacaCamara" class="theme-light-show"
+                                                                    alt="">
+
+                                                            </div>
+                                                            <!--end::Image-->
+                                                            <!--begin::Title-->
+                                                            <div class="fs-5 fw-bold mb-2">
+                                                                Foto Cámara Línea
+                                                            </div>
+                                                            <!--end::Title-->
+                                                        </a>
+                                                        <!--end::Name-->
+                                                        <!--begin::Description-->
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <!--end::Card body-->
+                                                </div>
+                                            </div>
+                                        }
+                                    </div> *@
+
+                                    @if ( (ViewBag.ListaImagen as List<ListDocumentos>)
+                                    != null && ViewBag.ListaImagen.Count > 0)
+                                    {
+                                        <div class="row g-6 g-xl-9 mb-3 mb-xl-9">
+                                            @foreach (var item in (List<ListDocumentos>)ViewBag.ListaImagen)
+                                            {
+                                                <div class="col-md-6 col-sm-12 col-lg-6 col-12 col-xl-6 align-self-end">
+                                                    <!--begin::Card-->
+                                                    <div class="card">
+                                                        <!--begin::Card body-->
+                                                        <div
+                                                            class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                                            <!--begin::Name-->
+                                                            <a href="javascript:void(0)"
+                                                                class="text-gray-800 text-hover-primary d-flex flex-column imageUser"
+                                                                data-nombre="@item.DocName">
+                                                                <!--begin::Image-->
+                                                                <div class="img-thumbnail mb-5">
+                                                                    <img src="" class="img-fluid" data-url="@item.UrlName" class="theme-light-show" alt="">
+
+                                                                </div>
+                                                                <!--end::Image-->
+                                                                <!--begin::Title-->
+                                                                <div class="fs-5 fw-bold mb-2">
+                                                                    @item.DocName
+                                                                </div>
+                                                                <!--end::Title-->
+                                                            </a>
+                                                            <!--end::Name-->
+                                                            <!--begin::Description-->
+                                                            <!--end::Description-->
+                                                        </div>
+                                                        <!--end::Card body-->
+                                                    </div>
+                                                    <!--end::Card-->
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+
+
+
+
+
+                                </div>
+                            </div>
+                            }
+
+                        </div>
+                    </div>
+                <!--end::Invoice 2 content-->
+            </div>
+            <!--end::Content-->
+
+        </div>
+        <!--end::Layout-->
+    </div>
+    <!--end::Body-->
+</div>
+
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+
+@section Scripts{
+    <script src="~/js/Cita/smadot.cita.expediente.js" asp-append-version="true"></script>
+}

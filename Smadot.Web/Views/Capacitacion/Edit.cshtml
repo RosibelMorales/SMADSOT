@@ -1,0 +1,395 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model List<Smadot.Models.Entities.Capacitacion.Response.CapacitacionResponse>
+
+@{
+	ViewBag.Title = "Registro";
+	ViewBag.Title2 = "Lista de empleados";
+	Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+	var cero = 0;
+	var SolicitarAutorizacion = Smadot.Models.Dicts.CapacitacionDic.SolicitarAutorizacion;
+	var RechazadoDVRF = Smadot.Models.Dicts.CapacitacionDic.RechazadoDVRF;
+	var asistio = Smadot.Models.Dicts.CapacitacionDic.Asistencia;
+}
+
+@section styles{
+	<link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+	<style>
+		input:read-only {
+			/*pointer-events: none;*/
+			background: var(--kt-input-disabled-bg);
+		}
+
+		input:disabled {
+			pointer-events: none;
+		}
+
+		.select2-container .select2-selection--single {
+			height: 43px !important;
+		}
+
+		.tableCustom > tbody > tr:nth-child(4n+1) > td,
+		.tableCustom > tbody > tr:nth-child(4n+2) > td {
+			background-color: #fff;
+		}
+
+		.tableCustom > tbody > tr:nth-child(4n+3) > td,
+		.tableCustom > tbody > tr:nth-child(4n+4) > td {
+			background-color: #f9f9f9;
+		}
+
+		/*.tableCustom > thead > tr {
+											background-color: #f9f9f9;
+										}*/
+	</style>
+}
+
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+<partial name="~/Views/Shared/_ModalCierre.cshtml" model="string.Empty" />
+
+@if (Model[0].IdCapacitacion == null || Model[0].IdCapacitacion == cero)
+{
+	@section breadcrumb{
+	<li class="breadcrumb-item">
+		<a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+	</li>
+	<li class="breadcrumb-item">
+		<span class="bullet bg-gray-400 w-5px h-2px"></span>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="/Capacitacion" class="text-muted text-hover-primary">Capacitaciones</a>
+	</li>
+	<li class="breadcrumb-item">
+		<span class="bullet bg-gray-400 w-5px h-2px"></span>
+	</li>
+	<li class="active">@ViewData["Title"]</li>
+}
+	@section toolbar{
+	@*<a class="btn btn-sm fw-bold btn-success" id="btnRegistroCapacitacionEmpleado">Guardar</a>*@
+	<a class="btn btn-sm fw-bold btn-primary" id="btnSave">Guardar</a>
+	<a class="btn btn-sm fw-bold btn-success" asp-controller="Capacitacion" asp-action="Index">Cancelar</a>
+    }
+
+	<form role="form" id="form_registroCapacitacion">
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-flush h-lg-100 shadow-sm">
+						<!--begin::Body-->
+						<div class="card-body pt-5">
+							<div class="bottom-buffer">
+								<div class="row mb-5">
+									<div class="col-md-12">
+										<div class="form-group row">
+											<label class="form-label"><b>Verificentro: </b></label>
+											<div class="position-relative" style="width: 100% !important">
+												<label class="form-label">@Model[0].NombreVerificentro</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row mb-5">
+									<div class="col-md-4">
+										<div class="form-group row">
+											<label class="form-label"><b>Tema: &nbsp;<strong class="obligatorio">*</strong></b></label>
+											<div class="position-relative" style="width: 100% !important">
+												<input class="form-control form-control-solid" type="text" placeholder="Ingresa el tema" id="TemaCapacitacion" name="TemaCapacitacion" />
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group row">
+											<label class="form-label" for="autocomplete"><b>Empleado: &nbsp;<strong class="obligatorio">*</strong></b></label>
+											<div class="position-relative" style="width: 100% !important">
+												<select class="form-control form-control-solid form-select" data-control="select2" name="empleadosGrid" id="empleadosGrid">
+													@foreach (var obj in Model)
+													{
+														<option value="@obj.IdPuestoVerificentro">@obj.Nombre / @obj.NumeroTrabajador</option>
+													}
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 form-group">
+										<label class="form-label" for="Fecha"><b>Fecha: &nbsp;<strong class="obligatorio">*</strong></b></label>
+										<div class="position-relative">
+											<input class="form-control form-control-solid" id="FechaRegistroCapacitacion" name="FechaRegistroCapacitacion" />
+											<div class="position-absolute translate-middle-y top-50 end-0 me-3">
+												<i class="fa-solid fa-calendar-days" onclick="document.getElementById('FechaRegistroCapacitacion').focus(); return false;"></i>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-1">
+										<div class="form-group row" align="right">
+											<label class="form-label" for="autocomplete"><b>&#8192</b></label>
+											<button class="btn btn-secondary" id="botonEnvio">Añadir</button>
+										</div>
+									</div>
+								</div>
+								@*<div class="row mb-5">
+							<div class="col-md-12" align="right">
+							<button class="btn btn-secondary" id="botonEnvio">Añadir</button>
+							</div>
+							</div>*@
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br>
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-flush h-lg-100 shadow-sm">
+						<!--begin::Body-->
+						<div class="card-body pt-5">
+							<div class="bottom-buffer">
+								<div class="datatable datatable-bordered datatable-head-custom">
+									<table class="table table-striped gx-7" id="transactionTable">
+										<tr>
+											<th hidden><b>Id</b></th>
+											<th><b>Empleado</b></th>
+											<th><b></b></th>
+											<th></th>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!--end::Body-->
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</form>
+}
+else
+{
+	@section breadcrumb{
+	<li class="breadcrumb-item">
+		<a href="#" class="text-muted text-hover-primary">Administración CVV</a>
+	</li>
+	<li class="breadcrumb-item">
+		<span class="bullet bg-gray-400 w-5px h-2px"></span>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="/Capacitacion" class="text-muted text-hover-primary">Capacitaciones</a>
+	</li>
+	<li class="breadcrumb-item">
+		<span class="bullet bg-gray-400 w-5px h-2px"></span>
+	</li>
+	<li class="active">@ViewData["Title2"]</li>
+	}
+	@section toolbar{
+	@*<a class="btn btn-sm fw-bold btn-success" id="btnActualizarAsistencia">Guardar</a>*@
+	<a class="btn btn-sm fw-bold btn-success" asp-controller="Capacitacion" asp-action="Index">Cancelar</a>
+    }
+
+	<div class="col-md-12">
+		<!--begin::List widget 1-->
+		<div class="card card-flush h-lg-100">
+			<!--begin::Body-->
+            <div class="card-body pt-5">
+                @if (Model[0].IdCatEstatusCapacitacion == SolicitarAutorizacion)
+                {
+                    <div class="col-md-12" align="right">
+                        @if (UserResolver.HasPermission(MenuCapacitaciones.Autorizar))
+                        {
+                            <a class="btn btn-sm fw-bold btn-primary btnAutorizado" data-id="@Model[0].IdCapacitacion">Autorizar</a>
+                        }
+                        @if (UserResolver.HasPermission(MenuCapacitaciones.Rechazar))
+                        {
+                            <a class="btn btn-sm fw-bold btn-success btnDenegado" data-id="@Model[0].IdCapacitacion">Rechazar</a>
+                        }
+
+                    </div>
+                }
+
+				<label class="form-label"> <h1><b>@Model[0].TemaCapacitacion </b></h1></label><br>
+				<label class="form-label"><h3><b>@Model[0].FechaCapacitacionFormat</b></h3></label>
+                        
+				<div class="bottom-buffer">
+					<div class="datatable datatable-bordered datatable-head-custom" id="tabletable">
+						<table class="table table-striped gx-7" id="tblCapacitacionEmpleado">
+							<thead>
+								<tr>
+									@*<td class="d-none">Id</td>*@
+									<td><h5><b>No. Trabajador</b></h5></td>
+									<td><h5><b>Nombre Empleado</b></h5></td>
+									<td><h5><b>Fotografia</b></h5></td>
+									<td><h5><b>Asistio</b></h5></td>
+									<td><h5><b>Evaluación</b></h5></td>
+									<td><h5><b></b></h5></td>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (Smadot.Models.Entities.Capacitacion.Response.CapacitacionResponse autorizado in Model)
+								{
+									<tr>
+
+										@*@if (@autorizado.NumeroTrabajador == null || autorizado.NumeroTrabajador <= cero)*@
+										@if (string.IsNullOrEmpty(autorizado.NumeroTrabajador))
+										{
+											<td>-</td>
+										}
+										else
+										{
+											<td>@autorizado.NumeroTrabajador</td>
+										}
+
+										@if (@autorizado.Nombre == null || autorizado.Nombre == string.Empty)
+										{
+											<td>-</td>
+										}
+										else
+										{
+											<td>@autorizado.Nombre</td>
+										}
+
+										@if (@autorizado.UrlFotografia == null || autorizado.UrlFotografia == string.Empty)
+										{
+											<td>-</td>
+										}
+										else
+										{
+											var url2 = autorizado.UrlFotografia.Split("/")[autorizado.UrlFotografia.Split("/").Length - 1];
+											<td>
+
+												@*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarFoto" data-url="@(autorizado.Id+"/"+url2)" role="button">*@
+												<a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@autorizado.UrlFotografiaBase64" title="Descargar" role="button">
+													<span class="svg-icon svg-icon-1">
+														<!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<polygon points="0 0 24 0 24 24 0 24" />
+																<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+																<path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+															</g>
+														</svg><!--end::Svg Icon-->
+													</span>
+													@url2
+												</a>
+											</td>
+										}
+
+										@if (@autorizado.Asistio == asistio)
+										{
+											@if (autorizado.IdCatEstatusCapacitacion == SolicitarAutorizacion || autorizado.IdCatEstatusCapacitacion == RechazadoDVRF)
+											{
+												<td>
+													<div class="form-check form-switch form-check-custom form-check-success form-check-solid">
+														<input data-id="@autorizado.Id" class="form-check-input" checked type="checkbox" id="Asistencia" disabled value="@autorizado.Id">
+													</div>
+												</td>
+											}
+											else
+											{
+												<td>
+													<div class="formform-check form-switch form-check-custom form-check-success form-check-solid">
+														<input data-id="@autorizado.Id" class="form-check-input" checked type="checkbox" id="Asistencia" value="@autorizado.Id">
+													</div>
+												</td>
+											}
+
+										}
+										else
+										{
+											@if (autorizado.IdCatEstatusCapacitacion == SolicitarAutorizacion || autorizado.IdCatEstatusCapacitacion == RechazadoDVRF)
+											{
+												<td>
+													<div class="form-check form-switch form-check-custom form-check-success form-check-solid">
+														<input data-id="@autorizado.Id" class="form-check-input" type="checkbox" id="Asistencia" disabled value="@autorizado.Id">
+													</div>
+												</td>
+											}
+											else
+											{
+
+												<td>
+													<div class="form-check form-switch form-check-custom form-check-success form-check-solid">
+														<input data-id="@autorizado.Id" class="form-check-input" type="checkbox" id="Asistencia" value="@autorizado.Id">
+													</div>
+												</td>
+											}
+
+										}
+
+										@if (@autorizado.UrlEvaluacion == null || @autorizado.UrlEvaluacion == string.Empty)
+										{
+											<td>-</td>
+										}
+										else
+										{
+											var url = autorizado.UrlEvaluacion.Split("/")[autorizado.UrlEvaluacion.Split("/").Length - 1];
+											<td>
+
+												@*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(autorizado.Id+"/"+url)" role="button">*@
+												<a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url" href="@autorizado.UrlEvaluacionBase64" title="Descargar" role="button">
+													<span class="svg-icon svg-icon-1">
+														<!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<polygon points="0 0 24 0 24 24 0 24" />
+																<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+																<path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+															</g>
+														</svg><!--end::Svg Icon-->
+													</span>
+													@url
+												</a>
+											</td>
+										}
+										<td>
+                                            @if (autorizado.IdCatEstatusCapacitacion == SolicitarAutorizacion || autorizado.IdCatEstatusCapacitacion == RechazadoDVRF)
+                                            {
+
+                                            }
+                                            else if (UserResolver.HasPermission(MenuCapacitaciones.SubirEvaluacion))
+                                            {
+                                                <a data-id="@autorizado.Id" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnListaEmpleado" title="Subir Evaluación">
+                                                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                                                </a>
+                                            }
+                                            @if (UserResolver.HasPermission(MenuCapacitaciones.SubirFoto))
+                                            {
+                                                <a data-id="@autorizado.Id" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnUploadPhoto" title="Subir fotografía">
+                                                    <i class="bi bi-camera"></i>
+                                                </a>
+                                            }
+
+										</td>
+
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::LIst widget 1-->
+	</div>
+
+
+}
+
+
+
+@section scripts{
+	<script src="~/lib/jquery-ui/dist/jquery-ui.min.js"></script>
+	<script src="~/lib/moment/js/moment-with-locales.js"></script>
+	<script src="~/lib/datatables/dist/js/dataTables.material.min.js"></script>
+	<script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+	<script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+	<script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+	<script src="~/lib/dropzone/dist/dropzone-min.js"></script>
+	<script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+	<script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+
+	<script asp-append-version="true" src="~/js/Capacitacion/smadot.registro.js"></script>
+	<script asp-append-version="true" src="~/js/Capacitacion/smadot.upload.js"></script>
+}

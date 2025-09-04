@@ -1,0 +1,409 @@
+﻿@using Smadot.Models.Dicts;
+@using Smadot.Models.Entities.Personal.Response;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Personal.Response.PersonalResponse
+@{
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    ViewData["Title"] = "Detalle";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            cursor: default;
+            z-index: 99999 !important;
+        }
+    </style>
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Seguimiento a CVV </a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-hover-primary">@ViewData["Title"]</a>
+    </li>
+    }
+
+
+@section toolbar{
+    <a class="btn btn-sm fw-bold btn-secondary" asp-controller="Personal" asp-action="Index">Cancelar</a>
+    <button id="idUserPuestoVerificentro" value="@Model.IdPuestoVerificentro" hidden>Cancelar</button>
+    @if (Model.IdCatEstatusPuesto == CatEstatusPuestoDic.PendienteValidacion)
+    {
+        @if (UserResolver.HasPermission(MenuPersonal.AprobarDVRF))
+        {
+            <a class="btn btn-sm fw-bold btn-warning btnModificarEstatus" data-estatus="@CatEstatusPuestoDic.AprobadoDVRF">Aprobar DVRF </a>
+        }
+        @if (UserResolver.HasPermission(MenuPersonal.RechazarDVRF))
+        {
+            <a class="btn btn-sm fw-bold btn-danger btnModificarEstatus" data-estatus="@CatEstatusPuestoDic.RechazadoDVRF">Rechazar DVRF</a>
+        }
+    }
+    @if (Model.IdCatEstatusPuesto == CatEstatusPuestoDic.SolicitaModificar)
+    {
+        @if (UserResolver.HasPermission(MenuPersonal.PermiteModificar))
+        {
+            <a class="btn btn-sm fw-bold btn-warning btnModificarEstatus" data-estatus="@CatEstatusPuestoDic.PermiteModificar">Permitir Modificación</a>
+        }
+        @if (UserResolver.HasPermission(MenuPersonal.RechazaModificar))
+        {
+            <a class="btn btn-sm fw-bold btn-danger btnModificarEstatus" data-estatus="@CatEstatusPuestoDic.RechazaModificar">Rechazar Modificación</a>
+        }
+    }
+    @if (Model.IdCatEstatusPuesto == CatEstatusPuestoDic.RechazaModificar)
+    {
+        @if (UserResolver.HasPermission(MenuPersonal.AprobarDVRF))
+        {
+            <a class="btn btn-sm fw-bold btn-warning btnModificarEstatus" data-estatus="@CatEstatusPuestoDic.PermiteModificar">Activar</a>
+        }
+    }
+}
+
+<form role="form" id="form_registro" clase="clearfix">
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+            @if (Model.FechaSeparacion.HasValue)
+            {
+                <h4>
+                    Usuario <span class="badge badge-danger">Baja</span>
+                </h4>
+            }
+            else
+            {
+                <h4>
+                    Usuario <span class="badge badge-info">@CatEstatusPuestoDic.Nombres[Model.IdCatEstatusPuesto - 1]</span>
+                </h4>
+            }          
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-4  fv-row">
+                    <label class="form-label">Nombre: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase" asp-for="Nombre" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-4  fv-row">
+                    <label class="form-label">Correo: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid" asp-for="CorreoUsuario" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-4  fv-row">
+                    <label class="form-label">Teléfono: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid" asp-for="TelefonoUsuario" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Fecha de nacimiento: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="FechaNacimiento" value="@Model.FechaNacimiento.ToString("dd/MM/yyyy")" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Género: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="Genero" value="@(string.IsNullOrEmpty(Model.Genero) ? "" : Model.Genero == "M" ? "Masculino" : "Femenino")" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">RFC: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase" asp-for="Rfc" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">CURP: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase" asp-for="Curp" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Puesto:</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="NombrePuesto" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Número de trabajador: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase" asp-for="NumeroTrabajador" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Fecha de capacitación inicio: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="FechaCapacitacionInicio" value="@Model.FechaCapacitacionInicio.ToString("dd/MM/yyyy")" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Fecha de capacitación final: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="FechaCapacitacionFinal" value="@Model.FechaCapacitacionFinal.ToString("dd/MM/yyyy")" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-6 mt-6">
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Fecha de incorporación: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="FechaIncorporacion" value="@Model.FechaIncorporacion.ToString("dd/MM/yyyy")" type="text" disabled />
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6  fv-row">
+                    <label class="form-label">Fecha de acreditación de norma: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control form-control-solid input-uppercase " asp-for="FechaAcreditacionNorma" value="@(Model.FechaAcreditacionNorma.HasValue ? Model.FechaAcreditacionNorma.Value.ToString("dd/MM/yyyy") : "--/--/----")" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <div class="card shadow-sm mb-5 card-flush h-md-100">
+            <div class="card-header pt-7">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800">Horario</span>
+                </h3>
+            </div>
+            <div class="card-body pt-6">
+                <div class="table-responsive">
+                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                        <thead>
+                            <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
+                                <th class="p-0 pb-3 min-w-175px text-start">Día</th>
+                                <th class="p-0 pb-3 min-w-100px text-start">Hora inicial</th>
+                                <th class="p-0 pb-3 min-w-100px text-start">Hora final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.HorarioRequest)
+                            {
+                                <tr>
+                                    <td class="text-start pe-0">
+                                        <input id="Dia-@item.Id" value="@item.Dia" hidden />
+                                        <span class="text-gray-600 fw-bold fs-6">@item.Dia</span>
+                                    </td>
+                                    <td class="text-end pe-0">
+                                        <input class="form-control form-control-solid input-uppercase w-50" value="@item.HoraInicioResponse" type="time" disabled />
+                                    </td>
+                                    <td class="text-end pe-0">
+                                        <input class="form-control form-control-solid input-uppercase w-50" value="@item.HoraFinResponse" type="time" disabled />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12">
+        <div class="card shadow-sm mb-5 card-flush h-md-100">
+            <div class="card-header pt-7">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800">Documentos</span>
+                </h3>
+            </div>
+            <div class="card-body pt-6">
+                <div class="row col-md-12">
+                   @* @{
+                        var url1 = Model.UrlIne.Split("/")[Model.UrlIne.Split("/").Length - 1];
+                    }*@
+                    @if (!string.IsNullOrEmpty(Model.UrlIne))
+                    {
+                        var url2 = Model.UrlIne.Split("/")[Model.UrlIne.Split("/").Length - 1];
+                        <div class="py-2 px-4 col-md-3">
+
+                            
+                            <label class="control-label fw-bold">INE</label>
+
+                            <br />
+                            @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model.IdUsuario+"/"+Model.UrlIne.Split("/")[Model.UrlIne.Split("/").Length - 1])">*@
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@ViewBag.UrlIne" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                INE
+                            </a>
+
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.UrlFoto))
+                    {
+                        var url2 = Model.UrlFoto.Split("/")[Model.UrlFoto.Split("/").Length - 1];
+                        <div class="py-2 px-4 col-md-3">
+
+                            @{var url1 = Model.UrlFoto.Split("/")[Model.UrlFoto.Split("/").Length - 1];}
+                            <label class="control-label fw-bold">Foto</label>
+
+                            <br />
+                            @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model.IdUsuario+"/"+url1)">*@
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@ViewBag.UrlFoto" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                FOTO
+                            </a>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.UrlSeguroSocial))
+                    {
+                        var url2 = Model.UrlSeguroSocial.Split("/")[Model.UrlSeguroSocial.Split("/").Length - 1];
+                        <div class="py-2 px-4 col-md-3">
+
+                            @{var url1 = Model.UrlSeguroSocial.Split("/")[Model.UrlSeguroSocial.Split("/").Length - 1];}
+                            <label class="control-label fw-bold">Seguro social</label>
+
+                            <br />
+                            @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model.IdUsuario+"/"+url1)">*@
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@ViewBag.UrlSeguroSocial" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                Seguro Social
+                            </a>
+
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.UrlFirma))
+                    {
+                        var url2 = Model.UrlFirma.Split("/")[Model.UrlFirma.Split("/").Length - 1];
+                        <div class="py-2 px-4 col-md-3">
+
+                            @{var url1 = Model.UrlFirma.Split("/")[Model.UrlFirma.Split("/").Length - 1];}
+                            <label class="control-label fw-bold">Firma</label>
+
+                            <br />
+                            @*<a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model.IdUsuario+"/"+url1)">*@
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2" download="@url2" href="@ViewBag.UrlFirma" title="Descargar" role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                Firma
+                            </a>
+
+                        </div>
+                    }
+                    @*@if (!string.IsNullOrEmpty(Model.UrlContrato))
+                    {
+                        <div class="py-2 px-4 col-md-3">
+
+                            @{var url1 = Model.UrlContrato.Split("/")[Model.UrlContrato.Split("/").Length - 1];}
+                            <label class="control-label fw-bold">Contrato</label>
+
+                            <br />
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2 descargarDoc" data-url="@(Model.IdUsuario+"/"+url1)">
+                                <span class="svg-icon svg-icon-1">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo13/dist/../src/media/svg/icons/Files/DownloadedFile.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z" fill="#000000" />
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+                                Contrato
+                            </a>
+
+                        </div>
+                    }*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12" style="@(ViewBag.HasPuestos ? "display:block" : "display:none")">
+        <div class="card shadow-sm mb-5 card-flush h-md-100">
+            <div class="card-header pt-7">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800">Puestos Anteriores</span>
+                </h3>
+            </div>
+            <div class="card-body pt-6">
+                <div class="row col-md-12">
+                    <div class="py-2 px-4 col-md-3 table table-responsive">
+                        <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                            <thead>
+                                <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
+                                    <th class="p-0 pb-3 min-w-100px text-start"># Trabajador</th>
+                                    <th class="p-0 pb-3 min-w-100px text-start">Puesto</th>
+                                    <th class="p-0 pb-3 min-w-100px text-start">Fecha Capacitación inicio</th>
+                                    <th class="p-0 pb-3 min-w-100px text-start">Fecha Capacitación fin</th>
+                                    <th class="p-0 pb-3 min-w-100px text-start">Fecha Capacitación incorporacion</th>
+                                    <th class="p-0 pb-3 min-w-100px text-start">Fecha Separación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in (List<PersonalResponse>)ViewBag.Puestos)
+                                {
+                                    <tr>
+                                        <td class="text-gray-600 fw-bold fs-6">@item.NumeroTrabajador</td>
+                                        <td>@item.NombrePuesto</td>
+                                        <td>@item.FechaCapacitacionInicio.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.FechaCapacitacionFinal.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.FechaIncorporacion.ToString("dd/MM/yyyy")</td>
+                                        <td>@(item.FechaSeparacion.HasValue ? item.FechaSeparacion.Value.ToString("dd/MM/yyyy") : "")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-ui/dist/jquery-ui.min.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script asp-append-version="true" src="~/js/Personal/smadot.personal.detalle.js"></script>
+    }

@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Acceso a cámaras CVV";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/lib/dropzone/dist/dropzone.css" type="text/css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            cursor: default;
+            z-index: 99999 !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 43px !important;
+        }
+    </style>
+}
+
+@section breadcrumb{
+
+    <li class="active" aria-current="page"><a href="#">@ViewBag.Title</a></li>
+}
+
+@section toolbar{
+    @*<a class="btn  btn-sm fw-bold btn-primary" id="btnRegistrarDevolucionSPF">Registrar</a>*@
+    }
+
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-flush h-lg-100 shadow-sm">
+                <!--begin::Body-->
+                <div class="card-body pt-5">
+                    <div class="row">
+                        @for (int i = 1; i < 7; i++)
+                        {
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3> Cámara @i</h3>
+                                        <div id="vid-controls-@i">
+                                            <video id="vid-show-@i" autoplay style="width:100%"></video>
+                                            <div id="vid-canvas-@i" class="form-group"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+
+                    </div>
+
+                </div>
+                <!--end::Body-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+
+@section scripts{
+    <script src="~/lib/jquery-ui/dist/jquery-ui.min.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/dropzone/dist/dropzone-min.js"></script>
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script src="~/lib/formvalidation/dist/js/FormValidation.full.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+    <script src="~/Scripts/bootbox.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/SignalR/hubs"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+    <script>
+        var CamPage = function () {
+            var init = () => {
+                InitializeCameras();
+            }
+            const InitializeCameras = () => {
+                for (let i = 1; i < 7; i++) {
+                    CreateCamera(i);
+                }
+            }
+            const CreateCamera = (id) => {
+                var video = document.getElementById(`vid-show-${id}`);
+                //canvas = document.getElementById(`vid-canvas-${id}`),
+                //take = document.getElementById(`vid-take-${id}`),
+                //videoTracks;
+                //$(document).on('click', '#ActivarCamaraHTML', function () {
+                $(`vid-show-${id}`).show();
+                navigator.getMedia = (navigator.getUserMedia || navigator.webKitGetUserMedia || navigator.mozGetUserMedia);
+                navigator.getMedia({ video: true }, function (stream) {
+                    video.srcObject = stream;
+                    video.load();
+                    //take.addEventListener("click", function () {
+                    //    videoTracks = stream.getVideoTracks();
+                    //    var draw = document.createElement("canvas");
+                    //    draw.id = "canvas1";
+                    //    draw.width = video.videoWidth;
+                    //    draw.height = video.videoWidth + 100;
+                    //    var context2D = draw.getContext("2d");
+                    //    context2D.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                    //    $("#vid-show").hide();
+                    //    canvas.innerHTML = "";
+                    //    canvas.appendChild(draw);
+                    //    $("div#vid-canvas canvas").css({ "width": "100%" });
+                    //    $("#vid-canvas").show();
+                    //    videoTracks.forEach(function (track) { track.stop() });
+                    //    $("#vid-take").hide();
+                    //    $("#Cancel1").show();
+                    //    resource1 = ($("#canvas1")[0]).toDataURL("image/png").replace('data:image/png;base64,', '');
+                    //});
+                }, function (err) {
+                    document.getElementById("vid-controls").innerHTML = "Habilite la cámara.";
+                });
+                //});
+
+                /**/
+            }
+
+            return {
+                init: () => {
+                    init()
+                }
+            }
+        }();
+        $(document).ready(function () {
+            CamPage.init();
+        })
+    </script>
+
+}

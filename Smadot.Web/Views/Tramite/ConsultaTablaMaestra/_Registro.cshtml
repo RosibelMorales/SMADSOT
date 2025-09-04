@@ -1,0 +1,89 @@
+@using Smadot.Models.Entities.ConsultaTablaMaestra.Response
+@model Smadot.Models.Entities.ConsultaTablaMaestra.Response.TablaMaestraResponse
+@{
+    ViewData["Title"] = "_Registro";
+}
+
+
+<form role="form" id="form_tabla_maestra" class="clearfix">
+    <div class="row">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-3 col-lg-2 my-4">
+            <div class="form-group">
+                <label for="numeroSerie" class="form-label" asp-for="PROTOCOLO"> PROTOCOLO&nbsp;<strong
+                        class="obligatorio">*</strong></label>
+                <select asp-for="PROTOCOLO" asp-items="@((List<SelectListItem>)ViewBag.protocolos)"
+                    class="form-select"></select>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-2 my-4">
+            <div class="form-group">
+                <label for="numeroSerie" class="form-label" asp-for="Marca"> MARCA&nbsp;<strong
+                        class="obligatorio">*</strong></label>
+                <select asp-for="Marca" asp-items="@((List<SelectListItem>)ViewBag.marcas)"
+                    class="form-select"></select>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-2 my-4">
+            <div class="form-group">
+                <label class="form-label" asp-for="IdRegistroSubMarca">SUBMARCA &nbsp;<strong
+                        class="obligatorio">*</strong></label>
+                <select asp-for="IdRegistroSubMarca" class="form-select ">
+                    <option value="@(Model.IdRegistroSubMarca == 0 ? "":$"{Model.IdRegistroSubMarca}")">@Model.SubMarca
+                    </option>
+                </select>
+            </div>
+        </div>
+        <!-- Iterar a través de las propiedades que son checkboxes -->
+        @foreach (var property in typeof(TablaMaestraResponse).GetProperties().Where(p =>
+        !Model.CamposIgnorados.Contains(p.Name)))
+        {
+            <div class="col-md-3 col-lg-2 my-4 my-4">
+                @if (property.PropertyType == typeof(decimal))
+                {
+                    <div class="form-group">
+                        <label for="numeroSerie" class="form-label">@(property.Name): &nbsp;<strong
+                                class="obligatorio">*</strong></label>
+                        @if (property.Name.Contains("LAMDA"))
+                        {
+                            <input type="text" class="form-control form-control-sm form-input-" id="@property.Name"
+                                name="@property.Name" value="@($"{((decimal)(property.GetValue(Model)??0)).ToString("0.00")}")" />
+
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control form-control-sm form-input-" id="@property.Name"
+                                name="@property.Name" value="@($"{((decimal)(property.GetValue(Model)??0)).ToString("0.00")}")" />
+
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label for="numeroSerie" class="form-label">@(property.Name): &nbsp;<strong
+                                class="obligatorio">*</strong></label>
+                        <input type="number" class="form-control form-control-sm" id="@property.Name" name="@property.Name"
+                            value="@property.GetValue(Model)" />
+                    </div>
+                }
+            </div>
+
+        }
+    </div>
+    <div class="row">
+        @foreach (var property in typeof(TablaMaestraResponse)
+        .GetProperties()
+        .Where(p => Model.CamposCheck.Contains(p.Name)))
+        {
+            <div class="col-md-3 my-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="@property.Name" name="@property.Name"
+                    @((int)(property.GetValue(Model) ?? 0) == 1 ? "checked" : "") />
+                    <label class="form-check-label" for="@property.Name">
+                        @property.Name
+                    </label>
+                </div>
+            </div>
+        }
+</form>

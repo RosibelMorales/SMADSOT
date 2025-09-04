@@ -1,0 +1,132 @@
+﻿@model Smadot.Models.Entities.Calibracion.Response.vCalibracionResponse
+
+<div class="row mb-5">
+    <form role="form" id="form_registroCalibracion" class="=clearfix">
+        <input asp-for="Id" name="Id" id="Id" hidden/>
+        <input class="form-control input-sm" name="NombreTecnicoLaboratorio" id="NombreTecnicoLaboratorio" type="text" asp-for="@Model.NombreTecnicoLaboratorio" hidden />
+        <input class="form-control input-sm" name="IdTecnicoLaboratorio" id="IdTecnicoLaboratorio" type="text" asp-for="@Model.IdTecnicoLaboratorio" hidden />
+
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div class="form-group fv-row">
+                    <label class="form-label required">Realizado por: &nbsp;</label>                    
+                    <select class="form-control form-select" data-control="select2" id="IdRealiza" name="IdRealiza" asp-for="@Model.IdRealiza">
+                        <option value="">Seleccione...</option>
+                        <option value="1">CVV</option>
+                        <option value="2">Laboratorio</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group fv-row">
+                    <label class="form-label required">Fecha y hora: &nbsp;</label>
+                    <div class="position-relative">
+                        <input class="form-control input-sm campos-desactivados" name="FechaHora" id="FechaHora" type="text" asp-for="@Model.FechaCalibracion" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-5  mt-5" id="div-inicial" style="display:none">
+            <div class="row mb-5 mt-5"  >
+                
+                <div class="row mb-5 mt-5">
+                    <div class="col-md-6">
+                        <div class="form-group fv-row">
+                            <label class="form-label required">Línea: &nbsp;</label>
+                            <select class="form-control form-select" data-placeholder="Seleccione..." name="IdLinea" id="IdLinea" data-allow-clear="true" style="width: 100%" data-control="select2" data-hide-search="true" asp-for="@Model.IdLinea">
+                                <option></option>
+                                @foreach (var item in ViewBag.Lineas)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group fv-row">
+                            <label class="form-label required">Equipo: &nbsp;</label>
+                            <input hidden id="IdEquipoPreSelected" value="@Model.IdEquipo" />
+                            <select class="form-control form-select" data-placeholder="Seleccione..." data-control="select2" name="IdEquipo" id="IdEquipo" asp-for="@Model.IdEquipo">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5 mt-5">
+                <div class="col-md-12">
+                    <div class="form-group fv-row">
+                        <label class="form-label @*required*@">Nota: &nbsp;</label>
+                        <textarea class="form-control input-uppercase" name="@Html.NameFor(m => m.Nota)" id="Nota" rows="3" maxlength="250">@Model.Nota</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5 mt-5" id="div-realizado-cvv" style="display:none">
+                <div class="py-2 px-4 col-md-6 offset-3">
+                    <label class="form-label">Reporte de sistema&nbsp;</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs-reporte-sistema" name="dropzonejs-reporte-sistema">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mb-5 mt-5" id="div-realizado-laboratorio" style="display:none">
+                <div class="row mb-5 mt-5">
+                    <div class="col-md-4">
+                        <div class="form-group fv-row">
+                            <label class="form-label @*required*@">Nombre de técnico que realiza la calibración: &nbsp;</label>
+                            <div class="position-relative">
+                                <input class="form-control input-sm" name="IdTecnico" id="IdTecnico" type="text" asp-for="@Model.IdTecnicoLaboratorio" hidden />
+                                <input class="form-control input-sm" name="NombreTecnico" id="NombreTecnico" type="text" asp-for="@Model.NombreTecnicoLaboratorio" hidden />
+                                <select class="form-control form-select campos-desactivados" data-control="select2" id="autocomplete">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group fv-row">
+                            <label class="form-label @*required*@">No. de certificado / No. de folio: &nbsp;</label>
+                            <div class="position-relative">
+                                <input class="form-control input-sm" name="NumeroFolio" id="NumeroFolio" type="text" asp-for="@Model.NumeroCertificado" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group fv-row">
+                            <label class="form-label @*required*@">Fecha de emisión de certificado: &nbsp;</label>
+                            <div class="position-relative">
+                                <input class="form-control input-sm" name="FechaEmisionCertificado" id="FechaEmisionCertificado" type="text" asp-for="@Model.FechaEmisionCertificad" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-2 px-4 col-md-6 offset-3">
+                    <label class="form-label">Resultado de calibración&nbsp;</label><br />
+                    <div class="fv-row">
+                        <div class="dropzone" id="dropzonejs-resultado-calibracion" name="dropzonejs-resultado-calibracion">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <hr />
+            <div class="clearfix">
+                <div class="pull-left text-muted text-vertical-align-button">
+                    * Campos obligatorios
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>

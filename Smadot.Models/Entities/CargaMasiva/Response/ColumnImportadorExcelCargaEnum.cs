@@ -1,0 +1,38 @@
+﻿namespace Smadot.Models.Entities.CargaMasiva.Response
+{
+    public enum ColumnImportadorExcelCargaEnum
+    {
+        Nombre=1,
+        RazonSocial,
+        Correo,
+        FechaCita,
+        IdCVV,
+        Placa,
+        IdMarca,
+        IdSubMarca,
+        Anio,
+        VIN,
+        Color,
+        Estado,
+        Poblano,
+        IdCatTipoCombustible,
+        ImporteActual,
+        FechaRegistro,
+        ConsecutivoTramite,
+        FechaEmisionRef,
+        FechaPago,
+        FolioCertificado,
+        Vigencia,
+        Marca,
+        Modelo,
+        Combustible,
+        TarjetaCirculacion,
+        ClaveLinea,
+        NumeroReferencia,
+        Semestre,
+        AnioVerificacion,
+        FechaVerificacion,
+        IdCatTipoCertificado,
+        IdMotivoVerificacion
+    }
+}

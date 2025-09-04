@@ -1,0 +1,56 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.DirectorioCentrosVerificacion.Response.DirectorioCentrosVerificacionResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header"></h6></li>
+        @if (UserResolver.HasPermission(MenuDirectorioVerificentros.Detalles))
+        {
+            <li>
+                <a asp-controller="DirectorioCentrosVerificacion" asp-action="DetallesVerificentro" asp-route-id="@Model.Id" >
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-list"></i></span>
+                        <span class="navi-text">Detalles</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuDirectorioVerificentros.ConfiguradordeCitas))
+        {
+            <li>
+                <a asp-action="ConfiguradorCitas" asp-controller="DirectorioCentrosVerificacion" asp-route-id="@Model.Id" asp-route-nombre="@Model.Nombre">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-gear"></i></span>
+                        <span class="navi-text">Configurador de Citas</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @*@if (UserResolver.HasPermission(MenuDirectorioVerificentros.DiasnoLaborales))
+        {
+            <li>
+                <a href="javascript:;" class="btnDiaNoLaboral" data-id="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-calendar-x"></i></span>
+                        <span class="navi-text">Días no laborales</span>
+                    </label>
+                </a>
+            </li>
+        }*@
+        @if (UserResolver.HasPermission(MenuDirectorioVerificentros.Editar))
+        {
+            <li>
+                <a class="btnEditar" data-id="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-pencil-square"></i></span>
+                        <span class="navi-text">Editar</span>
+                    </label>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

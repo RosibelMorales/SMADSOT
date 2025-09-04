@@ -1,0 +1,92 @@
+﻿@model Smadot.Web.Models.StockMinimoModel.StockMinimoViewModel.Registro
+@{
+    ViewData["Title"] = " Determinación del Stock Mínimo";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+@section styles{
+    @*<link rel="stylesheet" href="~/assets/plugins/custom/datatables/datatables.bundle.css" />*@
+    <style>
+        input:read-only {
+            pointer-events: none;
+            background: var(--kt-input-disabled-bg);
+        }
+    </style>
+	
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administrar Formas Valoradas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Estatus de Uso</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@*@section toolbar{
+    <a class="btn btn-sm fw-bold btn-primary" id="btnSave">Registrar</a>
+    }*@
+
+
+<div class="row g-5 g-xxl-8">
+    <form role="form" id="stockMinimoRegistro" class="clearfix">
+        <div class="col-md-12">
+            <div class="card mb-5 mb-xxl-8">
+                <div class="card-header" style="padding:10px">
+                    <h3 class="card-title">Stock mínimo en el Departamento de Verificación y Regulación de Fuentes</h3>
+                    <div class="card-toolbar"></div>
+                </div>
+                <br />
+                <div class="card card-flush h-lg-100">
+                    <div class="card-body pt-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group fv-row">
+                                    <label class="form-label" for="IdAlmacen">Almacén &nbsp;<strong class="obligatorio">*</strong></label>
+                                    <select class="form-control form-control-sm w-250px mb-6" data-control="select2" name="IdAlmacen" id="IdAlmacen">
+                                        <option>Seleccione una opción</option>
+                                        @foreach (var almacen in ViewBag.Almacenes)
+                                        {
+                                            <option value="@almacen.Value">@almacen.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="clearfix">
+                            <div class="pull-left text-muted text-vertical-align-button">
+                                * Campos obligatorios
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm mb-5" id="divForm">
+                <div class="card-body">
+                </div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </form>
+   
+</div>
+
+
+@section Scripts{
+    @*<script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>*@
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    @*<script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="~/lib/formvalidation/dist/js/plugins/Bootstrap.min.js"></script>*@
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+	<script src="~/js/StockMinimo/smadot.stockMinimo.index.js" asp-append-version="true"></script>
+}

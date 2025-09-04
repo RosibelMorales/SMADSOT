@@ -1,0 +1,105 @@
+﻿@using System.Globalization;
+@model Smadot.Models.Entities.PortalCitas.Response.PortalCitasComprobanteResponse
+@{
+    //ViewBag.Title = "Acreditación de Técnicos Verificadores";
+    ViewBag.Title = "Portal Citas";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+@section styles {
+    @*<link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />*@
+    <link rel="stylesheet" href="~/lib/tempus-dominus/css/tempus-dominus.css" />
+    <style>
+    </style>
+}
+
+@if (Model.Id != 0)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="bottom-buffer">
+                <div class="d-flex flex-column flex-column-fluid">
+                    <div class="app-content  flex-column-fluid ">
+                        <div class="app-container  container-xxl ">
+                            <div class="card d-flex flex-row-fluid flex-start">
+                                <div class="card-body w-100">
+                                    @* @if (Model.Cancelada == true)
+                                    {
+                                        <span class="badge badge-danger badge-square badge-lg my-5 px-3">Cancelada</span>
+                                    } *@
+                                    <p style="font-size: 15px;">
+                                        Estimado(a) <b style="font-size: 16px;">@Model.NombrePersona: </b>
+                                    </p>
+                                    <p style="font-size: 15px;">
+                                        Ha registrado una cita para el día
+                                        <b>@Model.Fecha.Value.ToString("D", CultureInfo.GetCultureInfo("es-ES"))</b>, a las
+                                        <b>@Model.Fecha.Value.ToString("t", CultureInfo.GetCultureInfo("es-ES")) hrs.</b>
+                                    </p>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-6 col-12">
+                                            <p style="font-size: 15px;">
+                                                Le recordamos que el <b>Folio</b> de su Cita es:
+                                            </p>
+
+                                            <div style="text-align-last:center;" class="row">
+                                                <div class="col-md-6 col-12" style="display: flex;align-items: center;">
+                                                    <p style="font-size: 30px;text-align-last: center;">
+                                                        <b>@Model.Folio</b>
+                                                    </p>
+                                                </div>
+                                              
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6 col-12">
+                                            <p style="font-size: 15px"><b>Notas: </b></p>
+                                            <b style="font-size:larger; ">Se le envió la confirmación de su cita vía correo electrónico, tiene un lapso de 24 horas para confirmarla, o esta será cancelada.</b>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="col-md-4 col-5 float-right" style="text-align-last: start; ">
+                                        <a asp-controller="PortalCitas" asp-action="Index" class="btn btn-primary">
+                                            Nueva
+                                            Cita
+                                        </a>
+                                    </div>
+                                </div>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column flex-column-fluid" id="NavStepDiv" style="display:none!important">
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="bottom-buffer">
+                <div class="d-flex flex-column flex-column-fluid">
+                    <div class="app-content  flex-column-fluid ">
+                        <div class="app-container  container-xxl ">
+                            <div class="card d-flex flex-row-fluid flex-start">
+                                <div class="card-body w-100">
+                                    <a href="#" class="card hover-elevate-up shadow-sm parent-hover">
+                                        <div class="card-body d-flex align-items">
+                                            <span class="ms-3 text-gray-700 parent-hover-primary fs-6 fw-bold">
+                                                No se encontró información de la cita o ha expirado.
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

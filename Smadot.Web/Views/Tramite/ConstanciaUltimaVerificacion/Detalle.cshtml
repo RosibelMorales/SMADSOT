@@ -1,0 +1,177 @@
+﻿@using Smadot.Models.Entities.ConstanciaUltimaVerificacion.Response;
+@using Smadot.Models.DataBase;
+@model ConstanciaUltimaVerificacionDetalleResponse
+@using Smadot.Utilities.FileStorage
+
+@{
+    var trcolor = 0;
+    ViewData["Title"] = "Detalle Constancia Última Verificación";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section breadcrumb{
+    <li class="breadcrumb-item text-muted">Trámites</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">Certificados</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <a asp-controller="ConstanciaUltimaVerificacion" asp-action="Index" class="text-muted text-hover-primary">Constancia Última Verificación</a>
+    </li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active" aria-current="page"><a href="#">@ViewData["Title"]</a></li>     
+}
+
+<div class="form-group row">
+    <div class="col-md-12">
+        <div class="card card-flush h-lg-100">
+            <div class="card-header">
+                <h3 class="card-title">Detalle de Constancia Última Verificación</h3>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-sm table-responsive">
+                    <tbody>
+                        <tr class="@((trcolor % 2 == 0) ? "table-active" : "")">
+                            <th>
+                                <div class="row"><b>Placa</b></div>
+                                <div class="row"><label>@Model.Placa</label></div>
+                                <div class="row"><b>SubMarca</b></div>
+                                <div class="row"><label>@Model.Modelo</label></div>
+                                <div class="row"><b>Semestre</b></div>
+                                <div class="row"><label>@Model.Semestre</label></div>
+                                <div class="row"><b>Entidad de Procedencia</b></div>
+                                <div class="row"><label>@Model.EntidadProcedencia</label></div>
+                            </th>
+                            <th>
+                                <div class="row"><b>Serie</b></div>
+                                <div class="row"><label>@Model.Serie</label></div>
+                                <div class="row"><b>Modelo</b></div>
+                                <div class="row"><label>@Model.Anio</label></div>
+                                <div class="row"><b>Fecha</b></div>
+                                <div class="row"><label>@Model.Fecha.ToString("dd/MM/yyyy")</label></div>
+                                <div class="row"><b>Combustible</b></div>
+                                <div class="row"><label>@Model.Combustible</label></div>
+                            </th>
+                            <th>
+                                <div class="row"><b># Tarjeta circulación</b></div>
+                                <div class="row"><label>@Model.TarjetaCirculacion</label></div>
+                                <div class="row"><b>Tipo Certificado</b></div>
+                                <div class="row"><label>@Model.TipoCertificado</label></div>
+                                <div class="row"><b>Vigencia</b></div>
+                                <div class="row"><label>@Model.Vigencia.ToString("dd/MM/yyyy")</label></div>
+
+                            </th>
+                            <th>
+                                <div class="row"><b>Marca</b></div>
+                                <div class="row"><label>@Model.Marca</label></div>
+                                <div class="row"><b>Folio del Certificado</b></div>
+                                <div class="row"><label>@Model.FolioCertificado</label></div>
+                                <div class="row"><b>Nombre Propietario</b></div>
+                                <div class="row"><label>@Model.NombreRazonSocial</label></div>
+                                @*<div class="row"><b>CVV</b></div>
+                                <div class="row"><label>@Model.NombreVerificentro</label></div>*@
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card-body pt-5 row">
+                <div class="col-md-3 fv-row">
+                    <label class="control-label" for="NumeroReferencia">Número de Referencia</label>
+                    <input type="text" asp-for="@Model.NumeroReferencia" class="form-control form-control-lg " disabled />
+                </div>
+                <div class="col-md-3 fv-row">
+                    <label for="FechaEmisionRef">Fecha Emisión Referencia: <strong class="obligatorio">*</strong></label>
+                    <input type="text" asp-for="@Model.FechaEmisionRef" class="form-control form-control-lg " disabled />
+                </div>
+                <div class="col-md-3 fv-row">
+                    <label for="FechaPago">Fecha Pago: <strong class="obligatorio">*</strong></label>
+                    <input type="text" asp-for="@Model.FechaPago" class="form-control form-control-lg " disabled />
+                </div>
+                <br />
+                <div class="d-flex">
+                    <div class="py-2 px-4 col-md-3">
+                        @if (Model.UrlDoc1 != null)
+                        {
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                           download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc1))"
+                           href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc1)" title="Descargar"
+                           role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                     height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                              fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                Identificación Oficial
+                            </a>
+                        }
+                    </div>
+                    <div class="py-2 px-4 col-md-3">
+                        @if (Model.UrlDoc2 != null)
+                        {
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                           download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc2))"
+                           href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc2)" title="Descargar"
+                           role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                     height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                              fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                Tarjeta de Circulación
+                            </a>
+                        }
+                    </div>
+                    <div class="py-2 px-4 col-md-3">
+                        @if (Model.UrlDoc3 != null)
+                        {
+                            <a class="btn btn-outline btn-outline-dashed me-2 mb-2"
+                           download="referencia_pago_@(Model.Serie+"."+StorageManager.GetPathExtension(Model.UrlDoc3))"
+                           href="/FilesStorage?url=@StorageManager.GetParsePathWithOutContainer(Model.UrlDoc3)" title="Descargar"
+                           role="button">
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                     height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                              fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path d="M14.8875071,11.8306874 L12.9310336,11.8306874 L12.9310336,9.82301606 C12.9310336,9.54687369 12.707176,9.32301606 12.4310336,9.32301606 L11.4077349,9.32301606 C11.1315925,9.32301606 10.9077349,9.54687369 10.9077349,9.82301606 L10.9077349,11.8306874 L8.9512614,11.8306874 C8.67511903,11.8306874 8.4512614,12.054545 8.4512614,12.3306874 C8.4512614,12.448999 8.49321518,12.5634776 8.56966458,12.6537723 L11.5377874,16.1594334 C11.7162223,16.3701835 12.0317191,16.3963802 12.2424692,16.2179453 C12.2635563,16.2000915 12.2831273,16.1805206 12.3009811,16.1594334 L15.2691039,12.6537723 C15.4475388,12.4430222 15.4213421,12.1275254 15.210592,11.9490905 C15.1202973,11.8726411 15.0058187,11.8306874 14.8875071,11.8306874 Z"
+                                              fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                Comprobante de Pago
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>       
+    </div>
+   
+    
+</div>

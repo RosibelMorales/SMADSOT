@@ -1,0 +1,73 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    ViewData["Title"] = "Consulta de Circulares";
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/lib/summernote/css/summernote-lite.min.css" />
+    <style>
+        .note-modal-footer {
+            height: 60px;
+        }
+
+        .note-editable{
+            background-color: #fff;
+        }
+    </style>
+}
+
+    @section breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Seguimiento a CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Consultas</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewData["Title"]</li>
+}
+
+@section toolbar{
+    @if (UserResolver.HasPermission(MenuConsultaCirculares.Registrar))
+    {
+        <button class="btn btn-sm fw-bold btn-primary" type="button" id="bntRegistrar">Registrar Envío de Circular</button>
+    }
+}
+
+    <div class="row">
+        <!--begin::Col-->
+        <div class="col-md-12">
+            <!--begin::List widget 1-->
+            <div class="card card-flush h-lg-100">
+                <!--begin::Body-->
+                <div class="card-body pt-5">
+                    <div class="bottom-buffer">
+                        <div class="datatable datatable-bordered cell-border datatable-head-custom">
+                            <table class="table table-striped gx-7" id="kt_datatable"></table>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::LIst widget 1-->
+        </div>
+        <!--end::Col-->
+    </div>
+
+    <partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+    @section Scripts{
+    <script src="~/lib/summernote/js/summernote-lite.min.js"></script>
+    <script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/moment/js/moment-with-locales.js"></script>
+    <script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+    <script src="~/js/ConsultaCirculares/smadot.index.js" asp-append-version="true"></script>
+}

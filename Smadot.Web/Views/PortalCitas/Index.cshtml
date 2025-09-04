@@ -1,0 +1,280 @@
+﻿@{
+    //ViewBag.Title = "Acreditación de Técnicos Verificadores";
+    ViewBag.Title = "Portal Citas";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+@using Microsoft.Extensions.Options
+@using Smadot.Models.Entities.GoogleReCaptchaService
+@inject IOptions<GoogleReCaptchaConfig> googleReCaptcha
+@section styles {
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=@googleReCaptcha.Value.SiteKey" async defer></script>
+    @*<link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />*@
+    <link rel="stylesheet" href="~/lib/tempus-dominus/css/tempus-dominus.css" />
+    <style>
+        .form-check-secondary.form-check-custom.form-check-solid > .form-check-input:checked {
+            background-color: var(--kt-primary-active) !important;
+        }
+    </style>
+}
+
+@* @section breadcrumb{
+<li class="breadcrumb-item">
+<a href="#" class="text-muted text-hover-primary">Seguimiento a CVV</a>
+</li>
+<li class="breadcrumb-item">
+<span class="bullet bg-gray-400 w-5px h-2px"></span>
+</li>
+<li class="active">@ViewBag.Title</li>
+}
+*@
+@section toolbar {
+    @* <a class="btn btn-sm fw-bold btn-primary" asp-controller="AcreditacionTecnicoVerificador" asp-action="Registro">
+<span class="fa fa-plus"></span>&nbsp; Registrar Acreditación
+</a>*@
+
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="bottom-buffer">
+            <div class="d-flex flex-column flex-column-fluid">
+                <div class="app-content  flex-column-fluid ">
+                    <div class="app-container  container-xxl ">
+                        <div class="card d-flex flex-row-fluid flex-start">
+                            <div class="card-body w-100">
+                                <div class="row col-md-12 w-100 mb-10 pt-5 pb-5 d-flex flex-row-fluid flex-center"
+                                     style="background-color: #f7f7f7">
+                                    <label class="col-md-7 fw-bold d-flex align-items-start text-dark">
+                                        Si usted ya cuenta con una cita y desea imprimir su confirmación o cancelarla,
+                                        ingrese a continuación su número de folio o número de serie de su vehículo:
+                                    </label>
+                                    <div class="col-md-5 text-muted fw-semibold fs-6">
+                                        <div class="row">
+                                            <div class="col-md-8 col-9">
+                                                <input type="text" class="form-control-sm form-control" id="txt_Search">
+                                            </div>
+                                            <div class="col-md-4 col-3">
+                                                <button type="button" class="btn btn-sm btn-primary" id="btnBuscarCita">
+                                                    Buscar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 w-100 mb-10 d-flex flex-row-fluid flex-center">
+                                    <div class="col-md-12 fw-bold text-dark">
+                                        <p>ESTIMADO CIUDADANO:</p>
+                                        <p>
+                                            A continuación se muestran los requisitos que deberá presentar ante el
+                                            Centro
+                                            de Atención para realizar el trámite; favor de revisar que se cuenta con
+                                            todos los documentos requeridos:
+                                        </p>
+                                        <ul>
+                                            <li>
+                                                <b>CORREO ELECTRÓNICO obligatorio para realizar el trámite</b><span class="required"></span>
+                                            </li>
+                                            <li>Folio de la cita impreso <span class="required"></span></li>
+                                            <li>
+                                                Original y copia de identificación oficial vigente <span class="required"></span>
+                                            </li>
+                                            <li>
+                                                Original y copia de la tarjeta de circulación <span class="required"></span>
+                                            </li>
+                                            <li>
+                                                Original de la papeleta de Verificación del semestre anterior <span class="required"></span>
+                                            </li>
+                                            <li>
+                                                Para vehículos nuevos: copia de la factura, carta factura o contrato de
+                                                arrendamiento.
+                                            </li>
+                                            
+                                        </ul>
+                                        <p>
+                                            Si usted ya cuenta con una cita agendada y desea consultarla, puede realizar
+                                            la búsqueda en la parte superior de esta página.
+                                            Todos los trámites son personales. Para verificar las especificaciones de
+                                            los requisitos <a href="https://ventanilladigital.puebla.gob.mx/web/fichaAsunto.do?opcion=0&asas_ide_asu=1812&ruta=/web/asuntosMasUsuales.do?opcion=0!periodo=0"
+                                                              target="_blank">dé clic aquí.</a>
+                                        </p>
+
+                                        <span class="text-danger">(*)Requisitos obligatorios</span>
+                                        <br />
+                                        <br />
+                                        <p class="mb-3"><b>NORMATIVIDAD DE VERIFICACIÓN VEHÍCULAR :</b></p>
+                                        <div class="d-flex flex-lg-row flex-wrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://periodicooficial.puebla.gob.mx/media/k2/attachments/T_1_31122024_C.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-fill flex-md-row-auto flex- align-self-center  mx-lg-3">
+                                                <p class="p-0 m-0">
+                                                    Programa de Verificación Vehicular Obligatoria para el Primer
+                                                    Semestre de 2025
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-lg-row flex-wrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://periodicooficial.puebla.gob.mx/media/k2/attachments/T_E_V_28062024_C.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-fill flex-md-row-auto flex- align-self-center  mx-lg-3">
+                                                <p class="p-0 m-0">
+                                                    Programa de Verificación Vehicular Obligatoria para el
+                                                    Segundo Semestre de 2024
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-lg-row  flex-md-nowrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto  mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://smadsot.puebla.gob.mx/images/Acuerdo_a_Publicar.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-md-row-auto flex-fill  align-self-center  mx-lg-3 min-w-100px">
+                                                <p class="p-0 m-0">
+                                                    ACUERDO de la Secretaria de Medio Ambiente, Desarrollo
+                                                    Sustentable y Ordenamiento Territorial del Gobierno del
+                                                    Estado, por el que crea el
+                                                    Registro de Proveedores para el suministro, instalación y
+                                                    mantenimiento de equipos de verificación vehicular, de los
+                                                    Centros de Verificación Vehicular
+                                                    concesionados para operar en el Estado de Puebla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-lg-row  flex-md-nowrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto  mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://smadsot.puebla.gob.mx/images/Tabla_de_Proveedores_Actualizada_18-10-22.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-md-row-auto flex-fill  align-self-center  mx-lg-3 min-w-100px">
+                                                <p class="p-0 m-0">
+                                                    Padrón de proveedores.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-lg-row  flex-md-nowrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto  mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://smadsot.puebla.gob.mx/images/Proyecto_de_Aviso_de_Privacidad_Integral_Verificacion_Vehicular.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-md-row-auto flex-fill  align-self-center  mx-lg-3 min-w-100px">
+                                                <p class="p-0 m-0">
+                                                    Aviso de Privacidad Integral en relación a la convocatoria para
+                                                    el otorgamiento de concesiones del servicio de verificación vehicular
+                                                    en el Estado de Puebla, a través del establecimiento y operación de
+                                                    unidades de verificación vehicular.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-lg-row  flex-md-nowrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto  mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://smadsot.puebla.gob.mx/images/Proyecto_de_Aviso_de_Privacidad_Simplificado_Convocatoria_Verificacion_Vehicular.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-md-row-auto flex-fill  align-self-center  mx-lg-3 min-w-100px">
+                                                <p class="p-0 m-0">
+                                                    Aviso de Privacidad Simplificado en relación a la convocatoria para
+                                                    el otorgamiento de concesiones del servicio de verificación vehicular
+                                                    en el Estado de Puebla, a través del establecimiento y operación de
+                                                    unidades de verificación vehicular.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-lg-row  flex-md-nowrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto  mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://ojp.puebla.gob.mx/media/k2/attachments/Manual_para_la_Adecuada_Operaci%C3%B3n_y_Funcionamiento_de_los_Equipos,_Infraestructura_y_Sistemas_de_Verificaci%C3%B3n_Vehicular_2EV_07102022.pdf">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-md-row-auto flex-fill  align-self-center  mx-lg-3 min-w-100px">
+                                                <p class="p-0 m-0">
+                                                    Manual para la Adecuada Operación y Funcionamiento de los Equipos,
+                                                    Infraestructura y Sistemas de  Verificación Vehicular del Estado de Puebla.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-lg-row  flex-md-nowrap mb-3 justify-content-start">
+                                            <div class="d-flex flex-column flex-md-row-auto  mx-lg-3 w-75px min-w-75px">
+                                                <a href="https://ojp.puebla.gob.mx/component/k2/itemlist/search?searchword=Programa+de+Verificaci%C3%B3n+Vehicular+Obligatoria+para+los+meses+de+Octubre%2C+Noviembre+y+Diciembre+de+2022">
+                                                    <img style="display : block; margin-left: auto; margin-right: auto;"
+                                                         src="~/images/pdfCita.png" align="left" alt width="52"
+                                                         height="52" />
+                                                </a>
+                                            </div>
+                                            <div class="d-flex flex-column flex-md-row-auto flex-fill  align-self-center  mx-lg-3 min-w-100px">
+                                                <p class="p-0 m-0">
+                                                    Programa de Verificación Vehicular Obligatoria para los meses de Octubre, Noviembre y Diciembre de 2022
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 w-100 mb-10 d-flex flex-row-fluid flex-center">
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-check form-check-custom form-check-success form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="CheckAceptoDocumentacion">
+                                            <label class="form-check-label" for="CheckAceptoDocumentacion">
+                                                Haz clic aquí para generar una cita
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-column-fluid" id="NavStepDiv" style="display:none!important">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<partial name="~/Views/Shared/_ModalRegistro.cshtml" model="string.Empty" />
+@section Scripts {
+    <script>
+        var min = "@Html.Raw(ViewBag.Min)";
+        var max = "@Html.Raw(ViewBag.Max)";
+        var googleKey = "@Html.Raw(googleReCaptcha.Value.SiteKey)";
+
+    </script>
+    @*<script src="~/lib/datatable/dist/js/jquery.dataTables.min.js"></script>
+<script src="~/lib/datatable/dist/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/lib/moment/js/moment-with-locales.js"></script>
+<script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+<script src="~/js/AcreditacionTecnicoVerificador/smadot.index.js" asp-append-version="true"></script>*@
+    <script src="~/lib/es6-shim/dist/es6-shim.min.js"></script>
+    <script type="module" src="~/lib/tempus-dominus/js/tempus-dominus.min.js"></script>
+    <script type="module" src="~/lib/tempus-dominus/js/jQuery-provider.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/js/PortalCitas/smadot.portalcitasV2.index.js" asp-append-version="true"></script>
+}

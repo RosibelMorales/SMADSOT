@@ -1,0 +1,50 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Equipo.Response.vEquipoResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+        data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        <li>
+            <a class="editar" data-id="@Model.Id">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-pencil-square"></i></span>&nbsp;&nbsp;
+                    <span class="navi-text">Editar</span>
+                </label>
+            </a>
+        </li>
+        @if (UserResolver.HasPermission(MenuInventarioEquipos.Detalle))
+        {
+            <li>
+                <a class="btnDetalle" asp-action="Detalle" asp-controller="Equipo" asp-route-id="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuInventarioEquipos.ProgramaciondeCalibracion))
+        {
+            @if (Model.IdCatEstatusEquipo != 1)
+            {
+                <li>
+                    <a class="btnProgramacionCalibracion" asp-action="Index" asp-controller="ProgramacionCalibracion"
+                        asp-route-id="@Model.Id">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-file-earmark-text"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Programación de Calibración</span>
+                        </label>
+                    </a>
+                </li>
+            }
+        }
+
+    </ul>
+</div>

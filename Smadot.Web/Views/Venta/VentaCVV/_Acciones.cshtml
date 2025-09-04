@@ -1,0 +1,50 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.SolicitudFormaValorada.Response.SeguimientoSolicitudResponse
+<div class="btn-group dropstart drop-down drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+        data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        @if (UserResolver.HasPermission(MenuVentaFormasValoradasCVV.Detalle) &&
+        Model.IdCatEstatusSolicitudFV == EstatusSolicitud.VentaFinalizada)
+        {
+            <li>
+                <a class="btnDetalle" asp-action="Detalle" asp-controller="VentaCVV" asp-route-idVenta="@Model.IdVentaFV">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuVentaFormasValoradasCVV.Registrar) &&
+        Model.IdCatEstatusSolicitudFV == EstatusSolicitud.Entregado)
+        {
+            <li>
+                <a class="btnDetalle" asp-controller="VentaCVV" asp-action="Registrar" asp-route-id="@Model.IdIngresoFV" asp-route-idSolicitudFV="@Model.IdSolicitudFV">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="fa fa-file-invoice"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Finalizar Venta</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuVentaFormasValoradasCVV.GenerarRecibo) &&
+        Model.IdCatEstatusSolicitudFV == EstatusSolicitud.VentaFinalizada)
+        {
+            <li>
+                <a class="btnRecibo" data-idventa="@Model.IdVentaFV" data-idalmacen="@Model.IdAlmacenFV">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-file-earmark-pdf"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Generar recibo</span>
+                    </label>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

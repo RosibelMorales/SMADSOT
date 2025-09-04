@@ -1,0 +1,151 @@
+﻿@{
+	ViewData["Title"] = "Registrar Cancelación de Folio en Ventanilla";
+	Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+}
+
+@section styles{
+	@*<link rel="stylesheet" href="~/lib/datatable/dist/css/dataTables.bootstrap4.min.css" />*@
+	<link rel="stylesheet" href="~/lib/jquery-ui/dist/jquery-ui.min.css" type="text/css" />
+	<style>
+		.ui-autocomplete {
+			position: absolute;
+			cursor: default;
+			z-index: 99999 !important;
+		}
+	</style>
+}
+
+	@section breadcrumb{
+    <li class="breadcrumb-item text-muted">Administrar Formas Valoradas</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item text-muted">Folios Cancelados</li>
+    <li class="breadcrumb-item text-muted">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+	<li class="breadcrumb-item text-muted">
+		<a class="text-muted" asp-controller="FoliosCancelados" asp-action="Index">Consulta de Folios Cancelados</a>	
+	</li>
+	<li class="breadcrumb-item text-muted">
+		<span class="bullet bg-gray-400 w-5px h-2px"></span>
+	</li>
+    <li class="active">Registrar Cancelación de Folio en Ventanilla</li>
+}
+
+	@section toolbar{
+}
+
+<div class="card shadow-sm mb-5">
+    <div class="card-body">
+        <h4>Registrar Cancelación de Folio en Ventanilla</h4>
+        <hr class="red">
+        <div class="col-md-12">
+            <div class="panel-body">
+                <div class="row align-items-end mb-5 mt-5">
+                    <div class="col-md-4">
+                        <div class="form-check form-check-custom form-check-success form-check-solid">
+							<input class="form-check-input" type="checkbox" value="" checked id="FolioExists" name="FolioExists" />
+							<label class="form-check-label" for="FolioExists">Folio registrado en el sistema</label>
+                        </div>
+                    </div>
+                    <div class="form-group input-group-sm col-md-6" id="autocompleteDiv">
+                        <input type="text" id="ConsultaFolio" name="ConsultaFolio" class="form-control" placeholder="Búsqueda de Folio">
+
+					</div>
+					<div class="col-md-6 row" id="nuevoFolioDiv" style="display:none">
+						<div class="form-group input-group-sm col-md-6">
+							<label class="control-label">Folio</label>
+							<input id="FolioNuevo" name="FolioNuevo" class="form-control" type="number" />
+						</div>
+						<div class="form-group input-group-sm col-md-6">
+							<label class="control-label">Tipo de Certificado</label>
+							<select id="IdCatTipoCertificado" name="IdCatTipoCertificado" class="form-control" data-control="select2" asp-items="(List<SelectListItem>)ViewBag.Certificados">
+								<option value="0">Seleccione</option>
+							</select>
+						</div>
+					</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*<div class="card-footer d-flex justify-content-end py-6 px-9">
+    <input class="btn btn-primary btn-sm pull-right" type="button" id="reasignarExpediente_btnAgregar" value="Agregar" />
+    </div>*@
+</div>
+
+	<div class="card shadow-sm mb-5" id="DetalleFolio" style="display:none">
+		<div class="card-body">
+			<div class="col-md-12">
+				<div class="panel-body">
+					<div class="row align-items-end mb-5 mt-5 detalleFolioRow" style="display:none">
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Folio</label>
+							<input type="text" id="FolioId" name="FolioId" class="form-control" placeholder="Folio" disabled>
+							<input type="hidden" id="IdF" />
+						</div>
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Tipo de Trámite</label>
+							<input type="text" id="Tipo" name="Tipo" class="form-control" disabled>
+						</div>
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Fecha</label>
+							<input type="text" id="Fecha" name="Fecha" class="form-control" disabled>
+						</div>
+					</div>
+
+				<div class="row align-items-end mb-5 mt-5 detalleFolioRow" style="display:none">
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Datos de Usuario</label>
+							<input type="text" id="Usuario" name="Usuario" class="form-control" disabled>
+						</div>
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Datos de Vehículo</label>
+							<input type="text" id="Vehiculo" name="Vehiculo" class="form-control" disabled>
+						</div>
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Persona que realizó el trámite</label>
+							<input type="text" id="Persona" name="Persona" class="form-control" disabled>
+						</div>
+					</div>
+
+					<div class="row align-items-end mb-5 mt-5">
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Fecha de Cancelación</label>
+							<input type="text" id="FechaC" name="FechaC" class="form-control" >
+						</div>
+						<div class="form-group input-group-sm col-md-4">
+							<label class="control-label">Motivo de Cancelación</label>
+							@*<input type="text" id="Motivo" name="Motivo" class="form-control" >*@
+							<select id="Motivo" name="Motivo" class="form-control">
+							<option value="0">Seleccione</option>
+							<option value="1">Mala Impresión</option>
+								<option value="2">Folio Defectuoso</option>
+								<option value="3">Otro</option>
+							</select>
+						</div>
+						<div class="form-group input-group-sm col-md-4" style="display:none" id="InputOtro">
+							<label class="control-label">Otro</label>
+							<input type="text" id="Otro" name="Otro" class="form-control" >
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="card-footer d-flex justify-content-end py-6 px-9">
+			<a class="btn btn-secondary btn-sm pull-right" id="btnCancelarFolio" asp-action="Index" asp-controller="FoliosCancelados">Cancelar</a> &nbsp;&nbsp;&nbsp;
+			<button class="btn btn-primary btn-sm pull-right" type="button" id="btnGuardarFolio">Guardar</button>
+		</div>
+
+	</div>
+	
+
+	@section Scripts{
+
+	@*<script src="~/lib/jquery/dist/jquery.min.js"></script>	*@
+	<script src="~/lib/jquery-ui/dist/jquery-ui.min.js"></script>
+	<script src="~/lib/daterangepicker/js/daterangepicker.js"></script>
+	<script asp-append-version="true" src="~/js/FoliosCancelados/smadot.folioscancelados.registro.js"></script>
+}

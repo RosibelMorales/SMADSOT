@@ -1,0 +1,32 @@
+﻿@model List<Smadot.Models.Entities.StockMinimo.Response.StockMinimoResponse>
+<table class="table table-dark table-striped table-rounded border gy-7 gs-7  mb-6 mt-6" id="tableRegistro">
+    <thead>
+        <tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+            <th>Clave del Certificado</th>
+            <th>Tipo de Certificado</th>
+            <th>Cantidad Mínima</th>
+            <th>Cantidad Media</th>
+
+        </tr>
+    </thead>
+    @* <tbody>
+        @for (int c = 1; c < Model.Count; c++)
+        {
+            <tr>
+                <td>@Model[c].ClaveCertificado</td>
+                <td>@Model[c].Nombre<input type="hidden" class="nombre_@c" value="@Model[c].Nombre" /></td>
+                <td class="d-none">
+                    <input type="text" asp-for="@Model[c].IdAlmacen" class="form-control d-none">
+                    <input type="text" asp-for="@Model[c].IdCatTipoCertificado" class="form-control d-none">
+                    <input type="text" asp-for="@Model[c].IdStockMinimo class=" form-control d-none">
+                </td>
+                <td class="fv-row"><input type="number" asp-for="@Model[c].CantidadMinima" class="form-control cantidadInput cantidadMinInput_@c" id="CantidadMinima"></td>
+                <td class="fv-row"><input type="number" asp-for="@Model[c].CantidadMedia" class="form-control cantidadInput cantidadMedInput_@c" id="CantidadMedia"></td>
+
+            </tr>
+        }
+    </tbody> *@
+</table>
+<div class="d-flex justify-content-end">
+    <button class="btn btn-sm fw-bold btn-primary btn-bottom-right" type="button" id="btnSave">Guardar</button>
+</div>

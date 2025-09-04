@@ -1,0 +1,21 @@
+﻿@model Smadot.Models.Entities.SolicitudFormaValorada.Response.EstadisiticaUsoFormaValoradaResponseGridAcciones
+
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+        <li class="btnDetalle" data-id="">
+            <a asp-action="Expediente" asp-controller="Citas" asp-route-id="@Model.Id">
+                <label class="dropdown-item">
+
+                    <span class="navi-icon"><i class="bi bi-zoom-in"></i></span>
+                    <span class="navi-text">Detalle</span>
+
+                </label>
+            </a>
+        </li>
+
+    </ul>
+</div>

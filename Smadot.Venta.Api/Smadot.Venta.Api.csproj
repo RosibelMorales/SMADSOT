@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>1b202bfb-9de1-48a7-b375-faf61d847ba9</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+      <PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <OpenApiReference Include="OpenApis\VentaApi.json" CodeGenerator="NSwagCSharp" Namespace="Smadsot.Api" ClassName="VentaApi">
+			<SourceUri>http://40.124.140.165:7124/swagger/v1/swagger.json</SourceUri>
+		</OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smadot.Models\Smadot.Models.csproj" />
+    <ProjectReference Include="..\Smadot.Venta.Model\Smadot.Venta.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,65 @@
+﻿@model Smadot.Models.Entities.Autenticacion.Request.RegistroRequest
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-sesion">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <h3>Registrar Cuenta</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form asp-controller="Autenticacion" asp-action="Registro" method="post">
+                                <div class="form-group">
+                                    <label asp-for="Nombre" class="control-label"></label>
+                                    <input asp-for="Nombre" class="form-control" />
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="APaterno" class="control-label"></label>
+                                    <input asp-for="APaterno" class="form-control" />
+                                    <span asp-validation-for="APaterno" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="AMaterno" class="control-label"></label>
+                                    <input asp-for="AMaterno" class="form-control" />
+                                    <span asp-validation-for="AMaterno" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" type="email"/>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Contrasenia" class="control-label"></label>
+                                    <input asp-for="Contrasenia" class="form-control" type="password"/>
+                                    <span asp-validation-for="Contrasenia" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-center">
+                                            <a asp-controller="Autenticacion" asp-action="Index" class="btn btn-default">Cancelar</a>
+                                        </div>
+                                        <div class="col-sm-6 text-center">
+                                            <button type="submit" class="btn btn-primary" id="btnSesion">Registrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+               @*     <div class="row item-hide-Elemento" id="divAlerta">
+                        <div class="alert alert-danger">
+                            <div id="msjError"></div>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿.form-control.is-invalid, .was-validated .form-control:invalid {
+	border-color: var(--kt-gray-300) !important;
+	background-image: none !important;
+	border: 1px solid var(--kt-input-border-color);
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+	border-color: var(--kt-gray-300) !important;
+	background-image: none !important;
+	border: 1px solid var(--kt-input-border-color);
+}

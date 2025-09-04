@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  smadot.web:
+    image: ${DOCKER_REGISTRY-}smadotweb
+    build:
+      context: .
+      dockerfile: Smadot.Web/Dockerfile
+
+  smadot.gateway:
+    image: ${DOCKER_REGISTRY-}smadotgateway
+    build:
+      context: .
+      dockerfile: Smadot.Gateway/Dockerfile
+
+  smadot.solicitudformavalorada.api:
+    image: ${DOCKER_REGISTRY-}smadotsolicitudformavaloradaapi
+    build:
+      context: .
+      dockerfile: Smadot.SolicitudFormaValorada.api/Dockerfile
+
+  smadot.autenticacion.api:
+    image: ${DOCKER_REGISTRY-}smadotautenticacionapi
+    build:
+      context: .
+      dockerfile: Smadot.Autenticacion.api/Dockerfile

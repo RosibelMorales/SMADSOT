@@ -1,0 +1,56 @@
+﻿@model Smadot.Models.Entities.Calibracion.Response.vCalibracionResponse
+@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+        data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        @if (UserResolver.HasPermission(MenuCalibraciones.Detalle))
+        {
+            <li>
+                <a class="btnDetalle" data-id="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuCalibraciones.Modificar))
+        {
+            @if (Model.IdCatEstatusCalibracion == CalibracionEstatus.PermiteModificar)
+            {
+                <li>
+                    <a class="btnEditar" data-id="@Model.Id">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-pencil-square"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Modificar</span>
+                        </label>
+                    </a>
+                </li>
+            }
+        }
+        @if (UserResolver.HasPermission(MenuCalibraciones.Modificar))
+        @* {
+            @if ((Model.IdCatEstatusCalibracion == CalibracionEstatus.PendienteCalibracion || (DateTime.Now -
+           Model.FechaCalibracion).TotalDays < 5) && (Model.IdCatEstatusCalibracion !=
+           CalibracionEstatus.SolicitaModificar && Model.IdCatEstatusCalibracion != CalibracionEstatus.PermiteModificar)) *@
+            @if (Model.IdCatEstatusCalibracion != CalibracionEstatus.SolicitaModificar)
+            {
+                <li>
+                    <a class="btnSolicitarModificacion" data-id="@Model.Id">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-exclamation-diamond"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Solicitar Modificación</span>
+                        </label>
+                    </a>
+                </li>
+            }
+      @*   } *@
+    </ul>
+</div>

@@ -1,0 +1,15 @@
+﻿using Newtonsoft.Json;
+using Smadot.Utilities.Modelos;
+
+namespace Smadot.Models.Entities.GoogleReCaptchaService.Request
+{
+    public class GoogleReCaptchaRequest
+    {
+        [JsonProperty("secret")]
+        public string Secret { get; set; }
+        [JsonProperty("response")]
+        public string Response { get; set; }
+        [JsonProperty("remoteip")]
+        public string? RemoteIp { get; set; }
+    }
+}

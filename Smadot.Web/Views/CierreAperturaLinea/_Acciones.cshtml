@@ -1,0 +1,47 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.SeguimientoCVV.Response.SeguimientoCVVResponse
+@{
+    var Activo = Smadot.Models.Dicts.CierreAperturaLineaDic.Activo;
+    var Inactivo = Smadot.Models.Dicts.CierreAperturaLineaDic.Inactivo;
+    var IdActivo = Smadot.Models.Dicts.CierreAperturaLineaDic.IdActivo;
+    var IdInactivo = Smadot.Models.Dicts.CierreAperturaLineaDic.IdInactivo;
+}
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+        @if (UserResolver.HasPermission(MenuLineas.Detalle))
+        {
+            <li class="btnDetalle" data-id="@Model.Id">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-zoom-in"></i></span>
+                    <span class="navi-text">Detalle</span>
+                </label>
+            </li>
+        }
+        @if ((Model.Estatus == Activo || Model.IdEstatus == IdActivo) && UserResolver.HasPermission(MenuLineas.Cerrar))
+        {
+            <li class="btnCierre" data-id="@Model.Id">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-x-circle"></i></span>
+                    <span class="navi-text">Cerrar</span>
+                </label>
+            </li>
+        }
+
+        @if ((Model.Estatus == Inactivo || Model.IdEstatus == IdInactivo) && UserResolver.HasPermission(MenuLineas.Abrir))
+        {
+            <li class="btnTryApertura" data-id="@Model.Id">
+                <label class="dropdown-item">
+                    <span class="navi-icon"><i class="bi bi-x-circle"></i></span>
+                    <span class="navi-text">Abrir</span>
+                </label>
+            </li>
+        }
+
+
+    </ul>
+</div>

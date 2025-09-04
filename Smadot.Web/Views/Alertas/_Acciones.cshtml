@@ -1,0 +1,63 @@
+﻿@using Newtonsoft.Json;
+@using Smadot.Models.DataBase;
+@using Smadot.Models.Entities.Alertas.Response;
+@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model vAlertaResponse
+@{
+    var data = new EquipoTipoCalibracion();
+    try
+    {
+        if (Model?.Data != null)
+            data = JsonConvert.DeserializeObject<EquipoTipoCalibracion>(Model.Data);
+    }
+    catch (Exception)
+    {
+
+    }
+}
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+        data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        @if (UserResolver.HasPermission(MenuAutorizacionesValidacionesDVRF.Detalle))
+        {
+            <li>
+                <a class="btnDetalleAlerta" data-detalle="@Model.Data" data-id="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuAutorizacionesValidacionesDVRF.Atender))
+        {
+            if (
+            (Model.TableName.Equals(DictAlertas.Capacitacion) ||
+            Model.TableName.Equals(DictAlertas.Reportes) ||
+            Model.TableName.Equals(DictAlertas.Calibracion) ||
+            Model.TableName.Equals(DictAlertas.Equipo) ||
+            Model.TableName.Equals(DictAlertas.UserPuestoVerificentro) ||
+            Model.TableName.Equals(DictAlertas.EquipoTipoCalibracion)) && string.IsNullOrEmpty(Model.MovimientoFinal)
+            )
+            {
+                <li>
+                    <a class="btnAtender"
+                        data-id="@(Model.TableName.Equals(DictAlertas.EquipoTipoCalibracion) ? data.IdEquipo : Model.Id)"
+                        data-tablename="@Model.TableName">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-bookmark-check"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Atender</span>
+                        </label>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>

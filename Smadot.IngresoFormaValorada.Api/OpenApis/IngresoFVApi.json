@@ -1,0 +1,1493 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Smadot_Venta_Api",
+        "version": "v1"
+    },
+    "paths": {
+        "/api/Caja/{id}": {
+            "get": {
+                "tags": [
+                    "Caja"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/Caja": {
+            "post": {
+                "tags": [
+                    "Caja"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/CajaResponse"
+                                }
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/CajaResponse"
+                                }
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/CajaResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/Caja/GetCajaById": {
+            "get": {
+                "tags": [
+                    "Caja"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/IngresoFormaValorada": {
+            "get": {
+                "tags": [
+                    "IngresoFormaValorada"
+                ],
+                "parameters": [
+                    {
+                        "name": "SiguienteFolio",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "IdAlmacen",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "Pagina",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Registros",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Activo",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "Busqueda",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "ColumnaOrdenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ordenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Pagination",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "IngresoFormaValorada"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IngresoFormaValoradaRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IngresoFormaValoradaRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IngresoFormaValoradaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/IngresoFormaValorada/{id}": {
+            "get": {
+                "tags": [
+                    "IngresoFormaValorada"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/IngresoFormaValorada/GetIngresoCertificadoById": {
+            "get": {
+                "tags": [
+                    "IngresoFormaValorada"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/PortalCita/GetPortalCitasCalendarioByIdCvv": {
+            "get": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/PortalCita/GetHistorialCitas": {
+            "get": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "parameters": [
+                    {
+                        "name": "Fecha1",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "Fecha2",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "Atendida",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "Pagina",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Registros",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Activo",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "Busqueda",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "ColumnaOrdenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ordenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Pagination",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/PortalCita": {
+            "post": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PortalCitaRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PortalCitaRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PortalCitaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/PortalCita/GetCitaData": {
+            "get": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "Folio",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/PortalCita/CancelarCita": {
+            "post": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PortalCitaCancelarRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PortalCitaCancelarRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PortalCitaCancelarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/PortalCita/ReiniciarCita": {
+            "post": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "parameters": [
+                    {
+                        "name": "sinRedireccion",
+                        "in": "header",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReiniciarCitaRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReiniciarCitaRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReiniciarCitaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Int64ResponseGeneric"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/PortalCita/ConfirmarCita": {
+            "post": {
+                "tags": [
+                    "PortalCita"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConfirmarCita"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConfirmarCita"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConfirmarCita"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos": {
+            "get": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "Pagina",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Registros",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Activo",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "Busqueda",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "ColumnaOrdenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ordenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Pagination",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecepcionDocumentosRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecepcionDocumentosRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecepcionDocumentosRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/{id}": {
+            "get": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/Reagendar": {
+            "post": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReagendarCitaRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReagendarCitaRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReagendarCitaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/ConsultaTablaMaestra": {
+            "get": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "IdCita",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "IdSubmarca",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "IdMarca",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "Cilindros",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "RegistroTMaestra",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/Autocomplete": {
+            "get": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "Term",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Start",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "End",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/ConsultaSubDiesel": {
+            "get": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "IdCatMarcaVehiculo",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Pagina",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Registros",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "Activo",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "Busqueda",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "ColumnaOrdenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Ordenamiento",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Pagination",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/CambiarLinea/{idVerificacion}": {
+            "get": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "idVerificacion",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/CambiarLinea": {
+            "post": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecepcionDocumentosCambiarLineaRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecepcionDocumentosCambiarLineaRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecepcionDocumentosCambiarLineaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/RecepcionDocumentos/ListaVerificaciones": {
+            "post": {
+                "tags": [
+                    "RecepcionDocumentos"
+                ],
+                "parameters": [
+                    {
+                        "name": "numeroSerie",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AlmacenResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "activo": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "idVerificentro": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "total": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CajaResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "idIngresoFV": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idCatTipoCertificado": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "numeroCaja": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "folioInicial": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "folioFinal": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "fechaEntrega": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "nombreCatTipoCertificado": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "claveCertificadoCatTipoCertificado": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "almacenes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AlmacenResponse"
+                        },
+                        "nullable": true
+                    },
+                    "idVerificentro": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CertificadoData": {
+                "type": "object",
+                "properties": {
+                    "idIngresoCertificado": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idCatTipoCertificado": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "folioInicial": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "folioFinal": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "cantidadRecibida": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "clave": {
+                        "type": "string",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "nombreCertificado": {
+                        "type": "string",
+                        "nullable": true,
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ConfirmarCita": {
+                "type": "object",
+                "properties": {
+                    "folio": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "IngresoFormaValoradaFiles": {
+                "type": "object",
+                "properties": {
+                    "nombre": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "base64": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "IngresoFormaValoradaRequest": {
+                "type": "object",
+                "properties": {
+                    "idSolicitudFV": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idIngresoFV": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "fechaSolicitud": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "fechaEntrega": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "idAlmacen": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombreRecibio": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "documento1": {
+                        "$ref": "#/components/schemas/IngresoFormaValoradaFiles"
+                    },
+                    "documento2": {
+                        "$ref": "#/components/schemas/IngresoFormaValoradaFiles"
+                    },
+                    "documento3": {
+                        "$ref": "#/components/schemas/IngresoFormaValoradaFiles"
+                    },
+                    "certificados": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CertificadoData"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Int64ResponseGeneric": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/ResponseStatus"
+                    },
+                    "currentException": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "mensaje": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "respuesta": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "accesoTotalVerificentros": {
+                        "type": "boolean"
+                    },
+                    "response": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PortalCitaCancelarRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "folio": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "errorTablaMaestra": {
+                        "type": "boolean",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PortalCitaRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idTipoCombustible": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nombreGeneraCita": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "razonSocial": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "correo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "fecha": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "idCVV": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "placa": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "idSubMarca": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "marca": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "subMarcaNueva": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "anio": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "acepto": {
+                        "type": "boolean"
+                    },
+                    "poblano": {
+                        "type": "boolean"
+                    },
+                    "esPErsonaMoral": {
+                        "type": "boolean"
+                    },
+                    "serie": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "claveEstado": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "colorVehiculo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "fechaString": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "horaString": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "logo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "token": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ProblemDetails": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "instance": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": {}
+            },
+            "ReagendarCitaRequest": {
+                "type": "object",
+                "properties": {
+                    "idCita": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "folio": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "fecha": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "idCVV": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "fechaString": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "horaString": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "logo": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RecepcionDocumentoFiles": {
+                "type": "object",
+                "properties": {
+                    "nombre": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "base64": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RecepcionDocumentosCambiarLineaRequest": {
+                "type": "object",
+                "properties": {
+                    "idVerificacion": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idLinea": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RecepcionDocumentosRequest": {
+                "type": "object",
+                "properties": {
+                    "idCitaVerificacion": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idCatTipoServicio": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "idTipoCombustible": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "colorVehiculo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "folioTarjetaCirculacion": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cambioPlacas": {
+                        "type": "boolean"
+                    },
+                    "fileIdentificacion": {
+                        "$ref": "#/components/schemas/RecepcionDocumentoFiles"
+                    },
+                    "fileFactura": {
+                        "$ref": "#/components/schemas/RecepcionDocumentoFiles"
+                    },
+                    "fileValidacionCertificado": {
+                        "$ref": "#/components/schemas/RecepcionDocumentoFiles"
+                    },
+                    "fileBajaPlacas": {
+                        "$ref": "#/components/schemas/RecepcionDocumentoFiles"
+                    },
+                    "fileAltaPlacas": {
+                        "$ref": "#/components/schemas/RecepcionDocumentoFiles"
+                    },
+                    "fileMulta": {
+                        "$ref": "#/components/schemas/RecepcionDocumentoFiles"
+                    },
+                    "numeroReferencia": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "fechaRecepcion": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "anio": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "modelo": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "idTablaMaestra": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombrePersona": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nombreGeneraCita": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "personaMoral": {
+                        "type": "boolean"
+                    },
+                    "placa": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "serie": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "fechaFacturacion": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "idMotivoVerificacion": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "folioCertificadoAnterior": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ReiniciarCitaRequest": {
+                "type": "object",
+                "properties": {
+                    "idCita": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idVerificacion": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ResponseStatus": {
+                "enum": [
+                    0,
+                    1
+                ],
+                "type": "integer",
+                "format": "int32"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "description": "Token",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ]
+}

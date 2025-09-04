@@ -1,0 +1,35 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Usuarios.Response.UsuariosResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    <div class="btn-group dropup drop-up dropdown">
+        @if (UserResolver.HasPermission(MenuUsuarios.Editar))
+        {
+            <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnEditar"
+                data-id="@Model.Id" title="Editar">
+                <label class="dropdown-item">
+                    <i class="bi bi-pencil-square"></i>
+                </label>
+            </a>
+        }
+        @if (UserResolver.HasPermission(MenuUsuarios.Editar))
+        {
+            <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btn-cambiar-contrasenia"
+                data-id="@Model.Id" data-lock="@Model.NombreUsuario" title="Reestablecer Contraseña">
+                <label class="dropdown-item">
+                    <i class="bi bi-arrow-return-left"></i>
+                </label>
+            </a>
+        }
+        @if (UserResolver.HasPermission(MenuUsuarios.ActivarDesactivar))
+        {
+            <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnLock" data-id="@Model.Id"
+                data-lock="@Model.LockoutEnabled" title="@(Model.LockoutEnabled?"Activar":"Desactivar")">
+                <label class="dropdown-item">
+                    <i class="bi @(Model.LockoutEnabled?"bi-unlock":"bi bi-lock")"></i>
+                </label>
+            </a>
+        }
+    </div>
+</div>

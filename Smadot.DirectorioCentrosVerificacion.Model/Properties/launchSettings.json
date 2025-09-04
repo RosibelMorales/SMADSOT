@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Smadot.DirectorioCentrosVerificacion.Model": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+         "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "https://localhost:63359;http://localhost:63360"
+    }//,
+    //"Docker": {
+    //  "commandName": "Docker",
+    //  "launchBrowser": true,
+    //  "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+    //  "publishAllPorts": true,
+    //  "useSSL": true
+    //}
+  }
+}

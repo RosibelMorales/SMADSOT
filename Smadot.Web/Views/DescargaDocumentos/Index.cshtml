@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "";
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta property="og:locale" content="es_MX" />
+    <link rel="shortcut icon" href="~/assets/media/logos/smadot.ico" />
+    <title>Certificado.pdf</title>
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+</head>
+@if (ViewBag.ErrorMessage != null)
+{
+    <body>
+        <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+        <script>
+            var error = '@ViewBag.ErrorMessage';
+            jQuery(document).ready(function () {
+                toastr.error(error, 'SMADSOT');
+            });
+        </script>
+    </body>
+}
+else
+{
+    <body style="height: 100%;width: 100%;overflow: hidden;margin: 0px;background-color: rgb(51, 51, 51);">
+            <iframe src="data:application/pdf;base64,@ViewBag.Base64" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen>
+            </iframe>
+        </body>
+}
+</html>

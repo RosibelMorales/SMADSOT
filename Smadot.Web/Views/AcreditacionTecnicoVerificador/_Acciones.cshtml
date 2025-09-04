@@ -1,0 +1,40 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.AcreditacionTecnicoVerificador.Response.AcreditacionTecnicoVerificadorGridResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    @*<a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+    <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+    <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+
+    <li class="btnDetalle" data-id="@Model.Id">
+    <label class="dropdown-item">
+    <span class="navi-icon"><i class="bi bi-zoom-in"></i></span>
+    <span class="navi-text">Detalle</a></span>
+    </label>
+    </li>
+
+    </ul>*@
+    @*<a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" asp-controller="AcreditacionTecnicoVerificador" asp-action="Edit" asp-route-id="@Model.Id" title="Editar">
+        <i class="bi bi-pencil-square"></i>
+    </a>*@
+    @if (Model.IdCatEstatusAcreditacion == EstatusAcreditacion.SolicitarAutorización && (UserResolver.HasPermission(MenuAcreditaciones.Autorizar) || UserResolver.HasPermission(MenuAcreditaciones.Rechazar)))
+    {
+        <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnAutorizar" data-id="@Model.Id" title="Autorizar">
+            <i class="bi bi-check2-square"></i>
+        </a>
+    }
+    @if (Model.IdCatEstatusAcreditacion == EstatusAcreditacion.ApruebaDVRF && UserResolver.HasPermission(MenuAcreditaciones.Evidencia))
+    {
+        <a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" asp-controller="AcreditacionTecnicoVerificador" asp-action="Evidencia" asp-route-solicitud="@Model.NumeroSolicitud" title="Evidencia">
+        <i class="bi bi-eye"></i>
+    </a>
+    }
+    
+    
+    @*<a class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2 btnPDFCertificado" data-id="@Model.Id" title="Generar Certificado">
+        <i class="bi bi-download"></i>
+    </a>*@
+</div>

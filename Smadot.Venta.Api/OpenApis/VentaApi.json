@@ -1,0 +1,3391 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Smadot_Venta_Api",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/ConfiguracionLayout": {
+      "get": {
+        "tags": [
+          "ConfiguracionLayout"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ConfiguracionLayout"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ConfiguracionLayoutResponse"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ConfiguracionLayoutResponse"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ConfiguracionLayoutResponse"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EventosVerificentro/{clave}/RegistrarEvento": {
+      "post": {
+        "tags": [
+          "EventosVerificentro"
+        ],
+        "parameters": [
+          {
+            "name": "clave",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoSalida"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoSalida"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoSalida"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EventosVerificentro/{clave}/ActualizarPrueba": {
+      "post": {
+        "tags": [
+          "EventosVerificentro"
+        ],
+        "parameters": [
+          {
+            "name": "clave",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prueba"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prueba"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prueba"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EventosVerificentro/TestResultados/{id}": {
+      "post": {
+        "tags": [
+          "EventosVerificentro"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EventosVerificentro/ReimprimirFolio": {
+      "post": {
+        "tags": [
+          "EventosVerificentro"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolioCanceladosRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolioCanceladosRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolioCanceladosRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EventosVerificentro/GenerarFolio/{id}": {
+      "post": {
+        "tags": [
+          "EventosVerificentro"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EventosVerificentro/DataImpresion": {
+      "get": {
+        "tags": [
+          "EventosVerificentro"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Idverificacion",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Imprimir",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sinRedireccion",
+            "in": "header",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FolioFormaValoradaImpresionResponseResponseGeneric"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FolioFormaValoradaImpresionResponseResponseGeneric"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FormaValorada/Consulta": {
+      "get": {
+        "tags": [
+          "FormaValorada"
+        ],
+        "parameters": [
+          {
+            "name": "TipoCertificado",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "TipoTramite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Registros",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Activo",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnaOrdenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ordenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagination",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/FormaValorada/ProximosFolios": {
+      "get": {
+        "tags": [
+          "FormaValorada"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/FormaValorada/Recalcular": {
+      "put": {
+        "tags": [
+          "FormaValorada"
+        ],
+        "parameters": [
+          {
+            "name": "idFolioFormaValorada",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "idVerificentro",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/OrdenServicio": {
+      "get": {
+        "tags": [
+          "OrdenServicio"
+        ],
+        "parameters": [
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Registros",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Activo",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnaOrdenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ordenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagination",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OrdenServicio"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdenServicioApiRequestData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdenServicioApiRequestData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdenServicioApiRequestData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/OrdenServicio/{id}": {
+      "get": {
+        "tags": [
+          "OrdenServicio"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/OrdenServicio/EquipoAutocomplete": {
+      "get": {
+        "tags": [
+          "OrdenServicio"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/OrdenServicio/CatTipoOrdenServicio": {
+      "get": {
+        "tags": [
+          "OrdenServicio"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Proveedor": {
+      "get": {
+        "tags": [
+          "Proveedor"
+        ],
+        "parameters": [
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Registros",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Activo",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnaOrdenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ordenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagination",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Proveedor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Proveedor/CambiarAutorizacion": {
+      "post": {
+        "tags": [
+          "Proveedor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstatusProveedor"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstatusProveedor"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstatusProveedor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Proveedor/{id}": {
+      "get": {
+        "tags": [
+          "Proveedor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Proveedor/Autocomplete": {
+      "get": {
+        "tags": [
+          "Proveedor"
+        ],
+        "parameters": [
+          {
+            "name": "Term",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Start",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "End",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "EsLaboratorio",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ProveedorFolioServicio": {
+      "get": {
+        "tags": [
+          "ProveedorFolioServicio"
+        ],
+        "parameters": [
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Registros",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Activo",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnaOrdenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ordenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagination",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ProveedorFolioServicio"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorFolioServicioRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorFolioServicioRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorFolioServicioRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ProveedorFolioServicio/{id}": {
+      "get": {
+        "tags": [
+          "ProveedorFolioServicio"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/VentaCVV": {
+      "get": {
+        "tags": [
+          "VentaCVV"
+        ],
+        "parameters": [
+          {
+            "name": "SiguienteFolio",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "IdAlmacen",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Registros",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Activo",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnaOrdenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ordenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagination",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "VentaCVV"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VentaFVRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VentaFVRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VentaFVRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/VentaCVV/InventarioVentaCVV": {
+      "get": {
+        "tags": [
+          "VentaCVV"
+        ],
+        "parameters": [
+          {
+            "name": "idAlmacen",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/VentaCVV/VerificentrosAutocomplete": {
+      "get": {
+        "tags": [
+          "VentaCVV"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/VentaCVV/VentaCertificados": {
+      "get": {
+        "tags": [
+          "VentaCVV"
+        ],
+        "parameters": [
+          {
+            "name": "idAlmacen",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "idVenta",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/VentaCVV/AutocompleteSolicitud": {
+      "get": {
+        "tags": [
+          "VentaCVV"
+        ],
+        "parameters": [
+          {
+            "name": "Term",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Start",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "End",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "IdAlmacen",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/InfoLineas": {
+      "get": {
+        "tags": [
+          "Verificacion"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/BuscarVin": {
+      "get": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "IdVerificentro",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Registros",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Activo",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Busqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnaOrdenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ordenamiento",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagination",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/SavePlacas": {
+      "post": {
+        "tags": [
+          "Verificacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificacionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificacionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/PruebaVisual/Diesel": {
+      "post": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "sinRedireccion",
+            "in": "header",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadosDieselPruebaVisualRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadosDieselPruebaVisualRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadosDieselPruebaVisualRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Verificacion/PruebaVisual/Gasolina": {
+      "post": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "sinRedireccion",
+            "in": "header",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadosGasolinaPruebaVisualRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadosGasolinaPruebaVisualRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadosGasolinaPruebaVisualRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectConsultaVerificacionResponseResponseGeneric"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Verificacion/ConsultaPruebaVisual": {
+      "post": {
+        "tags": [
+          "Verificacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaVerificacionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaVerificacionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaVerificacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/AbortarPrueba": {
+      "post": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "sinRedireccion",
+            "in": "header",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaVerificacionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaVerificacionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsultaVerificacionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int64ConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int64ConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int64ConsultaVerificacionResponseResponseGeneric"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int64ConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int64ConsultaVerificacionResponseResponseGeneric"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int64ConsultaVerificacionResponseResponseGeneric"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Verificacion/Expediente/{id}": {
+      "get": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/ExpedienteTest": {
+      "get": {
+        "tags": [
+          "Verificacion"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/PruebaFinalizada/{id}": {
+      "get": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/InsertPruebaTest/{id}": {
+      "get": {
+        "tags": [
+          "Verificacion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Verificacion/VolverImprimir": {
+      "put": {
+        "tags": [
+          "Verificacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CertificadoVentaData": {
+        "type": "object",
+        "properties": {
+          "idIngresoCertificado": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "precioUnitario": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfiguracionLayoutResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "folio": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idCatTipoCertificado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "catTipoCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "verificentro": {
+            "type": "string",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          },
+          "selected": {
+            "type": "boolean"
+          },
+          "tipoTramiteLayout": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConsultaVerificacionRequest": {
+        "type": "object",
+        "properties": {
+          "idTipoPrueba": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificacion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idUserTecnico": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "claveRechazo": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstatusProveedor": {
+        "type": "object",
+        "properties": {
+          "idEstatus": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventoSalida": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idTipo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nota": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecnicoVerificador": {
+            "type": "string",
+            "nullable": true
+          },
+          "idIdentificador": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FolioCanceladosRequest": {
+        "type": "object",
+        "properties": {
+          "idFolio": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idVerificacion": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "fechaCancelacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivoCancelacion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "otroMotivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "personaAprobo": {
+            "type": "string",
+            "nullable": true
+          },
+          "idUser": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "folioExists": {
+            "type": "boolean"
+          },
+          "folioNuevo": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idCatTipoCertificado": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FolioFormaValoradaImpresionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificacion": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idExento": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idTestificacion": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idRefrendoExento": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "tipoCertificadoFV": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveTramite": {
+            "type": "string",
+            "nullable": true
+          },
+          "idCatTipoTramite": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idCatTipoCertificado": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idReposicion": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "tipoCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlDoc1": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlDoc2": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlDoc3": {
+            "type": "string",
+            "nullable": true
+          },
+          "folioFoliosFormaValoradaVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombreVerificentro": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiEndPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "apiKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "idFoliosFormaValoradaVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "folioCertificado": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "importeActual": {
+            "type": "number",
+            "format": "double"
+          },
+          "impreso": {
+            "type": "boolean"
+          },
+          "entidadProcedencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "placa": {
+            "type": "string",
+            "nullable": true
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigencia": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
+          },
+          "combustible": {
+            "type": "string",
+            "nullable": true
+          },
+          "tarjetaCirculacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "folioCertificadoAnterior": {
+            "type": "string",
+            "nullable": true
+          },
+          "propietario": {
+            "type": "string",
+            "nullable": true
+          },
+          "etapa": {
+            "type": "string",
+            "nullable": true
+          },
+          "spS_Humo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "spS_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "spS_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_TIPO_SDB": {
+            "type": "string",
+            "nullable": true
+          },
+          "obD_MIL": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_CATAL": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_CILIN": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_COMBU": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_INTEG": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_OXIGE": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lamdA_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temP_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rpM_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "kpH_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "thP_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "voltS_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hC_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cO_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cO2_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cocO2_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "o2_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nO_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lamdA_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temP_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rpM_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "kpH_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "thP_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "voltS_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hC_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cO_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cO2_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cocO2_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "o2_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nO_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "opacidadp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "opacidadk": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temP_MOT": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "veL_GOB": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "potmiN_RPM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rpotmaX_RPM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "temP_GAS": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "temP_CAM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pruebaObd": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "pruebaEmisiones": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "pruebaOpacidad": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "protocolo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pbv": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "linea": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "c_RECHAZO": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "c_RECHAZO_OBD": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "inicioPruebas": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "finalizacionPruebas": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "idUserCapturista": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "nombreCapturista": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroCapturista": {
+            "type": "string",
+            "nullable": true
+          },
+          "idUserTecnico": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "nombreTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "idEquipo": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "numeroSerieEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "idCatTipoEquipo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idMotivoVerificacion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "semestre": {
+            "type": "string",
+            "nullable": true
+          },
+          "leyendaCNA": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaVistaPrevia": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FolioFormaValoradaImpresionResponseResponseGeneric": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
+          },
+          "currentException": {
+            "type": "string",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "respuesta": {
+            "type": "string",
+            "nullable": true
+          },
+          "accesoTotalVerificentros": {
+            "type": "boolean"
+          },
+          "response": {
+            "$ref": "#/components/schemas/FolioFormaValoradaImpresionResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Int64ConsultaVerificacionResponse": {
+        "type": "object",
+        "properties": {
+          "idEstatusPrueba": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultados": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Int64ConsultaVerificacionResponseResponseGeneric": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
+          },
+          "currentException": {
+            "type": "string",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "respuesta": {
+            "type": "string",
+            "nullable": true
+          },
+          "accesoTotalVerificentros": {
+            "type": "boolean"
+          },
+          "response": {
+            "$ref": "#/components/schemas/Int64ConsultaVerificacionResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ObjectConsultaVerificacionResponse": {
+        "type": "object",
+        "properties": {
+          "idEstatusPrueba": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultados": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ObjectConsultaVerificacionResponseResponseGeneric": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
+          },
+          "currentException": {
+            "type": "string",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "respuesta": {
+            "type": "string",
+            "nullable": true
+          },
+          "accesoTotalVerificentros": {
+            "type": "boolean"
+          },
+          "response": {
+            "$ref": "#/components/schemas/ObjectConsultaVerificacionResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdenServicioApiRequestData": {
+        "type": "object",
+        "properties": {
+          "idEquipo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipoOrdenServicio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "folio": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "solucion": {
+            "type": "string",
+            "nullable": true
+          },
+          "noSerieActual": {
+            "type": "string",
+            "nullable": true
+          },
+          "noSerieAnterior": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "idUserRegistro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "file": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrdenServicioDoc"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdenServicioDoc": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "base64": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "ProveedorFolioServicioRequest": {
+        "type": "object",
+        "properties": {
+          "folioInicial": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "folioFinal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idProveedor": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProveedorRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "correoElectronico": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "autorizado": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "esLaboratorio": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Prueba": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fechaUltimaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "numSerie": {
+            "type": "string",
+            "nullable": true
+          },
+          "placa": {
+            "type": "string",
+            "nullable": true
+          },
+          "combustible": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "numeroConstanciaOtorgada": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "propietario": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecnicoVerificador": {
+            "type": "string",
+            "nullable": true
+          },
+          "linea": {
+            "type": "string",
+            "nullable": true
+          },
+          "idEstatus": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "subMarca": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marca": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pot_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pot_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rpM_GOB": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "protocolo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cilindros": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cilindrada": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "motor_DSL": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pbv": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pbV_Equivalente": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pbV_ASM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "c_ABS": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "convertidorCatalitico": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "claveCombustible": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "combustible_POTMAX_RPM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "raL_FAB": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "goB_FAB": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obd": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "dobleCero": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cerO_GASOL": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cerO_GASLP": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cerO_GASNC": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cerO_DSL": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "etapa": {
+            "type": "string",
+            "nullable": true
+          },
+          "spS_Humo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "spS_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "spS_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "hc": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "co": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cO2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "o2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "no": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lamda": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fcnox": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fcdil": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rpm": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "kph": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "veL_LIN": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "veL_ANG": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "bhp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "paR_TOR": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fuerza": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "poT_FRENO": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temp": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "presion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "humrel": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_TIPO_SDB": {
+            "type": "string",
+            "nullable": true
+          },
+          "obD_MIL": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_CATAL": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_CILIN": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_COMBU": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_INTEG": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "obD_OXIGE": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lamdA_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temP_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hR_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "psI_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fcnoX_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fcdiL_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rpM_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "kpH_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "thP_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "voltS_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hC_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cO_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cO2_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cocO2_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "o2_5024": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nO_5024": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lamdA_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temP_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hR_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "psI_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fcnoX_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fcdiL_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rpM_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "kpH_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "thP_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "voltS_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hC_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cO_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cO2_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cocO2_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "o2_2540": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nO_2540": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "opacidadp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "opacidadk": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temP_MOT": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "veL_GOB": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "potmiN_RPM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "potmaX_RPM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "temP_GAS": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "temP_CAM": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "c_RECHAZO": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "c_RECHAZO_OBD": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pruebaObd": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "pruebaEmisiones": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "pruebaDiesel": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseStatus": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ResultadosDiesel": {
+        "type": "object",
+        "properties": {
+          "sistemaEscape": {
+            "type": "boolean"
+          },
+          "gobernadorBuenEstado": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadosDieselPruebaVisualRequest": {
+        "type": "object",
+        "properties": {
+          "idVerificacion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numeroEscapes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fotoEvidencia": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "resultados": {
+            "$ref": "#/components/schemas/ResultadosDieselResultadosPrueba"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadosDieselResultadosPrueba": {
+        "type": "object",
+        "properties": {
+          "tipoCombustible": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultados": {
+            "$ref": "#/components/schemas/ResultadosDiesel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadosGasolina": {
+        "type": "object",
+        "properties": {
+          "sistemaEscape": {
+            "type": "boolean"
+          },
+          "portafiltroAire": {
+            "type": "boolean"
+          },
+          "taponDispositivoAceite": {
+            "type": "boolean"
+          },
+          "taponCombustible": {
+            "type": "boolean"
+          },
+          "bayoneta": {
+            "type": "boolean"
+          },
+          "neumaticosBuenEstato": {
+            "type": "boolean"
+          },
+          "componenteControlEmisiones": {
+            "type": "boolean"
+          },
+          "fugaFluidos": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadosGasolinaPruebaVisualRequest": {
+        "type": "object",
+        "properties": {
+          "idVerificacion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numeroEscapes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fotoEvidencia": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "resultados": {
+            "$ref": "#/components/schemas/ResultadosGasolinaResultadosPrueba"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadosGasolinaResultadosPrueba": {
+        "type": "object",
+        "properties": {
+          "tipoCombustible": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultados": {
+            "$ref": "#/components/schemas/ResultadosGasolina"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VentaFiles": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "base64": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VentaFVRequest": {
+        "type": "object",
+        "properties": {
+          "idVentaFV": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idIngresoFV": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fechaVenta": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "numeroCompra": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "certificadoVentas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CertificadoVentaData"
+            },
+            "nullable": true
+          },
+          "filesString": {
+            "type": "string",
+            "nullable": true
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VentaFiles"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificacionRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idUserTecnico": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idVerificentro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "vin": {
+            "type": "string",
+            "nullable": true
+          },
+          "vinUpper": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "placas": {
+            "type": "string",
+            "nullable": true
+          },
+          "idVerificacion": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "urlFotoEvidencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "imgPlacaDelantera": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "imgPlacaTrasera": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

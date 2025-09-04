@@ -1,0 +1,105 @@
+﻿<div id="toogle_panel"
+     class="bg-white"
+     data-kt-drawer="true"
+     data-kt-drawer-activate="true"
+     data-kt-drawer-toggle="#toogle_panel_button"
+     data-kt-drawer-close="#toogle_panel_close"
+     data-kt-drawer-overlay="true"
+     data-kt-drawer-width="{default:'350px', 'md': '350px'}">
+    <div class="card rounded-0 w-100">
+        <!--begin::Card header-->
+        <div class="card-header pe-5">
+            <!--begin::Title-->
+            <div class="card-title">
+                <!--begin::User-->
+                <div class="d-flex justify-content-center flex-column me-3">
+                    <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 lh-1">Listado de Centros de Verificación</a>
+                </div>
+                <!--end::User-->
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-light-primary" id="toogle_panel_close">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                        </svg>
+
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Title-->
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar">
+            </div>
+            <!--end::Card toolbar-->
+        </div>
+        <!--end::Card header-->
+        <!--begin::Card body-->
+        <div class="card-body hover-scroll-overlay-y">
+            <!--begin::Main wrapper-->
+            <div id="kt_docs_search_handler_basic"
+                 data-kt-search-keypress="true"
+                 data-kt-search-min-length="2"
+                 data-kt-search-enter="true"
+                 data-kt-search-layout="inline">
+
+                <!--begin::Input Form-->
+                <form data-kt-search-element="form" class="w-100 position-relative mb-5" autocomplete="off">
+                    <!--begin::Hidden input(Added to disable form autocomplete)-->
+                    <input type="hidden" />
+                    <!--end::Hidden input-->
+                    <!--begin::Icon-->
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                    <!--end::Icon-->
+                    <!--begin::Input-->
+                    <input type="text" class="form-control form-control-lg form-control-solid px-1"
+                           name="search"
+                           value=""
+                           placeholder="Buscar..."
+                           data-kt-search-element="input" />
+                    <!--end::Input-->
+                    <!--begin::Spinner-->
+                    <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
+                        <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+                    </span>
+                    <!--end::Spinner-->
+                    <!--begin::Reset-->
+                    <span class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-5 d-none"
+                          data-kt-search-element="clear">
+
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    </span>
+                    <!--end::Reset-->
+                </form>
+                <!--end::Form-->
+                <!--begin::Wrapper-->
+                <div class="py-5">
+                    <!--being::Search suggestion-->
+                    <div data-kt-search-element="suggestions">
+                        ...
+                    </div>
+                    <!--end::Suggestion wrapper-->
+                    <!--begin::Search results-->
+                    <div data-kt-search-element="results" class="d-none">
+                    </div>
+                    <!--end::Search results-->
+                    <!--begin::Empty search-->
+                    <div data-kt-search-element="empty" class="text-center d-none">
+                        <h4>No se encontraron resultados</h4>
+                    </div>
+                    <!--end::Empty search-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Main wrapper-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer">
+        </div>
+        <!--end::Card footer-->
+    </div>
+</div>

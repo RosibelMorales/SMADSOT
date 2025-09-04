@@ -1,0 +1,74 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@{
+    Layout = "~/Views/Shared/_LayoutSmadot.cshtml";
+    ViewBag.Title = "Permisos";
+}
+
+@section styles{
+    <link href="~/assets/plugins/custom/jstree/jstree.bundle.css" rel="stylesheet" type="text/css">
+}
+
+@section Breadcrumb{
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Administración a CVV</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Configuracion</a>
+    </li>
+    @*<li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Roles</a>
+    </li>*@
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+@section Toolbar{
+    @if (UserResolver.HasPermission(MenuPermisos.Registrar))
+    {
+        <a class="btn btn-primary font-weight-bolder" id="btnSave">
+            <span class="fa fa-save"></span>&nbsp;Guardar
+        </a>
+    }
+}
+
+<div class="d-flex flex-column-fluid">
+    <div class="container">
+        <div class="card card-custom">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <label class="form-control-lg fw-bold">Rol:</label>
+                    <select class="form-control form-control-solid form-control-lg" data-control="select2" id="rol" asp-items="(List<SelectListItem>)ViewBag.Roles"></select>
+                </div>
+                <br />
+                <div id="divTree">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Vendors{
+    <script src="~/assets/plugins/custom/jstree/jstree.bundle.js" asp-append-version="true"></script>
+}
+
+@section scripts{
+    <script>
+        var PermResources = {
+            SeleccioneAlMenos1Permiso: 'Debe seleccionar al menos un permiso.',
+            PermisosActualizadosConExito: 'Permisos actualizados correctamente.',
+            HuboErrorGuardarPermisos: 'Ocurrió un error al guardar los permisos.',
+            HuboErrorCargarPermisos: 'Ocurrió un error al cargar los permisos',
+
+        }
+    </script>
+    <script src="~/js/Permiso/smadot.Index.js" asp-append-version="true"></script>
+}

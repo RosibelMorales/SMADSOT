@@ -1,0 +1,92 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Exento.Response.vExentoResponse
+
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2"
+       data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <h6 class="dropdown-header">Selecciona una acción:</h6>
+        </li>
+        @if (UserResolver.HasPermission(MenuExentos.Detalle))
+        {
+            <li>
+                <a class="btnDetalle" data-id="@Model.Id">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-search"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @* @if (Model.IdRefrendo != null)
+        {
+        @if (UserResolver.HasPermission(MenuExentos.DetalleRefrendo))
+        {
+        <li>
+        <a class="" asp-controller="Refrendo" asp-action="Edit" asp-route-id="@Model.IdRefrendo">
+        <label class="dropdown-item">
+        <span class="navi-icon"><i class="bi bi-eye"></i></span>&nbsp;&nbsp;
+        <span class="navi-text">Detalle Refrendo</span>
+        </label>
+        </a>
+        </li>
+        }
+        @if (UserResolver.HasPermission(MenuExentos.CertificadoRefrendo))
+        {
+        <li>
+        <a class="btnPDFCertificadoRefrendo" data-id="@Model.RefrendoIdFoliosFormaValoradaVerificentro"
+        title="Generar Certificado">
+        <label class="dropdown-item">
+        <span class="navi-icon"><i class="bi bi-download"></i></span>&nbsp;&nbsp;
+        <span class="navi-text">Certificado Refrendo</span>
+        </label>
+        </a>
+        </li>
+        }
+        }
+        else
+        { *@
+        @if (UserResolver.HasPermission(MenuExentos.CertificadoExento))
+        {
+            <li>
+                <a class="btnPDFCertificadoRefrendo" data-id="@Model.IdFoliosFormaValoradaVerificentro"
+               title="Generar Certificado">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-download"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Certificado Exento</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (UserResolver.HasPermission(MenuExentos.Eliminar))
+        {
+            <li>
+                <a class="btnEliminar" data-id="@Model.Id" title="Eliminar Registro">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-trash"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Eliminar Registro</span>
+                    </label>
+                </a>
+            </li>
+        }
+
+        @*
+        @if (UserResolver.HasPermission(MenuExentos.Refrendar) && Model.Com)
+        {
+        <li>
+        <a class="" asp-controller="Refrendo" asp-action="Edit" asp-route-idExento="@Model.Id">
+        <label class="dropdown-item">
+        <span class="navi-icon"><i class="bi bi-plus"></i></span>&nbsp;&nbsp;
+        <span class="navi-text">Refrendar</span>
+        </label>
+        </a>
+        </li>
+        }
+        *@
+        @* } *@
+    </ul>
+</div>

@@ -1,0 +1,79 @@
+﻿@using Smadot.Models.Dicts;
+@inject Smadot.Utilities.GestionTokens.IUserResolver UserResolver
+@model Smadot.Models.Entities.Personal.Response.PersonalGridResponse
+<div class="btn-group dropup drop-up dropdown">
+    <a href="javascript:;" class="btn btn-sm btn-secondary btn-text-primary btn-hover-primary btn-icon mr-2" data-bs-toggle="dropdown">
+        <i class="bi bi-three-dots"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Selecciona una acción:</h6></li>
+        @if (UserResolver.HasPermission(MenuPersonal.Detalle))
+        {
+            <li>
+                <a asp-controller="Personal" asp-action="Detalle" asp-route-id="@Model.IdPuestoVerificentro" class="btnDetalle" data-id="@Model.IdPuestoVerificentro">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-eye"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Detalle</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (Model.IdCatEstatusPuesto == CatEstatusPuestoDic.PermiteModificar && string.IsNullOrEmpty(Model.FechaSeparacionPuestoString))
+        {
+            @if (UserResolver.HasPermission(MenuPersonal.Editar))
+            {
+                <li>
+                    <a asp-controller="Personal" asp-action="Editar" asp-route-id="@Model.IdPuestoVerificentro" class="btnEditar" data-id="@Model.Id">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-pencil-square"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Editar</span>
+                        </label>
+                    </a>
+                </li>
+            }
+            @if (UserResolver.HasPermission(MenuPersonal.Movimiento) && string.IsNullOrEmpty(Model.FechaSeparacionPuestoString))
+            {
+                <li>
+                    <a asp-controller="Personal" asp-action="Movimiento" asp-route-id="@Model.IdPuestoVerificentro" class="btnMovimiento" data-id="@Model.Id">
+                        <label class="dropdown-item">
+                            <span class="navi-icon"><i class="bi bi-list-columns"></i></span>&nbsp;&nbsp;
+                            <span class="navi-text">Movimiento</span>
+                        </label>
+                    </a>
+                </li>
+            }
+        }
+
+        @if ((Model.IdCatEstatusPuesto == CatEstatusPuestoDic.AprobadoDVRF || Model.IdCatEstatusPuesto == CatEstatusPuestoDic.RechazadoDVRF || Model.IdCatEstatusPuesto == CatEstatusPuestoDic.RechazaModificar) && UserResolver.HasPermission(MenuPersonal.Editar) && string.IsNullOrEmpty(Model.FechaSeparacionPuestoString))
+        {
+            @*<li>
+        <a asp-controller="Personal" asp-action="Movimiento" asp-route-id="@Model.IdPuestoVerificentro" class="btnMovimiento" data-id="@Model.Id">
+        <label class="dropdown-item">
+        <span class="navi-icon"><i class="bi bi-list-columns"></i></span>&nbsp;&nbsp;
+        <span class="navi-text">Movimiento</span>
+        </label>
+        </a>
+        </li>*@
+            <li>
+                <a class="btnSolicitarM" data-id="@Model.Id" data-idupv="@Model.IdPuestoVerificentro" data-estatus="@CatEstatusPuestoDic.SolicitaModificar">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-list-columns"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Solicitar Modificar</span>
+                    </label>
+                </a>
+            </li>
+        }
+        @if (string.IsNullOrEmpty(Model.FechaSeparacionPuestoString) && UserResolver.HasPermission(MenuPersonal.Baja))
+        {
+            <li>
+                <a class="btnBaja" data-id="@Model.Id" data-nombre="@Model.Nombre" data-nombre-puesto="@Model.NombrePuesto" data-idpuestoverificentro="@Model.IdPuestoVerificentro" data-fechabaja="@Model.FechaSeparacionPuestoString">
+                    <label class="dropdown-item">
+                        <span class="navi-icon"><i class="bi bi-arrow-down-circle"></i></span>&nbsp;&nbsp;
+                        <span class="navi-text">Baja</span>
+                    </label>
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>

@@ -1,0 +1,17 @@
+﻿@model Smadot.Models.Entities.Linea.Response.vLineaEquipoResponse
+
+<div class="row mb-5">
+    <form role="form" id="form_cambiarLinea" class="clearfix">
+        <div class="form-group d-none fv-row">
+            <input type="number" id="IdVerificacion" name="IdVerificacion" value="@ViewBag.IdVerificacion" />
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div class="form-group fv-row">
+                    <label class="form-label required">Línea: &nbsp;</label>
+                    <select class="form-control form-select" data-control="select2" asp-for="@Model.IdLinea" asp-items="(List<SelectListItem>)ViewBag.LineaEquipos"></select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

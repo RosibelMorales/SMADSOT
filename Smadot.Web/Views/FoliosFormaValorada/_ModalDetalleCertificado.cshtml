@@ -1,0 +1,90 @@
+﻿@using System.Globalization
+
+@model Smadot.Utilities.Modelos.Documentos.ImpresionPDFResponse
+
+<form role="form" id="formDetalleCertificado" class="clearfix">
+    <div class="row mb-5">
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Marca:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Marca</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">SubMarca:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Submarca</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Año Modelo:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Anio</div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Nombre o Razón Social:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Nombre</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">VIN:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.NumSerie</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Linea:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Linea</div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Equipo:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Equipo</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Folio:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Folio.ToString("00000000")</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Folio Anterior:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.FolioAnterior</div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Fecha:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Fecha</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Hora Inicio:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.HoraInicio</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Hora Fin:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.HoraFin</div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Vigencia:</div>
+            <div class="fw-bold text-gray-800 fs-6">@(Model.Vigencia)</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Técnico de Captura:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.TecnicoCapturaNumero</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Técnico de Prueba:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.TecnicoPruebaNumero</div>
+        </div>
+    </div>
+    <div class="row mb-5">    
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">CVV:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Centro</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Combustible:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Combustible</div>
+        </div>
+        <div class="py-2 px-4 col-md-4">
+            <div class="fw-semibold text-gray-600 fs-7">Placa:</div>
+            <div class="fw-bold text-gray-800 fs-6">@Model.Placa</div>
+        </div>
+    </div>
+</form>

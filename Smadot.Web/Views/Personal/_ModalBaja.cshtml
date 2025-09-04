@@ -1,0 +1,23 @@
+﻿@model Smadot.Models.Entities.Personal.Response.BajaPersonalResponse
+<div class="d-flex">
+    <div class="py-2 px-4 col-md-6  fv-row">
+        <label class="form-label">Nombre:</label>
+        <div class="position-relative">
+            <input class="form-control form-control-solid input-uppercase " asp-for="Nombre" type="text" disabled />
+        </div>
+    </div>
+    <div class="py-2 px-4 col-md-6  fv-row">
+        <label class="form-label">Puesto:</label>
+        <div class="position-relative">
+            <input class="form-control form-control-solid input-uppercase " asp-for="NombrePuesto" type="text" disabled />
+        </div>
+    </div>
+</div>
+<div class="d-flex">
+    <div class="py-2 px-4 col-md-12  fv-row">
+        <label class="form-label">Fecha de separación:</label>
+        <div class="position-relative">
+            <input class="form-control form-control-solid input-uppercase " asp-for="NombrePuesto" type="text" id="FechaSeparacion" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+        </div>
+    </div>
+</div>

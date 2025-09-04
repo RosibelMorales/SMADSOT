@@ -1,0 +1,52 @@
+﻿@using static Smadot.Models.Entities.ProveedorFolioServicio.Request.ProveedorFolioServicioRequestData
+@model ProveedorFolioServicioRequest;
+
+<form role="form" id="form_registroProveedor" class="clearfix">
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="align-items-end" style="text-align: -webkit-center !important">
+                @*<div class="col-md-10 col-offset-md-1">*@
+                @*<label class="control-label col-md-3" for="autocomplete">Proveedor</label>*@
+                @*<div class="col-md-9">*@
+                <select class="form-control form-control-solid form-select" id="autocomplete"></select>
+                @*</div>*@
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Proveedor: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" id="ProveedorNombre" name="ProveedorNombre" class="form-control" placeholder="Nombre" disabled>
+                <input type="hidden" id="IdProveedor" name="IdProveedor" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Folio Inicial: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" id="FolioInicial" name="FolioInicial" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="name">Folio Final: &nbsp;<strong class="obligatorio">*</strong></label>
+                <input type="text" id="FolioFinal" name="FolioFinal" class="form-control">
+            </div>
+        </div>
+    </div>
+    @*<div class="row mb-5">
+    <div class="col-md-4">
+    <div class="form-group">
+    <label for="name">Dirección: &nbsp;<strong class="obligatorio">*</strong></label>
+    <input type="text" asp-for="Direccion" class="form-control" placeholder="Dirección">
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="form-group">
+    <label for="name">Empresa: &nbsp;<strong class="obligatorio">*</strong></label>
+    <input type="text" asp-for="Empresa" class="form-control" placeholder="Empresa">
+    </div>
+    </div>
+    </div>*@
+
+</form>

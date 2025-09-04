@@ -1,0 +1,70 @@
+﻿@model List<Smadot.Models.Entities.ConfiguracionLayout.Response.ConfiguracionLayoutResponse>
+@{
+    var c = 0;
+}
+
+<div class="row mb-5">
+    <form role="form" id="form_LayoutRegistroConfiguracion" class="clearfix">
+        <h4>Importes</h4>
+        <hr />
+        <table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+            <tbody>
+                @foreach (var i in Model.Where(x => x.IdCatTipoCertificado == 0))
+                {
+                    <tr>
+                        <td width="60%" class="align-middle">
+                            <label for="name">@i.CatTipoCertificado: &nbsp;<strong class="obligatorio">*</strong></label>
+                        </td>
+                        <td class="d-none">
+                            <input type="text" id="z@(c).TipoTramiteLayout.InputLayoutRegistroConfiguracion" name="[@(c)].TipoTramiteLayout.InputLayoutRegistroConfiguracion" value="@i.TipoTramiteLayout" class="form-control d-none" />
+                            <input type="text" id="z@(c).IdCatTipoCertificado.InputLayoutRegistroConfiguracion" name="[@(c)].IdCatTipoCertificado.InputLayoutRegistroConfiguracion" value="@i.IdCatTipoCertificado" class="form-control d-none" />
+                            <input type="text" id="z@(c).Selected.InputLayoutRegistroConfiguracion" name="[@(c)].Selected.InputLayoutRegistroConfiguracion" value="@i.Selected" class="d-none selectedInputLayoutRegistroConfiguracion" />
+                        </td>
+                        <td width="25%" class="fv-row">
+                            <input type="number" id="z@(c).Precio.InputLayoutRegistroConfiguracion" name="[@(c)].Precio.InputLayoutRegistroConfiguracion" value="@i.Precio" class="form-control" placeholder="0.00" />
+                        </td>
+                        <td width="15%" class="align-middle">
+                            <button type="button" class="btn btn-primary btn-sm font-weight-bold btnGuardarLayoutRegistroConfiguracion" data-selected="z@(c).Precio.InputLayoutRegistroConfiguracion"><i class="fa fa-save"></i></button>
+                        </td>
+                    </tr>
+                    c++;
+                }
+            </tbody>
+        </table>
+        <h4>Folios Actuales</h4>
+        <hr />
+		<table class="table table-dark table-striped table-rounded border gy-7 gs-7">
+			<thead>
+				<tr class="fw-semibold fs-6 text-gray-900 border-bottom-2 border-gray-200">
+					<th width="60%">Tipo de Certificado</th>
+                    <th width="25%">Folio*</th>
+                    <th width="15%"></th>
+				</tr>
+			</thead>
+            <tbody>
+                @foreach (var i in Model.Where(x => x.IdCatTipoCertificado > 0))
+                {
+                    <tr>
+                        <td class="align-middle">@Model[c].CatTipoCertificado</td>
+                        <td class="d-none">
+                            <input type="text" id="z@(c).IdCatTipoCertificado.InputLayoutRegistroConfiguracion" name="[@(c)].IdCatTipoCertificado.InputLayoutRegistroConfiguracion" value="@i.IdCatTipoCertificado" class="form-control d-none">
+                            <input type="text" id="z@(c).Selected.InputLayoutRegistroConfiguracion" name="[@(c)].Selected.InputLayoutRegistroConfiguracion" value="@i.Selected" class="d-none selectedInputLayoutRegistroConfiguracion">
+                        </td>
+                        <td class="fv-row">
+                            <input type="number" id="z@(c).Folio.asdasdasd" name="[@(c)].Folio.InputLayoutRegistroConfiguracion" value="@i.Folio" class="form-control folioInputLayoutRegistroConfiguracion">
+                        </td>
+                        <td class="align-middle"><button type="button" class="btn btn-primary btn-sm font-weight-bold btnGuardarLayoutRegistroConfiguracion" data-selected="z@(c).Folio.InputLayoutRegistroConfiguracion"><i class="fa fa-save"></i></button></td>
+                    </tr>
+                    c++;
+                }
+            </tbody>
+		</table>
+        <br />
+        <hr />
+        <div class="clearfix">
+            <div class="pull-left text-muted text-vertical-align-button">
+                * Campos obligatorios
+            </div>
+        </div>
+    </form>
+</div>
